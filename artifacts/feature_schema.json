@@ -1,0 +1,304 @@
+{
+  "schema_version": "1.0.0",
+  "project": "Heart Disease Risk Detection Using Machine Learning",
+  "target": {
+    "name": "num",
+    "model_name": "disease",
+    "labels": {
+      "0": "No disease indicated",
+      "1": "Disease indicated"
+    },
+    "description": "Original angiographic disease status (`num`): 0 = less than 50% diameter narrowing, 1\u20134 = greater than 50% narrowing in at least one major vessel. For modelling, values 1\u20134 are combined into a binary 'disease indicated' class."
+  },
+  "features": [
+    {
+      "key": "age",
+      "label": "Age",
+      "group": "patient",
+      "type": "number",
+      "unit": "years",
+      "min": 18,
+      "max": 100,
+      "observed_min": 29,
+      "observed_max": 77,
+      "required": true,
+      "description": "Age of the patient at the time of the examination."
+    },
+    {
+      "key": "sex",
+      "label": "Sex",
+      "group": "patient",
+      "type": "category",
+      "unit": null,
+      "required": true,
+      "options": [
+        {
+          "value": 0,
+          "label": "Female"
+        },
+        {
+          "value": 1,
+          "label": "Male"
+        }
+      ],
+      "description": "Recorded biological sex (UCI coding: 0 = female, 1 = male)."
+    },
+    {
+      "key": "trestbps",
+      "label": "Resting blood pressure",
+      "group": "measurements",
+      "type": "number",
+      "unit": "mm Hg",
+      "min": 80,
+      "max": 250,
+      "observed_min": 94,
+      "observed_max": 200,
+      "required": true,
+      "description": "Resting systolic blood pressure on admission to hospital."
+    },
+    {
+      "key": "chol",
+      "label": "Serum cholesterol",
+      "group": "measurements",
+      "type": "number",
+      "unit": "mg/dL",
+      "min": 100,
+      "max": 600,
+      "observed_min": 126,
+      "observed_max": 564,
+      "required": true,
+      "description": "Total serum cholesterol measured at the examination."
+    },
+    {
+      "key": "fbs",
+      "label": "Fasting blood sugar",
+      "group": "measurements",
+      "type": "category",
+      "unit": null,
+      "required": true,
+      "options": [
+        {
+          "value": 0,
+          "label": "120 mg/dL or below"
+        },
+        {
+          "value": 1,
+          "label": "Above 120 mg/dL"
+        }
+      ],
+      "description": "Whether fasting blood sugar exceeds 120 mg/dL (UCI coding: 1 = true)."
+    },
+    {
+      "key": "thalach",
+      "label": "Maximum heart rate",
+      "group": "measurements",
+      "type": "number",
+      "unit": "bpm",
+      "min": 50,
+      "max": 220,
+      "observed_min": 71,
+      "observed_max": 202,
+      "required": true,
+      "description": "Maximum heart rate achieved during the exercise stress test."
+    },
+    {
+      "key": "cp",
+      "label": "Chest pain type",
+      "group": "cardiac",
+      "type": "category",
+      "unit": null,
+      "required": true,
+      "options": [
+        {
+          "value": 1,
+          "label": "Typical angina"
+        },
+        {
+          "value": 2,
+          "label": "Atypical angina"
+        },
+        {
+          "value": 3,
+          "label": "Non-anginal pain"
+        },
+        {
+          "value": 4,
+          "label": "Asymptomatic"
+        }
+      ],
+      "description": "Chest pain category recorded at presentation (original UCI 1\u20134 coding)."
+    },
+    {
+      "key": "restecg",
+      "label": "Resting ECG",
+      "group": "cardiac",
+      "type": "category",
+      "unit": null,
+      "required": true,
+      "options": [
+        {
+          "value": 0,
+          "label": "Normal"
+        },
+        {
+          "value": 1,
+          "label": "ST-T wave abnormality"
+        },
+        {
+          "value": 2,
+          "label": "Left ventricular hypertrophy"
+        }
+      ],
+      "description": "Resting electrocardiographic findings (UCI coding: 0 = normal, 1 = ST-T abnormality, 2 = probable/definite LVH)."
+    },
+    {
+      "key": "exang",
+      "label": "Exercise-induced angina",
+      "group": "cardiac",
+      "type": "category",
+      "unit": null,
+      "required": true,
+      "options": [
+        {
+          "value": 0,
+          "label": "No"
+        },
+        {
+          "value": 1,
+          "label": "Yes"
+        }
+      ],
+      "description": "Whether exercise provoked angina during the stress test."
+    },
+    {
+      "key": "oldpeak",
+      "label": "ST depression (oldpeak)",
+      "group": "cardiac",
+      "type": "number",
+      "unit": "mm",
+      "min": 0,
+      "max": 10,
+      "step": 0.1,
+      "observed_min": 0.0,
+      "observed_max": 6.2,
+      "required": true,
+      "description": "ST depression induced by exercise relative to rest, measured on the ECG."
+    },
+    {
+      "key": "slope",
+      "label": "ST segment slope",
+      "group": "cardiac",
+      "type": "category",
+      "unit": null,
+      "required": true,
+      "options": [
+        {
+          "value": 1,
+          "label": "Upsloping"
+        },
+        {
+          "value": 2,
+          "label": "Flat"
+        },
+        {
+          "value": 3,
+          "label": "Downsloping"
+        }
+      ],
+      "description": "Slope of the peak-exercise ST segment (UCI coding: 1 = upsloping, 2 = flat, 3 = downsloping)."
+    },
+    {
+      "key": "ca",
+      "label": "Major vessels coloured",
+      "group": "cardiac",
+      "type": "category",
+      "unit": null,
+      "required": false,
+      "options": [
+        {
+          "value": 0,
+          "label": "0 vessels"
+        },
+        {
+          "value": 1,
+          "label": "1 vessel"
+        },
+        {
+          "value": 2,
+          "label": "2 vessels"
+        },
+        {
+          "value": 3,
+          "label": "3 vessels"
+        }
+      ],
+      "description": "Number of major vessels (0\u20133) coloured by fluoroscopy. May be left unrecorded; the training pipeline imputes the median."
+    },
+    {
+      "key": "thal",
+      "label": "Thalassemia scan",
+      "group": "cardiac",
+      "type": "category",
+      "unit": null,
+      "required": false,
+      "options": [
+        {
+          "value": 3,
+          "label": "Normal"
+        },
+        {
+          "value": 6,
+          "label": "Fixed defect"
+        },
+        {
+          "value": 7,
+          "label": "Reversible defect"
+        }
+      ],
+      "description": "Thallium stress-test result (original UCI coding: 3 = normal, 6 = fixed defect, 7 = reversible defect). May be left unrecorded; the training pipeline imputes the most frequent value."
+    }
+  ],
+  "model_input_order": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "preprocessing": {
+    "numeric_features": [
+      "age",
+      "trestbps",
+      "chol",
+      "thalach",
+      "oldpeak",
+      "ca"
+    ],
+    "categorical_features": [
+      "sex",
+      "cp",
+      "fbs",
+      "restecg",
+      "exang",
+      "slope",
+      "thal"
+    ],
+    "numeric_imputation": "median (fitted on training folds only)",
+    "categorical_imputation": "most frequent (fitted on training folds only)",
+    "numeric_scaling": "StandardScaler (fitted on training folds only)",
+    "categorical_encoding": "OneHotEncoder(handle_unknown='ignore'); one reference level per feature",
+    "nullable_fields": [
+      "ca",
+      "thal"
+    ]
+  },
+  "encoding_notes": "Uses the original UCI Cleveland codes, not the modified Kaggle encodings: cp 1\u20134, restecg 0\u20132, slope 1\u20133, thal 3/6/7, and num 0\u20134 mapped to binary via num > 0."
+}
