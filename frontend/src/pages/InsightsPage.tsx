@@ -1,14 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, type KeyboardEvent } from "react";
 import { Link } from "react-router-dom";
 import {
   Activity,
   ArrowRight,
   ArrowUpRight,
   BarChart3,
-  CheckCircle2,
   Database,
   FlaskConical,
-  Info,
   RefreshCw,
   ShieldAlert,
   Sparkles,
@@ -39,7 +37,7 @@ import {
   formatDate,
   formatUnitPercent,
 } from "../lib/format";
-import { InlineAlert, MedicalDisclaimer } from "../components/Feedback";
+import { InlineAlert } from "../components/Feedback";
 
 const METRIC_KEYS: MetricKey[] = ["accuracy", "precision", "recall", "f1", "roc_auc"];
 const MODEL_COLORS: Record<string, string> = {
@@ -48,20 +46,23 @@ const MODEL_COLORS: Record<string, string> = {
   decision_tree: "#C45D41",
 };
 
+type TabKey = "overview" | "evaluation" | "data";
+
+const TABS: Array<{ key: TabKey; label: string }> = [
+  { key: "overview", label: "Overview" },
+  { key: "evaluation", label: "Evaluation" },
+  { key: "data", label: "Data & limitations" },
+];
+
 function LoadingState() {
   return (
-    <div className="space-y-6">
-      <div className="space-y-3">
-        <div className="skeleton h-3 w-32" />
-        <div className="skeleton h-14 w-full max-w-2xl" />
-        <div className="skeleton h-4 w-full max-w-xl" />
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="space-y-5">
+      <div className="card grid overflow-hidden sm:grid-cols-2 xl:grid-cols-4">
         {[0, 1, 2, 3].map((item) => (
-          <div key={item} className="card p-5">
+          <div key={item} className="border-b border-line/70 p-5 last:border-0 sm:border-r xl:border-b-0">
             <div className="skeleton h-3 w-24" />
-            <div className="skeleton mt-5 h-10 w-32" />
-            <div className="skeleton mt-4 h-3 w-40" />
+            <div className="skeleton mt-5 h-10 w-28" />
+            <div className="skeleton mt-4 h-3 w-36" />
           </div>
         ))}
       </div>
@@ -69,7 +70,7 @@ function LoadingState() {
         <div className="skeleton h-5 w-48" />
         <div className="skeleton mt-6 h-72 w-full" />
       </div>
-      <p className="flex items-center gap-2 text-[11px] text-muted">
+      <p className="flex items-center gap-2 text-[12px] text-muted">
         <RefreshCw className="h-3.5 w-3.5 animate-spin" />
         Loading trained-model artifacts…
       </p>
@@ -77,349 +78,194 @@ function LoadingState() {
   );
 }
 
-function MetricCard({
-  label,
-  value,
-  note,
-  accent = false,
-}: {
-  label: string;
-  value: string;
-  note: string;
-  accent?: boolean;
-}) {
-  return (
-    <div
-      className={clsx(
-        "card p-5",
-        accent && "border-forest-700/40 bg-forest-950 text-paper",
-      )}
-    >
-      <p
-        className={clsx(
-          "text-[9px] font-bold uppercase tracking-[0.16em]",
-          accent ? "text-sage-200/60" : "text-muted",
-        )}
-      >
-        {label}
-      </p>
-      <p
-        className={clsx(
-          "mt-3 font-serif text-[42px] leading-none tracking-tight",
-          accent ? "text-paper" : "text-ink",
-        )}
-      >
-        {value}
-      </p>
-      <p
-        className={clsx(
-          "mt-3 text-[10px] leading-relaxed",
-          accent ? "text-sage-200/60" : "text-muted",
-        )}
-      >
-        {note}
-      </p>
-    </div>
-  );
-}
-
-function ModelComparisonSection({ info }: { info: ModelInfo }) {
-  const chartData = METRIC_KEYS.map((metric) => {
-    const row: Record<string, string | number> = {
-      metric: METRIC_LABELS[metric],
-    };
-    for (const model of info.comparison) {
-      row[model.key] = model.cv[metric].mean;
-    }
-    return row;
-  });
+function MetricStrip({ info }: { info: ModelInfo }) {
+  const cvF1 = info.selection.selected_cv_scores.f1;
+  const cells = [
+    {
+      label: "Held-out ROC-AUC",
+      value: formatMetric(info.test_metrics.roc_auc),
+      note: "Discrimination on the untouched 61-patient test partition.",
+      accent: true,
+    },
+    {
+      label: "Held-out recall",
+      value: formatPercent(info.test_metrics.recall),
+      note: `${info.confusion_matrix.tp} of ${info.confusion_matrix.tp + info.confusion_matrix.fn} disease-indicated test patients detected.`,
+    },
+    {
+      label: "Held-out F1",
+      value: formatMetric(info.test_metrics.f1),
+      note: `Precision ${formatPercent(info.test_metrics.precision)} on the same holdout.`,
+    },
+    {
+      label: "Cross-validated F1",
+      value: formatMetric(cvF1.mean),
+      note: `Selection metric · SD ±${formatMetric(cvF1.std)} across ${info.validation.cv_folds} folds.`,
+    },
+  ];
 
   return (
-    <section className="card overflow-hidden" aria-labelledby="comparison-heading">
-      <div className="border-b border-line/70 px-5 py-5 sm:px-7">
-        <p className="eyebrow">Model comparison</p>
-        <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2
-              id="comparison-heading"
-              className="display text-[32px] leading-none text-ink sm:text-[36px]"
+    <section className="card overflow-hidden" aria-label="Headline model metrics">
+      <div className="grid gap-px bg-line/70 sm:grid-cols-2 xl:grid-cols-4">
+        {cells.map((cell) => (
+          <div
+            key={cell.label}
+            className={clsx("p-5", cell.accent ? "bg-forest-950 text-paper" : "bg-paper")}
+          >
+            <p
+              className={clsx(
+                "text-[10.5px] font-bold uppercase tracking-[0.12em]",
+                cell.accent ? "text-sage-200/60" : "text-muted",
+              )}
             >
-              Three models, one evaluation protocol
-            </h2>
-            <p className="mt-2 max-w-2xl text-[11px] leading-relaxed text-muted">
-              Mean 5-fold cross-validation scores on the 242-patient training
-              partition. Hyperparameters were tuned within each fold structure;
-              the 61-patient holdout was not part of these numbers.
+              {cell.label}
+            </p>
+            <p
+              className={clsx(
+                "mt-3 font-serif text-[42px] leading-none tracking-tight",
+                cell.accent ? "text-paper" : "text-ink",
+              )}
+            >
+              {cell.value}
+            </p>
+            <p
+              className={clsx(
+                "mt-3 text-[11.5px] leading-relaxed",
+                cell.accent ? "text-sage-200/60" : "text-muted",
+              )}
+            >
+              {cell.note}
             </p>
           </div>
-          <span className="pill">
-            <Activity className="h-3 w-3 text-forest-600" />
-            5-fold stratified CV
-          </span>
-        </div>
+        ))}
       </div>
+    </section>
+  );
+}
 
-      <div className="grid gap-6 p-5 sm:p-7 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-        <div
-          role="img"
-          aria-label="Grouped bar chart comparing cross-validated accuracy, precision, recall, F1 and ROC-AUC for three models"
-          className="min-w-0"
-        >
-          <div className="h-[290px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={chartData}
-                margin={{ top: 6, right: 4, bottom: 4, left: -18 }}
-                barGap={2}
+function ModelSelection({ info }: { info: ModelInfo }) {
+  return (
+    <section className="card overflow-hidden" aria-labelledby="selection-heading">
+      <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+        <div className="p-5 sm:p-7">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2
+                id="selection-heading"
+                className="display text-[32px] leading-none text-ink sm:text-[36px]"
               >
-                <CartesianGrid vertical={false} stroke="#E3E7DE" strokeDasharray="3 4" />
-                <XAxis
-                  dataKey="metric"
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{ fill: "#6A7872", fontSize: 9.5 }}
-                  interval={0}
-                />
-                <YAxis
-                  domain={[0, 1]}
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{ fill: "#8A958F", fontSize: 9 }}
-                  tickFormatter={(value: number) => value.toFixed(1)}
-                />
-                <Tooltip
-                  cursor={{ fill: "rgba(36,82,68,0.045)" }}
-                  contentStyle={{
-                    borderRadius: 12,
-                    border: "1px solid #DDE2D9",
-                    fontSize: 11,
-                    boxShadow: "0 12px 30px -18px rgba(9,40,33,0.4)",
-                  }}
-                  formatter={(value) => Number(value).toFixed(3)}
-                />
-                <Legend
-                  verticalAlign="bottom"
-                  height={30}
-                  iconType="circle"
-                  iconSize={6}
-                  wrapperStyle={{ fontSize: 10, color: "#6A7872" }}
-                />
-                {info.comparison.map((model) => (
-                  <Bar
-                    key={model.key}
-                    dataKey={model.key}
-                    name={model.label}
-                    fill={MODEL_COLORS[model.key] ?? "#98BCA9"}
-                    radius={[3, 3, 0, 0]}
-                    maxBarSize={24}
-                  />
-                ))}
-              </BarChart>
-            </ResponsiveContainer>
+                Chosen before the holdout was opened
+              </h2>
+              <p className="mt-2 max-w-2xl text-[12.5px] leading-relaxed text-muted">
+                {info.selection.rationale}
+              </p>
+            </div>
+            <span className="pill">
+              <Activity className="h-3 w-3 text-forest-600" />
+              {info.validation.cv_folds}-fold CV
+            </span>
           </div>
-        </div>
 
-        <div className="min-w-0">
-          <div className="overflow-x-auto rounded-xl border border-line/80">
-            <table className="w-full min-w-[430px] border-collapse text-left text-[10.5px]">
-              <caption className="sr-only">
-                Cross-validated metrics for each candidate model
-              </caption>
-              <thead>
-                <tr className="border-b border-line bg-paper-deep/80 text-[8.5px] uppercase tracking-[0.09em] text-muted">
-                  <th className="px-3 py-2.5 font-bold">Model</th>
-                  {METRIC_KEYS.map((metric) => (
-                    <th key={metric} className="px-2 py-2.5 text-right font-bold">
-                      {METRIC_LABELS[metric]}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[...info.comparison]
-                  .sort((a, b) => a.rank - b.rank)
-                  .map((model) => {
-                    const selected = model.key === info.selection.selected_model_key;
-                    return (
-                      <tr
-                        key={model.key}
+          <div className="mt-5 space-y-2">
+            {info.selection.rankings.map((ranking) => {
+              const selected = ranking.rank === 1;
+              return (
+                <div
+                  key={ranking.model}
+                  className={clsx(
+                    "rounded-xl border p-3.5",
+                    selected
+                      ? "border-forest-300 bg-forest-50/80"
+                      : "border-line/80 bg-paper",
+                  )}
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="flex items-center gap-2 text-[12.5px] font-semibold text-ink">
+                      <span
                         className={clsx(
-                          "border-b border-line/60 last:border-0",
-                          selected ? "bg-forest-50/80" : "bg-paper",
+                          "grid h-5 w-5 place-items-center rounded-full text-[10px] font-bold",
+                          selected
+                            ? "bg-forest-800 text-paper"
+                            : "bg-sage-100 text-muted",
                         )}
                       >
-                        <td className="whitespace-nowrap px-3 py-2.5">
-                          <span className="flex items-center gap-1.5 font-semibold text-ink">
-                            {selected && (
-                              <CheckCircle2 className="h-3 w-3 text-forest-600" />
-                            )}
-                            {model.label}
-                          </span>
-                          <span className="text-[8.5px] text-muted">
-                            rank {model.rank}
-                          </span>
-                        </td>
-                        {METRIC_KEYS.map((metric) => (
-                          <td
-                            key={metric}
-                            className="px-2 py-2.5 text-right tabular-nums"
-                          >
-                            <span
-                              className={clsx(
-                                "font-semibold",
-                                selected ? "text-forest-800" : "text-ink-soft",
-                              )}
-                            >
-                              {formatMetric(model.cv[metric].mean)}
-                            </span>
-                            <span className="block text-[8.5px] text-muted">
-                              ±{formatMetric(model.cv[metric].std)}
-                            </span>
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
+                        {ranking.rank}
+                      </span>
+                      {ranking.model}
+                      {selected && (
+                        <span className="rounded-full bg-forest-800 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-paper">
+                          Selected
+                        </span>
+                      )}
+                    </span>
+                    <span className="flex gap-3 text-[10.5px] tabular-nums text-muted">
+                      <span>F1 {formatMetric(ranking.cv_f1)}</span>
+                      <span>Recall {formatMetric(ranking.cv_recall)}</span>
+                      <span>AUC {formatMetric(ranking.cv_roc_auc)}</span>
+                    </span>
+                  </div>
+                  <div className="mt-2 h-1 overflow-hidden rounded-full bg-sage-100">
+                    <div
+                      className={clsx(
+                        "h-full rounded-full",
+                        selected ? "bg-forest-700" : "bg-sage-300",
+                      )}
+                      style={{ width: `${ranking.cv_f1 * 100}%` }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <p className="mt-2 text-[9.5px] leading-relaxed text-muted">
-            Mean ± standard deviation across folds. Selection rank uses mean CV F1,
-            with ROC-AUC as the tie-breaker.
+          <p className="mt-4 text-[11px] leading-relaxed text-muted">
+            {info.selection.selection_protocol}
           </p>
         </div>
-      </div>
-    </section>
-  );
-}
 
-function ConfusionMatrixSection({ info }: { info: ModelInfo }) {
-  const { tn, fp, fn, tp } = info.confusion_matrix;
-  return (
-    <section className="card p-5 sm:p-6" aria-labelledby="confusion-heading">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="eyebrow">Classification</p>
-          <h2
-            id="confusion-heading"
-            className="display mt-2 text-[28px] leading-none text-ink"
-          >
-            Confusion matrix
-          </h2>
+        <div className="border-t border-line/80 bg-paper-deep/45 p-5 sm:p-6 lg:border-l lg:border-t-0">
+          <div className="flex items-center gap-2">
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-forest-900 text-paper">
+              <Target className="h-3.5 w-3.5" />
+            </span>
+            <p className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-muted">
+              Selected model
+            </p>
+          </div>
+          <p className="mt-3 font-serif text-[31px] leading-none text-ink">
+            {info.model.label}
+          </p>
+          <p className="mt-1.5 text-[11.5px] text-muted">
+            Version {info.model.version} · threshold {info.model.threshold.toFixed(2)}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {Object.entries(info.model.hyperparameters).map(([key, value]) => (
+              <span
+                key={key}
+                className="rounded-lg border border-line bg-paper px-2 py-1 text-[10px] font-semibold text-ink-soft"
+              >
+                {formatParameterName(key)}: {formatParameterValue(value)}
+              </span>
+            ))}
+          </div>
+          <dl className="mt-4 space-y-2 border-t border-line/70 pt-4 text-[11.5px]">
+            {[
+              ["Validation split", `${info.validation.split}, seed ${info.validation.random_seed}`],
+              ["Cross-validation", `${info.validation.cv_folds}-fold stratified`],
+              ["Selection rule", info.validation.selection_scoring],
+              ["Test set in selection", info.validation.test_set_used_for_selection ? "Yes" : "No"],
+            ].map(([label, value]) => (
+              <div key={label} className="flex justify-between gap-4">
+                <dt className="text-muted">{label}</dt>
+                <dd className="text-right font-semibold text-ink-soft">{value}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-4 rounded-lg border border-forest-200 bg-forest-50/60 p-3 text-[11.5px] leading-relaxed text-forest-800">
+            The test partition was evaluated once, after this choice was locked.
+          </div>
         </div>
-        <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-muted">
-          n = {tn + fp + fn + tp}
-        </span>
       </div>
-      <p className="mt-2 text-[10.5px] leading-relaxed text-muted">
-        Counts on the single held-out test partition at threshold{" "}
-        {info.model.threshold.toFixed(2)}.
-      </p>
-
-      <table className="mt-5 w-full border-collapse overflow-hidden rounded-xl text-center">
-        <caption className="sr-only">
-          Confusion matrix of predicted versus actual disease status
-        </caption>
-        <thead>
-          <tr>
-            <th className="w-[86px]" />
-            <th className="pb-2 text-[8.5px] font-bold uppercase tracking-[0.12em] text-muted">
-              Predicted no disease
-            </th>
-            <th className="pb-2 text-[8.5px] font-bold uppercase tracking-[0.12em] text-muted">
-              Predicted disease
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th className="pr-2 text-right text-[8.5px] font-bold uppercase tracking-[0.1em] leading-tight text-muted">
-              Actual
-              <br />
-              no disease
-            </th>
-            <td className="border border-line bg-forest-50 p-4">
-              <span className="font-serif text-3xl text-forest-900">{tn}</span>
-              <span className="mt-0.5 block text-[8.5px] font-semibold uppercase tracking-wider text-forest-600">
-                True negative
-              </span>
-            </td>
-            <td className="border border-line bg-coral-50/60 p-4">
-              <span className="font-serif text-3xl text-coral-600">{fp}</span>
-              <span className="mt-0.5 block text-[8.5px] font-semibold uppercase tracking-wider text-coral-600/80">
-                False positive
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <th className="pr-2 text-right text-[8.5px] font-bold uppercase tracking-[0.1em] leading-tight text-muted">
-              Actual
-              <br />
-              disease
-            </th>
-            <td className="border border-line bg-coral-50/60 p-4">
-              <span className="font-serif text-3xl text-coral-600">{fn}</span>
-              <span className="mt-0.5 block text-[8.5px] font-semibold uppercase tracking-wider text-coral-600/80">
-                False negative
-              </span>
-            </td>
-            <td className="border border-line bg-forest-50 p-4">
-              <span className="font-serif text-3xl text-forest-900">{tp}</span>
-              <span className="mt-0.5 block text-[8.5px] font-semibold uppercase tracking-wider text-forest-600">
-                True positive
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <p className="mt-3 text-[9.5px] leading-relaxed text-muted">
-        Sensitivity for the disease class is {formatPercent(info.test_metrics.recall)}.
-        Even here, {fn} patients with angiographic disease were missed and {fp} were
-        flagged as disease-indicated.
-      </p>
     </section>
-  );
-}
-
-function ClassificationReport({ info }: { info: ModelInfo }) {
-  const rows = [
-    ["No disease", info.classification_report.no_disease],
-    ["Disease", info.classification_report.disease],
-    ["Macro average", info.classification_report.macro_avg],
-  ] as const;
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[340px] border-collapse text-left text-[10.5px]">
-        <thead>
-          <tr className="border-b border-line text-[8.5px] uppercase tracking-[0.1em] text-muted">
-            <th className="py-2 pr-3 font-bold">Class</th>
-            <th className="px-2 py-2 text-right font-bold">Precision</th>
-            <th className="px-2 py-2 text-right font-bold">Recall</th>
-            <th className="px-2 py-2 text-right font-bold">F1</th>
-            <th className="py-2 pl-2 text-right font-bold">Support</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(([label, row]) => (
-            <tr key={label} className="border-b border-line/60 last:border-0">
-              <td className="py-2.5 pr-3 font-semibold text-ink">{label}</td>
-              <td className="px-2 py-2.5 text-right tabular-nums text-ink-soft">
-                {formatMetric(row.precision)}
-              </td>
-              <td className="px-2 py-2.5 text-right tabular-nums text-ink-soft">
-                {formatMetric(row.recall)}
-              </td>
-              <td className="px-2 py-2.5 text-right tabular-nums text-ink-soft">
-                {formatMetric(row["f1-score"])}
-              </td>
-              <td className="py-2.5 pl-2 text-right tabular-nums text-muted">
-                {row.support}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
   );
 }
 
@@ -429,30 +275,29 @@ function RocSection({ info }: { info: ModelInfo }) {
     tpr: info.roc_curve.tpr[index],
     chance: fpr,
   }));
+
   return (
-    <section className="card p-5 sm:p-6" aria-labelledby="roc-heading">
+    <section className="card min-w-0 p-5 sm:p-6" aria-labelledby="roc-heading">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="eyebrow">Discrimination</p>
-          <h2 id="roc-heading" className="display mt-2 text-[28px] leading-none text-ink">
+          <h2 id="roc-heading" className="display text-[28px] leading-none text-ink">
             ROC curve
           </h2>
+          <p className="mt-2 text-[11.5px] leading-relaxed text-muted">
+            Threshold-free separation on the untouched holdout.
+          </p>
         </div>
         <span className="pill border-forest-200 bg-forest-50 text-forest-800">
           AUC {formatMetric(info.roc_curve.auc)}
         </span>
       </div>
-      <p className="mt-2 text-[10.5px] leading-relaxed text-muted">
-        Threshold-free separation on the untouched test partition. The dashed line
-        is chance.
-      </p>
       <div
-        className="mt-4 h-[250px] w-full"
+        className="mt-4 h-[270px] w-full"
         role="img"
         aria-label={`ROC curve with AUC ${formatMetric(info.roc_curve.auc)}`}
       >
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={rocData} margin={{ top: 6, right: 8, bottom: 0, left: -22 }}>
+          <LineChart data={rocData} margin={{ top: 6, right: 8, bottom: 4, left: -22 }}>
             <CartesianGrid stroke="#E3E7DE" strokeDasharray="3 4" />
             <XAxis
               dataKey="fpr"
@@ -462,13 +307,13 @@ function RocSection({ info }: { info: ModelInfo }) {
               tickFormatter={(value: number) => value.toFixed(2)}
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#8A958F", fontSize: 9 }}
+              tick={{ fill: "#8A958F", fontSize: 10.5 }}
               label={{
                 value: "False positive rate",
                 position: "insideBottom",
                 offset: -2,
                 fill: "#6A7872",
-                fontSize: 9,
+                fontSize: 10.5,
               }}
             />
             <YAxis
@@ -477,11 +322,11 @@ function RocSection({ info }: { info: ModelInfo }) {
               tickFormatter={(value: number) => value.toFixed(2)}
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#8A958F", fontSize: 9 }}
+              tick={{ fill: "#8A958F", fontSize: 10.5 }}
             />
             <Tooltip
               contentStyle={{
-                borderRadius: 12,
+                borderRadius: 10,
                 border: "1px solid #DDE2D9",
                 fontSize: 11,
               }}
@@ -508,7 +353,7 @@ function RocSection({ info }: { info: ModelInfo }) {
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-2 flex flex-wrap items-center gap-4 text-[9px] text-muted">
+      <div className="mt-2 flex flex-wrap items-center gap-4 text-[10.5px] text-muted">
         <span className="inline-flex items-center gap-1.5">
           <span className="h-0.5 w-5 rounded-full bg-forest-700" />
           Selected model
@@ -517,6 +362,252 @@ function RocSection({ info }: { info: ModelInfo }) {
           <span className="h-px w-5 border-t border-dashed border-line-strong" />
           Chance
         </span>
+      </div>
+    </section>
+  );
+}
+
+function ConfusionMatrixSection({ info }: { info: ModelInfo }) {
+  const { tn, fp, fn, tp } = info.confusion_matrix;
+  return (
+    <section className="card p-5 sm:p-6" aria-labelledby="confusion-heading">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2
+            id="confusion-heading"
+            className="display text-[28px] leading-none text-ink"
+          >
+            Confusion matrix
+          </h2>
+          <p className="mt-2 text-[11.5px] leading-relaxed text-muted">
+            Counts at the locked threshold of {info.model.threshold.toFixed(2)}.
+          </p>
+        </div>
+        <span className="text-[10.5px] font-semibold uppercase tracking-[0.1em] text-muted">
+          n = {tn + fp + fn + tp}
+        </span>
+      </div>
+
+      <table className="mt-5 w-full border-collapse overflow-hidden rounded-lg text-center">
+        <caption className="sr-only">
+          Confusion matrix of predicted versus actual disease status
+        </caption>
+        <thead>
+          <tr>
+            <th className="w-[76px]" />
+            <th className="pb-2 text-[10px] font-bold uppercase tracking-[0.08em] text-muted">
+              Predicted no disease
+            </th>
+            <th className="pb-2 text-[10px] font-bold uppercase tracking-[0.08em] text-muted">
+              Predicted disease
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th className="pr-2 text-right text-[10px] font-bold uppercase leading-tight tracking-[0.08em] text-muted">
+              Actual
+              <br />
+              no disease
+            </th>
+            <td className="border border-line bg-forest-50 p-4">
+              <span className="font-serif text-3xl text-forest-900">{tn}</span>
+              <span className="mt-0.5 block text-[9px] font-semibold uppercase tracking-wide text-forest-600">
+                True negative
+              </span>
+            </td>
+            <td className="border border-line bg-coral-50/60 p-4">
+              <span className="font-serif text-3xl text-coral-600">{fp}</span>
+              <span className="mt-0.5 block text-[9px] font-semibold uppercase tracking-wide text-coral-600/80">
+                False positive
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <th className="pr-2 text-right text-[10px] font-bold uppercase leading-tight tracking-[0.08em] text-muted">
+              Actual
+              <br />
+              disease
+            </th>
+            <td className="border border-line bg-coral-50/60 p-4">
+              <span className="font-serif text-3xl text-coral-600">{fn}</span>
+              <span className="mt-0.5 block text-[9px] font-semibold uppercase tracking-wide text-coral-600/80">
+                False negative
+              </span>
+            </td>
+            <td className="border border-line bg-forest-50 p-4">
+              <span className="font-serif text-3xl text-forest-900">{tp}</span>
+              <span className="mt-0.5 block text-[9px] font-semibold uppercase tracking-wide text-forest-600">
+                True positive
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p className="mt-3 text-[10.5px] leading-relaxed text-muted">
+        Sensitivity is {formatPercent(info.test_metrics.recall)}. {fn} patients with
+        angiographic disease were missed; {fp} were flagged as disease-indicated.
+      </p>
+    </section>
+  );
+}
+
+function CvTable({ info }: { info: ModelInfo }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[560px] border-collapse text-left text-[11.5px]">
+        <caption className="sr-only">
+          Cross-validated metrics for each candidate model
+        </caption>
+        <thead>
+          <tr className="border-b border-line text-[10px] uppercase tracking-[0.08em] text-muted">
+            <th className="py-2 pr-3 font-bold">Model</th>
+            {METRIC_KEYS.map((metric) => (
+              <th key={metric} className="px-2 py-2 text-right font-bold">
+                {METRIC_LABELS[metric]}
+              </th>
+            ))}
+            <th className="py-2 pl-2 text-right font-bold">Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[...info.comparison]
+            .sort((a, b) => a.rank - b.rank)
+            .map((model) => {
+              const selected = model.key === info.selection.selected_model_key;
+              return (
+                <tr
+                  key={model.key}
+                  className={clsx(
+                    "border-b border-line/60 last:border-0",
+                    selected && "bg-forest-50/70",
+                  )}
+                >
+                  <td className="py-2.5 pr-3 font-semibold text-ink">
+                    {model.label}
+                  </td>
+                  {METRIC_KEYS.map((metric) => (
+                    <td
+                      key={metric}
+                      className="px-2 py-2.5 text-right tabular-nums text-ink-soft"
+                    >
+                      {formatMetric(model.cv[metric].mean)}
+                    </td>
+                  ))}
+                  <td className="py-2.5 pl-2 text-right tabular-nums text-muted">
+                    {model.rank}
+                  </td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function ModelComparisonSection({ info }: { info: ModelInfo }) {
+  const chartData = METRIC_KEYS.map((metric) => {
+    const row: Record<string, string | number> = {
+      metric: METRIC_LABELS[metric],
+    };
+    for (const model of info.comparison) {
+      row[model.key] = model.cv[metric].mean;
+    }
+    return row;
+  });
+
+  return (
+    <section className="card overflow-hidden" aria-labelledby="comparison-heading">
+      <div className="flex flex-wrap items-start justify-between gap-3 p-5 pb-0 sm:p-6 sm:pb-0">
+        <div>
+          <h2
+            id="comparison-heading"
+            className="display text-[30px] leading-none text-ink"
+          >
+            Cross-validated comparison
+          </h2>
+          <p className="mt-2 max-w-2xl text-[11.5px] leading-relaxed text-muted">
+            Mean 5-fold scores on the 242-patient training partition. The holdout
+            was not part of these numbers.
+          </p>
+        </div>
+        <span className="pill">
+          <Activity className="h-3 w-3 text-forest-600" />
+          {info.validation.cv_folds} folds
+        </span>
+      </div>
+
+      <div className="p-5 sm:p-6">
+        <div
+          role="img"
+          aria-label="Grouped bar chart comparing cross-validated accuracy, precision, recall, F1 and ROC-AUC for three models"
+          className="min-w-0"
+        >
+          <div className="h-[320px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={chartData}
+                margin={{ top: 6, right: 4, bottom: 4, left: -18 }}
+                barGap={2}
+              >
+                <CartesianGrid vertical={false} stroke="#E3E7DE" strokeDasharray="3 4" />
+                <XAxis
+                  dataKey="metric"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: "#6A7872", fontSize: 10.5 }}
+                  interval={0}
+                />
+                <YAxis
+                  domain={[0, 1]}
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: "#8A958F", fontSize: 10.5 }}
+                  tickFormatter={(value: number) => value.toFixed(1)}
+                />
+                <Tooltip
+                  cursor={{ fill: "rgba(36,82,68,0.045)" }}
+                  contentStyle={{
+                    borderRadius: 10,
+                    border: "1px solid #DDE2D9",
+                    fontSize: 11,
+                  }}
+                  formatter={(value) => Number(value).toFixed(3)}
+                />
+                <Legend
+                  verticalAlign="bottom"
+                  height={30}
+                  iconType="circle"
+                  iconSize={6}
+                  wrapperStyle={{ fontSize: 11, color: "#6A7872" }}
+                />
+                {info.comparison.map((model) => (
+                  <Bar
+                    key={model.key}
+                    dataKey={model.key}
+                    name={model.label}
+                    fill={MODEL_COLORS[model.key] ?? "#98BCA9"}
+                    radius={[3, 3, 0, 0]}
+                    maxBarSize={40}
+                  />
+                ))}
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <details className="group mt-4 border-t border-line/70 pt-3">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-[12px] font-semibold text-forest-700">
+            View the full CV table
+            <span className="text-[10.5px] font-normal text-muted">
+              all five metrics
+            </span>
+          </summary>
+          <div className="mt-3">
+            <CvTable info={info} />
+          </div>
+        </details>
       </div>
     </section>
   );
@@ -532,33 +623,27 @@ function CalibrationSection({ info }: { info: ModelInfo }) {
     <section className="card min-w-0 p-5 sm:p-6" aria-labelledby="calibration-heading">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="eyebrow">Probability quality</p>
           <h2
             id="calibration-heading"
-            className="display mt-2 text-[28px] leading-none text-ink"
+            className="display text-[28px] leading-none text-ink"
           >
             Calibration
           </h2>
+          <p className="mt-2 text-[11.5px] leading-relaxed text-muted">
+            Predicted probability against observed disease frequency.
+          </p>
         </div>
         <span className="pill">
           Brier {formatMetric(info.calibration.brier_score)}
         </span>
       </div>
-      <p className="mt-2 text-[10.5px] leading-relaxed text-muted">
-        Predicted probability against observed disease frequency in six bins.
-        With only {info.confusion_matrix.tn + info.confusion_matrix.fp + info.confusion_matrix.fn + info.confusion_matrix.tp} held-out
-        patients, these points are noisy.
-      </p>
       <div
-        className="mt-4 h-[230px] w-full"
+        className="mt-4 h-[240px] w-full"
         role="img"
         aria-label="Calibration curve comparing predicted probabilities with observed disease fractions"
       >
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            data={calibrationData}
-            margin={{ top: 6, right: 10, bottom: 0, left: -22 }}
-          >
+          <LineChart data={calibrationData} margin={{ top: 6, right: 10, bottom: 4, left: -22 }}>
             <CartesianGrid stroke="#E3E7DE" strokeDasharray="3 4" />
             <XAxis
               dataKey="predicted"
@@ -568,7 +653,7 @@ function CalibrationSection({ info }: { info: ModelInfo }) {
               tickFormatter={(value: number) => value.toFixed(2)}
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#8A958F", fontSize: 9 }}
+              tick={{ fill: "#8A958F", fontSize: 10.5 }}
             />
             <YAxis
               domain={[0, 1]}
@@ -576,11 +661,11 @@ function CalibrationSection({ info }: { info: ModelInfo }) {
               tickFormatter={(value: number) => value.toFixed(2)}
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#8A958F", fontSize: 9 }}
+              tick={{ fill: "#8A958F", fontSize: 10.5 }}
             />
             <Tooltip
               contentStyle={{
-                borderRadius: 12,
+                borderRadius: 10,
                 border: "1px solid #DDE2D9",
                 fontSize: 11,
               }}
@@ -606,7 +691,7 @@ function CalibrationSection({ info }: { info: ModelInfo }) {
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-2 flex flex-wrap items-center gap-4 text-[9px] text-muted">
+      <div className="mt-2 flex flex-wrap items-center gap-4 text-[10.5px] text-muted">
         <span className="inline-flex items-center gap-1.5">
           <span className="h-0.5 w-5 rounded-full bg-coral-500" />
           Observed
@@ -616,9 +701,72 @@ function CalibrationSection({ info }: { info: ModelInfo }) {
           Perfect calibration
         </span>
       </div>
-      <p className="mt-2 text-[9.5px] leading-relaxed text-muted">
+      <p className="mt-2 text-[10.5px] leading-relaxed text-muted">
         {info.calibration.note}
       </p>
+    </section>
+  );
+}
+
+function ClassificationReportSection({ info }: { info: ModelInfo }) {
+  const rows = [
+    ["No disease", info.classification_report.no_disease],
+    ["Disease", info.classification_report.disease],
+    ["Macro average", info.classification_report.macro_avg],
+  ] as const;
+  return (
+    <section className="card min-w-0 p-5 sm:p-6" aria-labelledby="report-heading">
+      <h2 id="report-heading" className="display text-[28px] leading-none text-ink">
+        Class-level report
+      </h2>
+      <p className="mt-2 text-[11.5px] leading-relaxed text-muted">
+        Precision, recall and F1 on the holdout. Macro averages weight both classes
+        equally.
+      </p>
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full min-w-[360px] border-collapse text-left text-[11.5px]">
+          <thead>
+            <tr className="border-b border-line text-[10px] uppercase tracking-[0.08em] text-muted">
+              <th className="py-2 pr-3 font-bold">Class</th>
+              <th className="px-2 py-2 text-right font-bold">Precision</th>
+              <th className="px-2 py-2 text-right font-bold">Recall</th>
+              <th className="px-2 py-2 text-right font-bold">F1</th>
+              <th className="py-2 pl-2 text-right font-bold">Support</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(([label, row]) => (
+              <tr key={label} className="border-b border-line/60 last:border-0">
+                <td className="py-2.5 pr-3 font-semibold text-ink">{label}</td>
+                <td className="px-2 py-2.5 text-right tabular-nums text-ink-soft">
+                  {formatMetric(row.precision)}
+                </td>
+                <td className="px-2 py-2.5 text-right tabular-nums text-ink-soft">
+                  {formatMetric(row.recall)}
+                </td>
+                <td className="px-2 py-2.5 text-right tabular-nums text-ink-soft">
+                  {formatMetric(row["f1-score"])}
+                </td>
+                <td className="py-2.5 pl-2 text-right tabular-nums text-muted">
+                  {row.support}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="mt-4 space-y-1.5 border-t border-line/70 pt-3 text-[10.5px] leading-relaxed text-muted">
+        <p>
+          <span className="font-semibold text-ink-soft">Precision</span>{" "}
+          {formatMetric(info.test_metrics.precision)}: when the model says disease,
+          how often that is correct on this test set.
+        </p>
+        <p>
+          <span className="font-semibold text-ink-soft">Recall</span>{" "}
+          {formatMetric(info.test_metrics.recall)}: how many disease-indicated
+          patients the model found.
+        </p>
+      </div>
     </section>
   );
 }
@@ -639,30 +787,27 @@ function FeatureSignals({ info }: { info: ModelInfo }) {
 
   return (
     <section className="card overflow-hidden" aria-labelledby="features-heading">
-      <div className="border-b border-line/70 px-5 py-5 sm:px-7">
-        <p className="eyebrow">Feature analysis</p>
-        <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2
-              id="features-heading"
-              className="display text-[32px] leading-none text-ink sm:text-[36px]"
-            >
-              What carries the signal
-            </h2>
-            <p className="mt-2 max-w-2xl text-[11px] leading-relaxed text-muted">
-              Permutation importance measures how much the selected pipeline's
-              ROC-AUC drops when one input is shuffled on the holdout. Associations
-              show raw cohort prevalence, not model weighting.
-            </p>
-          </div>
-          <span className="pill">Held-out estimates</span>
+      <div className="flex flex-wrap items-start justify-between gap-3 p-5 pb-0 sm:p-6 sm:pb-0">
+        <div>
+          <h2
+            id="features-heading"
+            className="display text-[30px] leading-none text-ink"
+          >
+            What carries the signal
+          </h2>
+          <p className="mt-2 max-w-2xl text-[11.5px] leading-relaxed text-muted">
+            Permutation importance measures the holdout ROC-AUC drop when one input
+            is shuffled. Associations show raw cohort prevalence, not model
+            weighting.
+          </p>
         </div>
+        <span className="pill">Held-out estimates</span>
       </div>
-      <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <div className="grid gap-6 p-5 sm:p-6 lg:grid-cols-2">
         <div>
           <div className="flex items-center gap-2">
-            <Sparkles className="h-3 w-3 text-gold-500" />
-            <h3 className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-soft">
+            <Sparkles className="h-3.5 w-3.5 text-gold-500" />
+            <h3 className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-ink-soft">
               Permutation importance · Δ ROC-AUC
             </h3>
           </div>
@@ -670,14 +815,15 @@ function FeatureSignals({ info }: { info: ModelInfo }) {
             {importance.map((item, index) => (
               <div key={item.feature}>
                 <div className="flex items-baseline justify-between gap-3">
-                  <span className="text-[10.5px] font-medium text-ink-soft">
-                    <span className="mr-1.5 font-mono text-[8.5px] text-muted">
+                  <span className="text-[11.5px] font-medium text-ink-soft">
+                    <span className="mr-1.5 font-mono text-[9.5px] text-muted">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     {item.label}
                   </span>
-                  <span className="shrink-0 text-[9px] tabular-nums text-muted">
-                    {formatMetric(item.mean_decrease_roc_auc)} ± {formatMetric(item.std)}
+                  <span className="shrink-0 text-[10px] tabular-nums text-muted">
+                    {formatMetric(item.mean_decrease_roc_auc)} ±{" "}
+                    {formatMetric(item.std)}
                   </span>
                 </div>
                 <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-sage-100">
@@ -694,17 +840,16 @@ function FeatureSignals({ info }: { info: ModelInfo }) {
               </div>
             ))}
           </div>
-          <p className="mt-4 text-[9.5px] leading-relaxed text-muted">
-            Features with zero or negative measured importance are omitted; a
-            negative value means shuffling did not reliably hurt this small test set.
+          <p className="mt-4 text-[10.5px] leading-relaxed text-muted">
+            Features with zero or negative measured importance are omitted.
             Importance is not causality.
           </p>
         </div>
 
         <div className="border-t border-line/70 pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
           <div className="flex items-center gap-2">
-            <BarChart3 className="h-3 w-3 text-forest-600" />
-            <h3 className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-soft">
+            <BarChart3 className="h-3.5 w-3.5 text-forest-600" />
+            <h3 className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-ink-soft">
               Disease prevalence by finding
             </h3>
           </div>
@@ -715,7 +860,7 @@ function FeatureSignals({ info }: { info: ModelInfo }) {
                 type="button"
                 onClick={() => setAssociationKey(association.feature)}
                 className={clsx(
-                  "rounded-full border px-2.5 py-1 text-[9px] font-semibold transition",
+                  "rounded-full border px-2.5 py-1 text-[10.5px] font-semibold transition",
                   association.feature === activeAssociation.feature
                     ? "border-forest-700 bg-forest-900 text-paper"
                     : "border-line bg-paper text-muted hover:border-sage-400 hover:text-ink",
@@ -728,13 +873,13 @@ function FeatureSignals({ info }: { info: ModelInfo }) {
           <div className="mt-4 space-y-2.5">
             {activeAssociation.groups.map((group) => (
               <div key={group.label}>
-                <div className="flex items-center justify-between gap-2 text-[10px]">
+                <div className="flex items-center justify-between gap-2 text-[11px]">
                   <span className="text-ink-soft">{group.label}</span>
                   <span className="shrink-0 tabular-nums text-muted">
                     {group.disease_rate === null
                       ? "—"
                       : formatUnitPercent(group.disease_rate)}{" "}
-                    <span className="text-[8.5px]">(n={group.n})</span>
+                    <span className="text-[9.5px]">(n={group.n})</span>
                   </span>
                 </div>
                 <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-sage-100">
@@ -746,7 +891,7 @@ function FeatureSignals({ info }: { info: ModelInfo }) {
               </div>
             ))}
           </div>
-          <p className="mt-4 text-[9px] leading-relaxed text-muted">
+          <p className="mt-4 text-[10.5px] leading-relaxed text-muted">
             Unadjusted percentage of patients with angiographic disease in each
             category of the full 303-record cohort.
           </p>
@@ -756,229 +901,121 @@ function FeatureSignals({ info }: { info: ModelInfo }) {
   );
 }
 
-function SelectionSection({ info }: { info: ModelInfo }) {
+function DatasetCard({ info }: { info: ModelInfo }) {
+  const total =
+    info.dataset.binary_class_counts.no_disease +
+    info.dataset.binary_class_counts.disease;
+  const noDiseaseShare = info.dataset.binary_class_counts.no_disease / total;
   return (
-    <section className="grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-      <div className="card p-5 sm:p-7">
-        <p className="eyebrow">Model selection</p>
-        <h2 className="display mt-2 text-[32px] leading-none text-ink sm:text-[36px]">
-          Chosen before the holdout was opened
-        </h2>
-        <p className="mt-3 text-[11.5px] leading-relaxed text-muted">
-          {info.selection.rationale}
-        </p>
-        <div className="mt-5 space-y-2">
-          {info.selection.rankings.map((ranking) => {
-            const selected = ranking.rank === 1;
-            return (
-              <div
-                key={ranking.model}
-                className={clsx(
-                  "rounded-xl border p-3.5",
-                  selected
-                    ? "border-forest-300 bg-forest-50/80"
-                    : "border-line/80 bg-paper",
-                )}
-              >
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="flex items-center gap-2 text-[11.5px] font-semibold text-ink">
-                    <span
-                      className={clsx(
-                        "grid h-5 w-5 place-items-center rounded-full text-[9px] font-bold",
-                        selected
-                          ? "bg-forest-800 text-paper"
-                          : "bg-sage-100 text-muted",
-                      )}
-                    >
-                      {ranking.rank}
-                    </span>
-                    {ranking.model}
-                    {selected && (
-                      <span className="rounded-full bg-forest-800 px-2 py-0.5 text-[7.5px] font-bold uppercase tracking-wider text-paper">
-                        Selected
-                      </span>
-                    )}
-                  </span>
-                  <span className="flex gap-3 text-[9px] tabular-nums text-muted">
-                    <span>F1 {formatMetric(ranking.cv_f1)}</span>
-                    <span>Recall {formatMetric(ranking.cv_recall)}</span>
-                    <span>AUC {formatMetric(ranking.cv_roc_auc)}</span>
-                  </span>
-                </div>
-                <div className="mt-2 h-1 overflow-hidden rounded-full bg-sage-100">
-                  <div
-                    className={clsx(
-                      "h-full rounded-full",
-                      selected ? "bg-forest-700" : "bg-sage-300",
-                    )}
-                    style={{ width: `${ranking.cv_f1 * 100}%` }}
-                  />
-                </div>
-              </div>
-            );
-          })}
+    <section className="card p-5 sm:p-6" aria-labelledby="dataset-heading">
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <h2 id="dataset-heading" className="display text-[30px] leading-none text-ink">
+            Dataset at a glance
+          </h2>
+          <p className="mt-2 text-[11.5px] text-muted">
+            UCI Heart Disease · Cleveland subset · 1988
+          </p>
         </div>
-        <p className="mt-4 text-[9.5px] leading-relaxed text-muted">
-          {info.selection.selection_protocol}
+        <p className="font-serif text-[48px] leading-none text-forest-800">
+          {info.dataset.n_rows}
         </p>
       </div>
 
-      <div className="card p-5 sm:p-6">
-        <p className="eyebrow">Selected estimator</p>
-        <p className="mt-2 font-serif text-[31px] leading-none text-ink">
-          {info.model.label}
-        </p>
-        <p className="mt-1.5 text-[10px] text-muted">
-          Model version {info.model.version} · threshold{" "}
-          {info.model.threshold.toFixed(2)}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {Object.entries(info.model.hyperparameters).map(([key, value]) => (
-            <span
-              key={key}
-              className="rounded-lg border border-line bg-paper-deep px-2 py-1 text-[8.5px] font-semibold text-ink-soft"
-            >
-              {formatParameterName(key)}: {formatParameterValue(value)}
-            </span>
-          ))}
-        </div>
-        <div className="mt-5 space-y-2.5 border-t border-line/70 pt-4">
-          {[
-            ["Validation split", `${info.validation.split}, seed ${info.validation.random_seed}`],
-            ["Cross-validation", `${info.validation.cv_folds}-fold stratified, shuffled`],
-            ["Selection rule", info.validation.selection_scoring],
-            ["Test set used for selection", info.validation.test_set_used_for_selection ? "Yes" : "No"],
-          ].map(([label, value]) => (
-            <div key={label} className="flex justify-between gap-4 text-[10px]">
-              <span className="text-muted">{label}</span>
-              <span className="text-right font-semibold text-ink-soft">{value}</span>
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 rounded-xl border border-forest-200 bg-forest-50/60 p-3 text-[10px] leading-relaxed text-forest-800">
-          <span className="font-bold">Why this matters:</span> the test partition
-          was evaluated once, after this choice was locked. That keeps the reported
-          test numbers an honest estimate rather than a selection score.
-        </div>
-        <div className="mt-3 rounded-xl border border-line/80 bg-paper-deep/60 p-3">
-          <p className="text-[8.5px] font-bold uppercase tracking-[0.12em] text-muted">
-            Why a linear baseline
-          </p>
-          <p className="mt-1 text-[9.5px] leading-relaxed text-muted">
-            With only 242 training patients, a regularised linear model has lower
-            variance than a deep tree. It also exposes additive log-odds
-            contributions, which power the local explanations on the results page.
-          </p>
-        </div>
+      <div className="mt-5 h-2.5 overflow-hidden rounded-full bg-coral-100">
+        <div
+          className="h-full bg-forest-700"
+          style={{ width: `${noDiseaseShare * 100}%` }}
+        />
       </div>
+      <div className="mt-2 flex justify-between text-[10.5px] text-muted">
+        <span>{info.dataset.binary_class_counts.no_disease} no disease</span>
+        <span>{info.dataset.binary_class_counts.disease} disease indicated</span>
+      </div>
+
+      <div className="mt-5 grid grid-cols-3 gap-2">
+        {[
+          { label: "Features", value: info.dataset.n_features },
+          {
+            label: "Missing cells",
+            value: Object.values(info.dataset.missing_values).reduce(
+              (sum, value) => sum + value,
+              0,
+            ),
+          },
+          {
+            label: "Test holdout",
+            value:
+              info.confusion_matrix.tn +
+              info.confusion_matrix.fp +
+              info.confusion_matrix.fn +
+              info.confusion_matrix.tp,
+          },
+        ].map((item) => (
+          <div
+            key={item.label}
+            className="rounded-lg border border-line/80 bg-paper-deep/70 p-2.5"
+          >
+            <p className="font-serif text-[24px] leading-none text-ink">
+              {item.value}
+            </p>
+            <p className="mt-1 text-[9.5px] font-bold uppercase tracking-[0.08em] text-muted">
+              {item.label}
+            </p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-[10.5px] leading-relaxed text-muted">
+        {info.dataset_info.positive_class_definition}
+      </p>
+      <a
+        href={info.dataset_info.source_url}
+        target="_blank"
+        rel="noreferrer"
+        className="btn-ghost mt-2 -ml-3"
+      >
+        UCI source archive
+        <ArrowUpRight className="h-3 w-3" />
+      </a>
     </section>
   );
 }
 
-function DatasetSection({ info }: { info: ModelInfo }) {
-  const total = info.dataset.binary_class_counts.no_disease + info.dataset.binary_class_counts.disease;
-  const noDiseaseShare = info.dataset.binary_class_counts.no_disease / total;
+function LimitationsCard({ info }: { info: ModelInfo }) {
   return (
-    <section className="grid gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-      <div className="card p-5 sm:p-7">
-        <p className="eyebrow">Cohort</p>
-        <div className="mt-2 flex items-end justify-between gap-4">
-          <div>
-            <h2 className="display text-[32px] leading-none text-ink">
-              Dataset at a glance
-            </h2>
-            <p className="mt-2 text-[10.5px] leading-relaxed text-muted">
-              UCI Heart Disease · Cleveland subset · 1988
-            </p>
-          </div>
-          <p className="font-serif text-[48px] leading-none text-forest-800">
-            {info.dataset.n_rows}
-          </p>
-        </div>
-
-        <div className="mt-5 h-2.5 overflow-hidden rounded-full bg-coral-100">
-          <div
-            className="h-full bg-forest-700"
-            style={{ width: `${noDiseaseShare * 100}%` }}
-          />
-        </div>
-        <div className="mt-2 flex justify-between text-[9px] text-muted">
-          <span>{info.dataset.binary_class_counts.no_disease} no disease</span>
-          <span>{info.dataset.binary_class_counts.disease} disease indicated</span>
-        </div>
-
-        <div className="mt-5 grid grid-cols-3 gap-2">
-          {[
-            { label: "Features", value: info.dataset.n_features },
-            {
-              label: "Missing cells",
-              value: Object.values(info.dataset.missing_values).reduce(
-                (sum, value) => sum + value,
-                0,
-              ),
-            },
-            {
-              label: "Test holdout",
-              value:
-                info.confusion_matrix.tn +
-                info.confusion_matrix.fp +
-                info.confusion_matrix.fn +
-                info.confusion_matrix.tp,
-            },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="rounded-xl border border-line/80 bg-paper-deep/70 p-2.5"
-            >
-              <p className="font-serif text-[24px] leading-none text-ink">
-                {item.value}
-              </p>
-              <p className="mt-1 text-[8px] font-bold uppercase tracking-[0.1em] text-muted">
-                {item.label}
-              </p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-4 text-[9.5px] leading-relaxed text-muted">
-          {info.dataset_info.positive_class_definition}
-        </p>
-        <a
-          href={info.dataset_info.source_url}
-          target="_blank"
-          rel="noreferrer"
-          className="btn-ghost mt-2 -ml-2"
+    <section className="card p-5 sm:p-6" aria-labelledby="limitations-heading">
+      <div className="flex items-center gap-2">
+        <ShieldAlert className="h-3.5 w-3.5 text-gold-700" />
+        <h2
+          id="limitations-heading"
+          className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-gold-700"
         >
-          UCI source archive
-          <ArrowUpRight className="h-3 w-3" />
-        </a>
-      </div>
-
-      <div className="card p-5 sm:p-7">
-        <div className="flex items-center gap-2">
-          <ShieldAlert className="h-3.5 w-3.5 text-gold-700" />
-          <p className="eyebrow !text-gold-700">Limitations</p>
-        </div>
-        <h2 className="display mt-2 text-[32px] leading-none text-ink">
-          What this evaluation cannot tell you
+          Limitations
         </h2>
-        <ol className="mt-4 space-y-3">
-          {info.limitations.map((limitation, index) => (
-            <li key={limitation} className="flex gap-3 text-[10.5px] leading-relaxed text-muted">
-              <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-sage-100 font-mono text-[8px] font-bold text-forest-700">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span>{limitation}</span>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-5 rounded-xl border border-line/80 bg-paper-deep/70 p-3">
-          <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-muted">
-            Intended use
-          </p>
-          <p className="mt-1 text-[10px] leading-relaxed text-ink-soft/80">
-            {info.intended_use}
-          </p>
-        </div>
+      </div>
+      <h3 className="display mt-2 text-[30px] leading-none text-ink">
+        What this evaluation cannot tell you
+      </h3>
+      <ol className="mt-4 space-y-3">
+        {info.limitations.map((limitation, index) => (
+          <li
+            key={limitation}
+            className="flex gap-3 text-[11.5px] leading-relaxed text-muted"
+          >
+            <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-sage-100 font-mono text-[9px] font-bold text-forest-700">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span>{limitation}</span>
+          </li>
+        ))}
+      </ol>
+      <div className="mt-5 rounded-lg border border-line/80 bg-paper-deep/70 p-3">
+        <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-muted">
+          Intended use
+        </p>
+        <p className="mt-1 text-[11px] leading-relaxed text-ink-soft/80">
+          {info.intended_use}
+        </p>
       </div>
     </section>
   );
@@ -986,25 +1023,24 @@ function DatasetSection({ info }: { info: ModelInfo }) {
 
 function ReproducibilitySection({ info }: { info: ModelInfo }) {
   return (
-    <section className="card overflow-hidden bg-forest-950 text-paper">
-      <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[1fr_auto] lg:items-center">
+    <section className="overflow-hidden rounded-card bg-forest-950 text-paper">
+      <div className="grid gap-5 p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-center">
         <div>
-          <p className="eyebrow-light">
+          <p className="flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-sage-200/60">
             <FlaskConical className="h-3 w-3" />
             Reproducibility
           </p>
-          <h2 className="display mt-2 text-[32px] leading-none text-paper sm:text-[36px]">
+          <h2 className="display mt-2 text-[30px] leading-none text-paper">
             Same seed. Same split. Same pipeline.
           </h2>
-          <p className="mt-2 max-w-2xl text-[10.5px] leading-relaxed text-sage-200/60">
+          <p className="mt-2 max-w-2xl text-[11px] leading-relaxed text-sage-200/60">
             The vendored UCI file is fingerprinted with SHA-256. Imputation, scaling
             and encoding are fitted inside each CV fold; the selected pipeline is
-            serialized whole. Metrics on this page are read directly from the
-            committed artifact generated at{" "}
-            {formatDate(info.model.trained_at_utc)}.
+            serialized whole. Metrics are read from the committed artifact generated
+            at {formatDate(info.model.trained_at_utc)}.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2 lg:max-w-[360px] lg:justify-end">
+        <div className="flex flex-wrap gap-2 lg:max-w-[380px] lg:justify-end">
           {[
             `seed ${info.validation.random_seed}`,
             "80/20 stratified",
@@ -1013,16 +1049,16 @@ function ReproducibilitySection({ info }: { info: ModelInfo }) {
           ].map((item) => (
             <span
               key={item}
-              className="rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-1 text-[9px] font-semibold text-sage-100"
+              className="rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-1 text-[10px] font-semibold text-sage-100"
             >
               {item}
             </span>
           ))}
-          <div className="mt-1 w-full rounded-xl border border-white/10 bg-black/15 px-3 py-2 font-mono text-[9px] text-sage-200/70 lg:text-right">
+          <div className="mt-1 w-full rounded-lg border border-white/10 bg-black/15 px-3 py-2 font-mono text-[10px] text-sage-200/70 lg:text-right">
             python -m ml.train → artifacts/
           </div>
           <p
-            className="w-full break-all text-[8px] font-mono text-sage-200/35 lg:text-right"
+            className="w-full break-all text-[9px] font-mono text-sage-200/35 lg:text-right"
             title={info.dataset_info.sha256}
           >
             sha256:{info.dataset_info.sha256.slice(0, 32)}…
@@ -1038,6 +1074,25 @@ export function InsightsPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [attempt, setAttempt] = useState(0);
+  const [tab, setTab] = useState<TabKey>("overview");
+
+  function handleTabKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    let nextIndex: number | null = null;
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % TABS.length;
+    if (event.key === "ArrowLeft") nextIndex = (index - 1 + TABS.length) % TABS.length;
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = TABS.length - 1;
+    if (nextIndex === null) return;
+    event.preventDefault();
+    const next = TABS[nextIndex];
+    setTab(next.key);
+    window.requestAnimationFrame(() => {
+      document.getElementById(`tab-${next.key}`)?.focus();
+    });
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -1067,25 +1122,13 @@ export function InsightsPage() {
     };
   }, [attempt]);
 
-  const topImportance = useMemo(
-    () =>
-      info?.permutation_importance.find(
-        (item) => item.mean_decrease_roc_auc > 0,
-      )?.label ?? "—",
-    [info],
-  );
-
   if (loading) {
     return (
       <div>
-        <p className="eyebrow">
-          <span className="h-px w-7 bg-forest-500/60" />
-          Model insights
-        </p>
-        <h1 className="display mt-4 text-[46px] leading-[0.95] text-ink sm:text-[58px]">
-          Reading the evidence…
+        <h1 className="display text-[46px] leading-[0.95] text-ink sm:text-[54px]">
+          Model insights<span className="text-coral-500">.</span>
         </h1>
-        <div className="mt-8">
+        <div className="mt-6">
           <LoadingState />
         </div>
       </div>
@@ -1101,7 +1144,7 @@ export function InsightsPage() {
         <h1 className="display mt-5 text-center text-4xl text-ink">
           Model evidence unavailable
         </h1>
-        <p className="mx-auto mt-3 max-w-md text-center text-[12px] leading-relaxed text-muted">
+        <p className="mx-auto mt-3 max-w-md text-center text-[13px] leading-relaxed text-muted">
           {error ??
             "The API did not return the evaluation artifacts. Check that the backend is running and the model has been trained."}
         </p>
@@ -1135,169 +1178,141 @@ export function InsightsPage() {
     );
   }
 
-  const { selection, test_metrics: metrics } = info;
-  const cvF1 = selection.selected_cv_scores.f1;
-
   return (
     <div>
-      <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-end">
+      <header className="flex flex-col gap-5 border-b border-line/80 pb-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="eyebrow">
-            <span className="h-px w-7 bg-forest-500/60" />
-            Model insights · artifacts v1.0
-          </p>
-          <h1 className="display mt-4 max-w-3xl text-[46px] leading-[0.94] text-ink sm:text-[58px] lg:text-[64px]">
-            The evidence behind
-            <br />
-            <span className="italic text-forest-700">the estimate.</span>
+          <h1 className="display text-[46px] leading-[0.94] text-ink sm:text-[54px]">
+            Model insights<span className="text-coral-500">.</span>
           </h1>
-          <p className="mt-5 max-w-2xl text-[13px] leading-relaxed text-muted sm:text-[13.5px]">
-            Every figure below is read from the trained model's evaluation
-            artifacts. Selection used cross-validation only; the 61-patient test
-            partition was opened once for the final report.
+          <p className="mt-3 max-w-2xl text-[13.5px] leading-relaxed text-muted">
+            Evidence from the served pipeline: cross-validation for selection, then
+            one locked evaluation on the untouched holdout.
           </p>
         </div>
-        <div className="rounded-2xl border border-line bg-paper/80 p-4">
-          <div className="flex items-center gap-2">
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-forest-900 text-paper">
-              <Target className="h-3.5 w-3.5" />
-            </span>
-            <div>
-              <p className="text-[10px] font-bold text-ink">{info.model.label}</p>
-              <p className="text-[8.5px] uppercase tracking-[0.12em] text-muted">
-                Selected estimator · v{info.model.version}
+        <div className="flex flex-wrap gap-x-5 gap-y-3 lg:justify-end">
+          {[
+            { label: "Model", value: `${info.model.label} · v${info.model.version}` },
+            { label: "Trained", value: formatDate(info.model.trained_at_utc) },
+          ].map((item) => (
+            <div key={item.label}>
+              <p className="text-[9.5px] font-bold uppercase tracking-[0.12em] text-muted">
+                {item.label}
+              </p>
+              <p className="mt-1 text-[11.5px] font-semibold text-ink-soft">
+                {item.value}
               </p>
             </div>
-          </div>
-          <p className="mt-3 border-t border-line/70 pt-3 text-[9.5px] leading-relaxed text-muted">
-            Trained {formatDate(info.model.trained_at_utc)} · {info.dataset.n_rows}{" "}
-            records · 13 inputs
-          </p>
+          ))}
         </div>
-      </section>
+      </header>
 
-      <div className="mt-7 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <MetricCard
-          label="Held-out ROC-AUC"
-          value={formatMetric(metrics.roc_auc)}
-          note="Discrimination on the untouched 61-patient test partition."
-          accent
-        />
-        <MetricCard
-          label="Held-out recall"
-          value={formatPercent(metrics.recall)}
-          note={`${info.confusion_matrix.tp} of ${info.confusion_matrix.tp + info.confusion_matrix.fn} disease-indicated test patients detected.`}
-        />
-        <MetricCard
-          label="Held-out F1"
-          value={formatMetric(metrics.f1)}
-          note={`Balances precision ${formatPercent(metrics.precision)} against recall.`}
-        />
-        <MetricCard
-          label="Cross-validated F1"
-          value={formatMetric(cvF1.mean)}
-          note={`Primary selection metric · SD ±${formatMetric(cvF1.std)} across ${info.validation.cv_folds} folds.`}
-        />
+      <div className="mt-5">
+        <MetricStrip info={info} />
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-xl border border-line/80 bg-paper/60 px-4 py-2.5 text-[9.5px] text-muted">
-        <span className="inline-flex items-center gap-1.5">
-          <CheckCircle2 className="h-3 w-3 text-forest-600" />
-          Top measured signal: <strong className="font-semibold text-ink-soft">{topImportance}</strong>
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <Info className="h-3 w-3 text-forest-600" />
-          Test accuracy {formatPercent(metrics.accuracy)} · precision {formatPercent(metrics.precision)}
-        </span>
-        <Link
-          to="/predict"
-          className="ml-auto inline-flex items-center gap-1.5 font-semibold text-forest-700 hover:text-forest-900"
+      <div className="mt-5 border-b border-line/80">
+        <div
+          role="tablist"
+          aria-label="Model insight sections"
+          className="flex flex-wrap gap-1"
         >
-          Run an assessment
-          <ArrowRight className="h-3 w-3" />
-        </Link>
+          {TABS.map((item, index) => {
+            const active = tab === item.key;
+            return (
+              <button
+                key={item.key}
+                type="button"
+                role="tab"
+                id={`tab-${item.key}`}
+                aria-selected={active}
+                aria-controls={`panel-${item.key}`}
+                tabIndex={active ? 0 : -1}
+                onClick={() => setTab(item.key)}
+                onKeyDown={(event) => handleTabKeyDown(event, index)}
+                className={clsx(
+                  "relative px-3.5 py-2.5 text-[12.5px] font-semibold transition",
+                  active ? "text-forest-900" : "text-muted hover:text-ink",
+                )}
+              >
+                {item.label}
+                {active && (
+                  <span className="absolute inset-x-1 -bottom-px h-0.5 rounded-full bg-forest-700" />
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="mt-5">
-        <SelectionSection info={info} />
+      <div
+        key={tab}
+        role="tabpanel"
+        id={`panel-${tab}`}
+        aria-labelledby={`tab-${tab}`}
+        className="mt-5 animate-fade-up"
+      >
+        {tab === "overview" && (
+          <div className="space-y-5">
+            <ModelSelection info={info} />
+            <div className="grid gap-5 xl:grid-cols-2">
+              <RocSection info={info} />
+              <ConfusionMatrixSection info={info} />
+            </div>
+          </div>
+        )}
+
+        {tab === "evaluation" && (
+          <div className="space-y-5">
+            <ModelComparisonSection info={info} />
+            <div className="grid gap-5 xl:grid-cols-2">
+              <CalibrationSection info={info} />
+              <ClassificationReportSection info={info} />
+            </div>
+            <FeatureSignals info={info} />
+          </div>
+        )}
+
+        {tab === "data" && (
+          <div className="space-y-5">
+            <div className="grid gap-5 xl:grid-cols-2">
+              <DatasetCard info={info} />
+              <LimitationsCard info={info} />
+            </div>
+            <ReproducibilitySection info={info} />
+          </div>
+        )}
       </div>
 
-      <div className="mt-5">
-        <ModelComparisonSection info={info} />
-      </div>
-
-      <div className="mt-5 grid gap-5 lg:grid-cols-2">
-        <RocSection info={info} />
-        <ConfusionMatrixSection info={info} />
-      </div>
-
-      <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-        <CalibrationSection info={info} />
-        <section className="card min-w-0 p-5 sm:p-6" aria-labelledby="report-heading">
-          <p className="eyebrow">Class-level detail</p>
-          <h2
-            id="report-heading"
-            className="display mt-2 text-[28px] leading-none text-ink"
+      <footer className="mt-6 flex flex-col gap-3 border-t border-line/70 pt-4 text-[11px] leading-relaxed text-muted sm:flex-row sm:items-start sm:justify-between">
+        <p className="flex max-w-2xl items-start gap-2">
+          <ShieldAlert className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-700" />
+          Academic machine-learning demonstration, not a medical device or
+          future-risk score.
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
+          <span className="inline-flex items-center gap-1.5">
+            <Database className="h-3 w-3" />
+            Artifacts {formatDate(info.model.trained_at_utc)}
+          </span>
+          <a
+            href={API_DOCS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 font-semibold text-forest-700 transition hover:text-forest-900"
           >
-            Classification report
-          </h2>
-          <p className="mt-2 text-[10.5px] leading-relaxed text-muted">
-            Precision, recall and F1 for each class on the holdout. Macro averages
-            weight both classes equally.
-          </p>
-          <div className="mt-4">
-            <ClassificationReport info={info} />
-          </div>
-          <div className="mt-4 space-y-2 border-t border-line/70 pt-4 text-[10px] leading-relaxed text-muted">
-            <p>
-              <span className="font-semibold text-ink-soft">Precision</span>{" "}
-              {formatMetric(metrics.precision)}: when the model says disease, how
-              often is that correct on this test set?
-            </p>
-            <p>
-              <span className="font-semibold text-ink-soft">Recall</span>{" "}
-              {formatMetric(metrics.recall)}: how many disease-indicated test
-              patients the model found.
-            </p>
-            <p className="text-[9px]">
-              Support values come from the {info.confusion_matrix.tn + info.confusion_matrix.fp + info.confusion_matrix.fn + info.confusion_matrix.tp}-patient
-              stratified holdout.
-            </p>
-          </div>
-        </section>
-      </div>
-
-      <div className="mt-5">
-        <FeatureSignals info={info} />
-      </div>
-
-      <div className="mt-5">
-        <DatasetSection info={info} />
-      </div>
-
-      <div className="mt-5">
-        <ReproducibilitySection info={info} />
-      </div>
-
-      <div className="mt-5">
-        <MedicalDisclaimer />
-      </div>
-
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-[9.5px] text-muted">
-        <span className="inline-flex items-center gap-1.5">
-          <Database className="h-3 w-3" />
-          Artifacts generated {formatDate(info.model.trained_at_utc)}
-        </span>
-        <a
-          href={API_DOCS_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 font-semibold text-forest-700 transition hover:text-forest-900"
-        >
-          API reference
-          <ArrowUpRight className="h-3 w-3" />
-        </a>
-      </div>
+            API reference
+            <ArrowUpRight className="h-3 w-3" />
+          </a>
+          <Link
+            to="/predict"
+            className="inline-flex items-center gap-1.5 font-semibold text-forest-700 transition hover:text-forest-900"
+          >
+            Run an assessment
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }

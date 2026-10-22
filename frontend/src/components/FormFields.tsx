@@ -33,20 +33,15 @@ function FieldShell({
         <label
           id={labelId}
           htmlFor={controlId}
-          className="flex items-center gap-1.5"
+          className="flex items-center gap-2"
         >
           {feature.label}
           {!feature.required && (
-            <span className="rounded-full bg-sage-100 px-1.5 py-0.5 text-[8.5px] font-bold uppercase tracking-wider text-forest-600">
+            <span className="rounded-full bg-sage-100 px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wide text-forest-600">
               Optional
             </span>
           )}
         </label>
-        {feature.unit && (
-          <span className="text-[10px] font-semibold uppercase tracking-[0.09em] text-muted">
-            {feature.unit}
-          </span>
-        )}
       </div>
       {children}
       <div aria-live="polite">
@@ -54,7 +49,7 @@ function FieldShell({
           <p
             id={`error-${feature.key}`}
             role="alert"
-            className="mt-1.5 flex items-start gap-1 text-[11px] font-semibold text-coral-600"
+            className="mt-1.5 flex items-start gap-1 text-[12px] font-semibold text-coral-600"
           >
             <AlertTriangle className="mt-0.5 h-3 w-3 shrink-0" />
             {error}
@@ -110,18 +105,13 @@ export function NumberField({
         />
         {feature.unit && <span className="unit-chip">{feature.unit}</span>}
       </div>
-      <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-muted/80">
-        <span>
-          Training range: {feature.observedMin}
-          {feature.step === 0.1 ? ".0" : ""}–{feature.observedMax}
-          {feature.unit ? ` ${feature.unit}` : ""}
-        </span>
-        {outOfRange && (
-          <span className="inline-flex items-center gap-1 font-semibold text-gold-700">
-            <Info className="h-3 w-3" /> Outside cohort range
-          </span>
-        )}
-      </div>
+      {outOfRange && (
+        <p className="mt-2 flex items-center gap-1 text-[11.5px] font-semibold text-gold-700">
+          <Info className="h-3 w-3 shrink-0" />
+          Outside the observed cohort range ({feature.observedMin}
+          {feature.step === 0.1 ? ".0" : ""}–{feature.observedMax})
+        </p>
+      )}
     </FieldShell>
   );
 }
@@ -134,9 +124,6 @@ export function SelectField({
   onChange,
 }: BaseFieldProps) {
   const describedBy = `help-${feature.key}`;
-  const selectedOption = feature.options?.find(
-    (option) => String(option.value) === value,
-  );
   return (
     <FieldShell feature={feature} error={error} describedBy={describedBy}>
       <div className="input-shell">
@@ -169,11 +156,6 @@ export function SelectField({
         </select>
         <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
       </div>
-      {selectedOption?.description && (
-        <p className="mt-2 border-l-2 border-sage-300 pl-2.5 text-[10.5px] leading-relaxed text-forest-700/75">
-          {selectedOption.description}
-        </p>
-      )}
     </FieldShell>
   );
 }
@@ -199,7 +181,7 @@ export function SegmentedField({
         aria-labelledby={`label-${feature.key}`}
         aria-describedby={error ? `error-${feature.key}` : describedBy}
         className={clsx(
-          "mt-2.5 grid gap-1 rounded-xl border border-line-strong bg-white/55 p-1",
+          "mt-2 grid gap-1 rounded-[10px] border border-line-strong bg-white/55 p-1",
           feature.options?.length === 2 ? "grid-cols-2" : "grid-cols-3",
           error && "border-coral-400",
         )}
@@ -214,9 +196,9 @@ export function SegmentedField({
               aria-pressed={selected}
               onClick={() => onChange(feature.key, String(option.value))}
               className={clsx(
-                "min-h-10 rounded-lg px-2 py-2 text-[11.5px] font-semibold leading-tight transition duration-150 disabled:opacity-60",
+                "min-h-10 rounded-lg px-2 py-2 text-[12px] font-semibold leading-tight transition duration-150 disabled:opacity-60",
                 selected
-                  ? "bg-forest-900 text-paper shadow-sm"
+                  ? "bg-forest-900 text-paper"
                   : "text-muted hover:bg-sage-100/70 hover:text-ink",
               )}
             >

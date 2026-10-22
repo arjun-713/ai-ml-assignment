@@ -14,7 +14,7 @@ export const FEATURES: FeatureDefinition[] = [
     step: 1,
     observedMin: 29,
     observedMax: 77,
-    help: "Age at the time of the examination. The source cohort ranged from 29 to 77 years.",
+    help: "Age at the examination.",
   },
   {
     key: "sex",
@@ -28,7 +28,7 @@ export const FEATURES: FeatureDefinition[] = [
       { value: 0, label: "Female" },
       { value: 1, label: "Male" },
     ],
-    help: "Recorded biological sex in the UCI cohort (0 = female, 1 = male).",
+    help: "Recorded biological sex.",
   },
   {
     key: "trestbps",
@@ -43,7 +43,7 @@ export const FEATURES: FeatureDefinition[] = [
     step: 1,
     observedMin: 94,
     observedMax: 200,
-    help: "Systolic blood pressure measured on admission, before the stress test.",
+    help: "Systolic pressure on admission.",
   },
   {
     key: "chol",
@@ -58,7 +58,7 @@ export const FEATURES: FeatureDefinition[] = [
     step: 1,
     observedMin: 126,
     observedMax: 564,
-    help: "Total serum cholesterol at the examination. Not LDL or HDL specifically.",
+    help: "Total serum cholesterol.",
   },
   {
     key: "fbs",
@@ -72,7 +72,7 @@ export const FEATURES: FeatureDefinition[] = [
       { value: 0, label: "120 mg/dL or below" },
       { value: 1, label: "Above 120 mg/dL" },
     ],
-    help: "The source data records a binary threshold, not a continuous glucose value.",
+    help: "Recorded as a binary threshold.",
   },
   {
     key: "thalach",
@@ -87,7 +87,7 @@ export const FEATURES: FeatureDefinition[] = [
     step: 1,
     observedMin: 71,
     observedMax: 202,
-    help: "Highest heart rate achieved during the exercise stress test.",
+    help: "Peak heart rate during stress testing.",
   },
   {
     key: "cp",
@@ -119,7 +119,7 @@ export const FEATURES: FeatureDefinition[] = [
         description: "No chest pain reported at presentation.",
       },
     ],
-    help: "Original UCI 1–4 coding. This is not the remapped 0–3 encoding used in some Kaggle copies.",
+    help: "Original UCI 1–4 coding.",
   },
   {
     key: "restecg",
@@ -146,7 +146,7 @@ export const FEATURES: FeatureDefinition[] = [
         description: "Probable or definite LVH by Estes' criteria.",
       },
     ],
-    help: "Resting electrocardiogram finding, coded 0–2 in the original dataset.",
+    help: "Resting ECG finding, original 0–2 coding.",
   },
   {
     key: "exang",
@@ -160,7 +160,7 @@ export const FEATURES: FeatureDefinition[] = [
       { value: 0, label: "No" },
       { value: 1, label: "Yes" },
     ],
-    help: "Whether the exercise test provoked angina. Also called exertional angina.",
+    help: "Angina provoked by exercise.",
   },
   {
     key: "oldpeak",
@@ -175,7 +175,7 @@ export const FEATURES: FeatureDefinition[] = [
     step: 0.1,
     observedMin: 0,
     observedMax: 6.2,
-    help: "ST-segment depression induced by exercise relative to rest, in millimetres.",
+    help: "Exercise-induced ST depression.",
   },
   {
     key: "slope",
@@ -190,7 +190,7 @@ export const FEATURES: FeatureDefinition[] = [
       { value: 2, label: "Flat" },
       { value: 3, label: "Downsloping" },
     ],
-    help: "Shape of the ST segment at peak exercise, coded 1–3 in the original data.",
+    help: "ST segment at peak exercise, original 1–3 coding.",
   },
   {
     key: "ca",
@@ -206,7 +206,7 @@ export const FEATURES: FeatureDefinition[] = [
       { value: 2, label: "2 vessels", description: "Two major vessels coloured." },
       { value: 3, label: "3 vessels", description: "Three major vessels coloured." },
     ],
-    help: "Count of major vessels (0–3) coloured by fluoroscopy. May be left unrecorded.",
+    help: "Vessels coloured by fluoroscopy. Optional.",
   },
   {
     key: "thal",
@@ -225,7 +225,7 @@ export const FEATURES: FeatureDefinition[] = [
         description: "Reversible perfusion defect, suggesting exercise-induced ischaemia.",
       },
     ],
-    help: "Thallium stress-test result. Original UCI coding is 3, 6 and 7 — not 1–3.",
+    help: "Thallium result, original 3/6/7 coding. Optional.",
   },
 ];
 

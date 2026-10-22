@@ -54,11 +54,11 @@ export default {
         serif: ["Instrument Serif", "Iowan Old Style", "Georgia", "serif"],
       },
       boxShadow: {
-        card: "0 1px 2px rgba(20,37,31,0.04), 0 18px 50px -30px rgba(20,37,31,0.22)",
-        lift: "0 18px 40px -24px rgba(9,40,33,0.45)",
+        card: "0 1px 2px rgba(20,37,31,0.03), 0 14px 36px -30px rgba(20,37,31,0.18)",
+        lift: "0 16px 36px -26px rgba(9,40,33,0.4)",
       },
       borderRadius: {
-        card: "26px",
+        card: "16px",
       },
       keyframes: {
         "fade-up": {

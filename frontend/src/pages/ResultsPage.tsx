@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
+  ChevronDown,
   Info,
   Printer,
   ShieldAlert,
-  SlidersHorizontal,
   Stethoscope,
-  TriangleAlert,
 } from "lucide-react";
 import clsx from "clsx";
 import type { AssessmentRecord, Contribution, FeatureKey } from "../types";
@@ -20,7 +18,6 @@ import {
   formatPercent,
   thresholdStatus,
 } from "../lib/format";
-import { MedicalDisclaimer } from "../components/Feedback";
 import { useAssessment } from "../state/AssessmentContext";
 
 function ContributionBar({ item }: { item: Contribution }) {
@@ -29,33 +26,42 @@ function ContributionBar({ item }: { item: Contribution }) {
     <div className="py-3 first:pt-0 last:pb-0">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-[12px] font-semibold text-ink">{item.label}</p>
-          <p className="mt-0.5 truncate text-[10.5px] text-muted">{item.value}</p>
+          <p className="text-[13px] font-semibold text-ink">{item.label}</p>
+          <p className="mt-0.5 truncate text-[11.5px] text-muted">{item.value}</p>
         </div>
         <span
           className={clsx(
-            "inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[8.5px] font-bold uppercase tracking-[0.08em]",
-            towardDisease
-              ? "bg-coral-50 text-coral-700"
-              : "bg-forest-50 text-forest-700",
+            "inline-flex shrink-0 items-center gap-1 text-[10.5px] font-semibold",
+            towardDisease ? "text-coral-600" : "text-forest-600",
           )}
         >
           {towardDisease ? (
-            <ArrowUpRight className="h-2.5 w-2.5" />
+            <ArrowUpRight className="h-3 w-3" />
           ) : (
-            <ArrowRight className="h-2.5 w-2.5 rotate-90" />
+            <ArrowRight className="h-3 w-3 rotate-90" />
           )}
           {towardDisease ? "Toward indicated" : "Toward not indicated"}
         </span>
       </div>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-sage-100">
-        <div
+      <div className="mt-2 flex items-center gap-3">
+        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-sage-100">
+          <div
+            className={clsx(
+              "h-full rounded-full",
+              towardDisease ? "bg-coral-400" : "bg-forest-500",
+            )}
+            style={{ width: `${Math.max(item.relative_strength * 100, 2)}%` }}
+          />
+        </div>
+        <span
           className={clsx(
-            "h-full rounded-full transition-all duration-700",
-            towardDisease ? "bg-coral-400" : "bg-forest-500",
+            "w-12 text-right text-[10.5px] font-semibold tabular-nums",
+            towardDisease ? "text-coral-600" : "text-forest-600",
           )}
-          style={{ width: `${Math.max(item.relative_strength * 100, 2)}%` }}
-        />
+        >
+          {item.log_odds_contribution > 0 ? "+" : ""}
+          {item.log_odds_contribution.toFixed(2)}
+        </span>
       </div>
     </div>
   );
@@ -70,10 +76,10 @@ function InputSummary({ record }: { record: AssessmentRecord }) {
         );
         return (
           <div key={group.id}>
-            <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-muted">
+            <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-muted">
               {group.title}
             </p>
-            <dl className="mt-2.5 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+            <dl className="mt-2.5 grid gap-x-8 gap-y-2 sm:grid-cols-2">
               {features.map(([key, feature]) => {
                 const raw = record.input[key as FeatureKey];
                 const value =
@@ -85,8 +91,8 @@ function InputSummary({ record }: { record: AssessmentRecord }) {
                     key={key}
                     className="flex items-baseline justify-between gap-3 border-b border-line/55 py-1.5"
                   >
-                    <dt className="text-[10.5px] text-muted">{feature.label}</dt>
-                    <dd className="text-right text-[11px] font-semibold text-ink">
+                    <dt className="text-[12px] text-muted">{feature.label}</dt>
+                    <dd className="text-right text-[12px] font-semibold text-ink">
                       {value}
                     </dd>
                   </div>
@@ -97,7 +103,7 @@ function InputSummary({ record }: { record: AssessmentRecord }) {
         );
       })}
       {(record.input.ca === null || record.input.thal === null) && (
-        <p className="text-[10px] leading-relaxed text-muted">
+        <p className="text-[11.5px] leading-relaxed text-muted">
           Missing vessels or thallium values are handled by the imputers fitted
           inside the training pipeline.
         </p>
@@ -116,7 +122,7 @@ export function ResultsPage() {
           <Stethoscope className="h-6 w-6 text-forest-600" />
         </div>
         <h1 className="display mt-5 text-4xl text-ink">No active assessment</h1>
-        <p className="mx-auto mt-3 max-w-md text-[12.5px] leading-relaxed text-muted">
+        <p className="mx-auto mt-3 max-w-md text-[13px] leading-relaxed text-muted">
           Results are intentionally kept only in application memory for this
           session. Reloading the page clears them. Start a new assessment to run
           the trained model.
@@ -135,20 +141,14 @@ export function ResultsPage() {
 
   return (
     <div>
-      <div className="no-print flex flex-wrap items-end justify-between gap-4">
+      <header className="no-print flex flex-wrap items-end justify-between gap-4 border-b border-line/80 pb-5">
         <div>
-          <Link
-            to="/predict"
-            className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-muted transition hover:text-forest-700"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            New assessment
-          </Link>
-          <h1 className="display mt-3 text-[42px] leading-none text-ink sm:text-[48px]">
-            Assessment result
+          <h1 className="display text-[42px] leading-none text-ink sm:text-[48px]">
+            Assessment result<span className="text-coral-500">.</span>
           </h1>
-          <p className="mt-2 text-[11px] text-muted">
-            Generated {formatDate(submittedAt)} · not saved
+          <p className="mt-2 text-[11.5px] text-muted">
+            Generated {formatDate(submittedAt)} · not saved · {result.model.label}{" "}
+            v{result.model.version} · threshold {result.threshold.toFixed(2)}
           </p>
         </div>
         <div className="flex gap-2">
@@ -165,12 +165,12 @@ export function ResultsPage() {
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
-      </div>
+      </header>
 
-      <section className="card mt-6 overflow-hidden animate-fade-up">
-        <div className="grid lg:grid-cols-[1.35fr_1fr]">
-          <div className="p-5 sm:p-8">
-            <p className="eyebrow">
+      <section className="mt-5 overflow-hidden rounded-card border border-line bg-paper animate-fade-up">
+        <div className="grid lg:grid-cols-[1.45fr_1fr]">
+          <div className="p-6 sm:p-8">
+            <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.13em] text-muted">
               <span
                 className={clsx(
                   "h-1.5 w-1.5 rounded-full",
@@ -179,7 +179,7 @@ export function ResultsPage() {
               />
               Model classification
             </p>
-            <h2 className="display mt-3 text-[40px] leading-[0.98] text-ink sm:text-[52px]">
+            <h2 className="display mt-3 text-[42px] leading-[0.98] text-ink sm:text-[54px]">
               {positive ? (
                 <>
                   Disease pattern
@@ -194,46 +194,23 @@ export function ResultsPage() {
                 </>
               )}
             </h2>
-            <p className="mt-4 max-w-lg text-[12.5px] leading-relaxed text-muted">
+            <p className="mt-4 max-w-xl text-[13.5px] leading-relaxed text-muted">
               {result.explanation}
             </p>
-
-            <div className="mt-5 flex flex-wrap gap-2">
-              <span className="pill">
-                <CheckCircle2 className="h-3 w-3 text-forest-600" />
-                Threshold {result.threshold.toFixed(2)}
-              </span>
-              <span className="pill">
-                <SlidersHorizontal className="h-3 w-3 text-forest-600" />
-                {result.model.label} v{result.model.version}
-              </span>
-              <span
-                className={clsx(
-                  "pill",
-                  positive
-                    ? "border-coral-200 bg-coral-50 text-coral-700"
-                    : "border-sage-200 bg-forest-50 text-forest-700",
-                )}
-              >
-                {thresholdStatus(result.probability, result.threshold)}
-              </span>
-            </div>
-
-            <div className="mt-6 rounded-xl border border-line/80 bg-paper-deep/60 p-3.5">
-              <div className="flex items-start gap-2.5">
-                <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-forest-600" />
-                <p className="text-[10.5px] leading-relaxed text-muted">
-                  <span className="font-semibold text-ink-soft">What the target means:
-                  </span>{" "}
-                  {result.target_definition}
-                </p>
-              </div>
+            <div className="mt-5 flex items-start gap-2 rounded-lg bg-paper-deep/65 px-3.5 py-3 text-[11.5px] leading-relaxed text-muted">
+              <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-forest-600" />
+              <p>
+                <span className="font-semibold text-ink-soft">
+                  Target definition:{" "}
+                </span>
+                {result.target_definition.replaceAll("`", "")}
+              </p>
             </div>
           </div>
 
-          <div className="relative overflow-hidden border-t border-forest-800 bg-forest-950 p-5 text-paper sm:p-8 lg:border-l lg:border-t-0">
+          <div className="relative overflow-hidden border-t border-forest-800 bg-forest-950 p-6 text-paper sm:p-8 lg:border-l lg:border-t-0">
             <div
-              className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-30 blur-3xl"
+              className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-25 blur-3xl"
               style={{
                 background: positive
                   ? "rgba(196,93,65,0.55)"
@@ -241,8 +218,10 @@ export function ResultsPage() {
               }}
             />
             <div className="relative flex h-full flex-col">
-              <div className="flex items-start justify-between">
-                <p className="eyebrow-light !text-[9px]">Model score</p>
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.13em] text-sage-200/65">
+                  Disease-pattern probability
+                </p>
                 <span
                   className={clsx(
                     "grid h-8 w-8 place-items-center rounded-full border",
@@ -252,9 +231,9 @@ export function ResultsPage() {
                   )}
                 >
                   {positive ? (
-                    <TriangleAlert className="h-3.5 w-3.5" />
+                    <ArrowUpRight className="h-4 w-4" />
                   ) : (
-                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    <CheckCircle2 className="h-4 w-4" />
                   )}
                 </span>
               </div>
@@ -263,13 +242,15 @@ export function ResultsPage() {
                 <span className="font-serif text-[76px] leading-[0.8] tracking-[-0.03em] text-paper sm:text-[88px]">
                   {percent.toFixed(1)}
                 </span>
-                <span className="mt-1 font-serif text-[26px] text-sage-200/70">%</span>
+                <span className="mt-1 font-serif text-[26px] text-sage-200/70">
+                  %
+                </span>
               </div>
-              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-sage-200/75">
-                Estimated probability · disease-indicated class
+              <p className="mt-2 text-[12px] font-semibold text-sage-100/85">
+                {thresholdStatus(result.probability, result.threshold)}
               </p>
 
-              <div className="mt-7">
+              <div className="mt-6">
                 <div className="relative h-2 rounded-full bg-white/10">
                   <div
                     className={clsx(
@@ -284,14 +265,14 @@ export function ResultsPage() {
                     aria-hidden="true"
                   />
                 </div>
-                <div className="mt-1.5 flex justify-between text-[9px] tabular-nums text-sage-200/55">
+                <div className="mt-1.5 flex justify-between text-[10px] tabular-nums text-sage-200/55">
                   <span>0</span>
-                  <span>Decision threshold {formatPercent(result.threshold, 0)}</span>
+                  <span>Threshold {formatPercent(result.threshold, 0)}</span>
                   <span>100</span>
                 </div>
               </div>
 
-              <p className="mt-auto pt-7 text-[10px] leading-relaxed text-sage-200/70">
+              <p className="mt-auto pt-6 text-[11px] leading-relaxed text-sage-200/65">
                 {result.probability_note}
               </p>
             </div>
@@ -299,118 +280,122 @@ export function ResultsPage() {
         </div>
       </section>
 
-      <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_330px]">
+      <div className="mt-5 grid items-start gap-5 xl:grid-cols-[minmax(0,1.5fr)_minmax(300px,0.85fr)]">
         <div className="space-y-5">
           <section className="card p-5 sm:p-6" aria-labelledby="factors-heading">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <p className="eyebrow">Local explanation</p>
                 <h2
                   id="factors-heading"
-                  className="display mt-2 text-[29px] leading-none text-ink"
+                  className="display text-[30px] leading-none text-ink"
                 >
                   Signals in this profile
                 </h2>
+                <p className="mt-2 max-w-2xl text-[11.5px] leading-relaxed text-muted">
+                  Each bar is one input's local log-odds shift for this profile,
+                  scaled to the strongest term.
+                </p>
               </div>
-              <span className="rounded-full border border-line bg-paper-deep px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-muted">
-                Logistic contributions
-              </span>
+              <span className="pill">Not causal</span>
             </div>
-            <p className="mt-3 text-[11px] leading-relaxed text-muted">
-              Each bar shows how one input shifted this model's log-odds for this
-              person, scaled to the strongest local term. These are model
-              associations for a linear classifier — not causes, and not medical
-              risk factors in isolation.
-            </p>
-            <div className="mt-5 divide-y divide-line/70">
+            <div className="mt-4 divide-y divide-line/70">
               {result.contributions.length > 0 ? (
                 result.contributions.map((item) => (
                   <ContributionBar key={item.feature} item={item} />
                 ))
               ) : (
-                <p className="text-[11.5px] text-muted">
+                <p className="text-[12px] text-muted">
                   This model does not expose local linear contributions.
                 </p>
               )}
             </div>
+            <p className="mt-4 border-t border-line/70 pt-3 text-[11px] leading-relaxed text-muted">
+              These are model associations for a linear classifier — not causes,
+              and not medical risk factors in isolation.
+            </p>
           </section>
 
-          <section className="card p-5 sm:p-6" aria-labelledby="inputs-heading">
-            <div className="flex items-center gap-2.5">
-              <SlidersHorizontal className="h-3.5 w-3.5 text-forest-600" />
-              <h2
-                id="inputs-heading"
-                className="text-[10px] font-bold uppercase tracking-[0.15em] text-ink-soft"
-              >
-                Input summary
-              </h2>
-            </div>
-            <div className="mt-5">
+          <details className="card group overflow-hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-5 text-[13px] font-semibold text-ink sm:p-6">
+              Review the 13 inputs
+              <ChevronDown className="h-4 w-4 text-muted transition group-open:rotate-180" />
+            </summary>
+            <div className="border-t border-line/80 p-5 sm:p-6">
               <InputSummary record={record} />
             </div>
-          </section>
+          </details>
         </div>
 
         <aside className="space-y-4">
-          <div className="card p-5">
-            <p className="eyebrow">Model used</p>
-            <p className="mt-2.5 font-serif text-[27px] leading-none text-ink">
+          <div className="card p-5 sm:p-6">
+            <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-muted">
+              Model used
+            </p>
+            <p className="mt-2 font-serif text-[28px] leading-none text-ink">
               {result.model.label}
             </p>
-            <p className="mt-1.5 text-[10.5px] text-muted">
-              Version {result.model.version} · decision threshold{" "}
+            <p className="mt-1.5 text-[11.5px] text-muted">
+              Version {result.model.version} · threshold{" "}
               {result.model.threshold.toFixed(2)}
             </p>
-            <div className="mt-4 space-y-2 border-t border-line/70 pt-4 text-[10.5px] leading-relaxed text-muted">
-              <p className="flex items-start gap-2">
-                <CheckCircle2 className="mt-0.5 h-3 w-3 shrink-0 text-forest-600" />
-                Selected by 5-fold cross-validation, before the holdout was opened.
+
+            <dl className="mt-4 grid grid-cols-2 gap-3 border-t border-line/70 pt-4">
+              <div>
+                <dt className="text-[10.5px] uppercase tracking-[0.1em] text-muted">
+                  Validation
+                </dt>
+                <dd className="mt-1 text-[12px] font-semibold text-ink-soft">
+                  5-fold CV
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[10.5px] uppercase tracking-[0.1em] text-muted">
+                  Holdout
+                </dt>
+                <dd className="mt-1 text-[12px] font-semibold text-ink-soft">
+                  61 patients
+                </dd>
+              </div>
+            </dl>
+
+            <div className="mt-4 border-t border-line/70 pt-4">
+              <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-muted">
+                How to read this
               </p>
-              <p className="flex items-start gap-2">
-                <CheckCircle2 className="mt-0.5 h-3 w-3 shrink-0 text-forest-600" />
-                Preprocessing and classifier served as one serialized pipeline.
-              </p>
+              <ul className="mt-2.5 space-y-2.5 text-[12px] leading-relaxed text-muted">
+                <li className="flex gap-2">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-forest-500" />
+                  The score is a thresholded model output for a historical cohort,
+                  not a clinical probability.
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-forest-500" />
+                  A positive can be a false positive; a negative does not exclude
+                  disease.
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-forest-500" />
+                  The held-out evaluation used only 61 patients, so uncertainty is
+                  substantial.
+                </li>
+              </ul>
             </div>
-            <Link
-              to="/insights"
-              className="btn-ghost mt-2 -ml-2"
-            >
+
+            <Link to="/insights" className="btn-ghost mt-3 -ml-3">
               Inspect the evidence
               <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
 
-          <div className="card p-5">
-            <div className="flex items-center gap-2">
-              <ShieldAlert className="h-3.5 w-3.5 text-gold-700" />
-              <p className="text-[9.5px] font-bold uppercase tracking-[0.14em] text-ink-soft">
-                How to read this
-              </p>
-            </div>
-            <ul className="mt-3 space-y-2.5 text-[10.5px] leading-relaxed text-muted">
-              <li className="flex gap-2">
-                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-forest-500" />
-                The score is a thresholded model output for a historical cohort,
-                not a clinical probability.
-              </li>
-              <li className="flex gap-2">
-                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-forest-500" />
-                A positive result can be a false positive; a negative result does
-                not exclude disease.
-              </li>
-              <li className="flex gap-2">
-                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-forest-500" />
-                The held-out evaluation used only 61 patients, so uncertainty is
-                substantial.
-              </li>
-            </ul>
-          </div>
-
-          <MedicalDisclaimer compact />
-
-          <div className="rounded-xl border border-dashed border-line-strong px-4 py-3 text-[9.5px] leading-relaxed text-muted">
-            Assessment data is not persisted. Leaving or reloading this page clears
-            the result from memory.
+          <div className="px-1 text-[11.5px] leading-relaxed text-muted">
+            <p className="flex items-start gap-2">
+              <ShieldAlert className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-700" />
+              Academic machine-learning demonstration. Not a medical device or a
+              future-risk estimate. Consult a qualified clinician.
+            </p>
+            <p className="mt-2 pl-5">
+              Results stay in application memory and clear when you leave this page.
+            </p>
           </div>
         </aside>
       </div>

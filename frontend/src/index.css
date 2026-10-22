@@ -17,9 +17,11 @@
 
   body {
     @apply min-h-screen bg-canvas font-sans text-ink antialiased;
-    background-image:
-      radial-gradient(ellipse 70% 48% at 88% -8%, rgba(126, 164, 138, 0.18), transparent 62%),
-      radial-gradient(ellipse 55% 40% at 8% 100%, rgba(196, 93, 65, 0.075), transparent 65%);
+    background-image: radial-gradient(
+      ellipse 64% 42% at 90% -10%,
+      rgba(126, 164, 138, 0.14),
+      transparent 66%
+    );
     background-attachment: fixed;
   }
 
@@ -69,19 +71,19 @@
 
 @layer components {
   .card {
-    @apply rounded-card border border-line/90 bg-paper shadow-card;
+    @apply rounded-card border border-line bg-paper;
   }
 
   .card-quiet {
-    @apply rounded-[22px] border border-line/80 bg-paper-deep/75;
+    @apply rounded-xl border border-line/80 bg-paper-deep/65;
   }
 
   .eyebrow {
-    @apply flex items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.18em] text-forest-600;
+    @apply flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-forest-600;
   }
 
   .eyebrow-light {
-    @apply flex items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.18em] text-sage-200;
+    @apply flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-sage-200;
   }
 
   .display {
@@ -89,43 +91,43 @@
   }
 
   .field-label {
-    @apply flex min-h-5 items-center justify-between gap-3 text-[13px] font-semibold text-ink;
+    @apply flex min-h-5 items-center justify-between gap-3 text-[13.5px] font-semibold text-ink;
   }
 
   .field-help {
-    @apply mt-1.5 text-[11.5px] leading-relaxed text-muted;
+    @apply mt-1.5 text-[12.5px] leading-relaxed text-muted;
   }
 
   .input-shell {
-    @apply relative mt-2.5;
+    @apply relative mt-2;
   }
 
   .text-input {
-    @apply h-12 w-full rounded-xl border border-line-strong bg-white/70 px-3.5 pr-14 text-[15px] font-medium text-ink shadow-sm outline-none transition duration-200 placeholder:font-normal placeholder:text-muted/55 hover:border-sage-400 focus:border-forest-600 focus:bg-white focus:ring-4 focus:ring-forest-700/10;
+    @apply h-11 w-full rounded-[10px] border border-line-strong bg-white/70 px-3.5 pr-14 text-[15px] font-medium text-ink outline-none transition duration-200 placeholder:font-normal placeholder:text-muted/55 hover:border-sage-400 focus:border-forest-600 focus:bg-white focus:ring-4 focus:ring-forest-700/10;
   }
 
   .select-input {
-    @apply h-12 w-full cursor-pointer appearance-none rounded-xl border border-line-strong bg-white/70 px-3.5 pr-10 text-[14px] font-medium text-ink shadow-sm outline-none transition duration-200 hover:border-sage-400 focus:border-forest-600 focus:bg-white focus:ring-4 focus:ring-forest-700/10;
+    @apply h-11 w-full cursor-pointer appearance-none rounded-[10px] border border-line-strong bg-white/70 px-3.5 pr-10 text-[14px] font-medium text-ink outline-none transition duration-200 hover:border-sage-400 focus:border-forest-600 focus:bg-white focus:ring-4 focus:ring-forest-700/10;
   }
 
   .unit-chip {
-    @apply pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 rounded-md bg-sage-100 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-forest-700;
+    @apply pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 rounded-md bg-sage-100 px-2 py-1 text-[10.5px] font-bold uppercase tracking-wide text-forest-700;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-forest-900 px-5 py-3.5 text-[13px] font-bold tracking-[0.01em] text-paper shadow-lift transition duration-200 hover:-translate-y-0.5 hover:bg-forest-800 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 rounded-[10px] bg-forest-900 px-5 py-3 text-[13px] font-bold tracking-[0.01em] text-paper shadow-lift transition duration-200 hover:-translate-y-0.5 hover:bg-forest-800 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line-strong bg-paper px-4 py-3 text-[13px] font-bold text-ink-soft transition duration-200 hover:border-forest-300 hover:bg-forest-50 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-[10px] border border-line-strong bg-paper px-4 py-3 text-[13px] font-bold text-ink-soft transition duration-200 hover:border-forest-300 hover:bg-forest-50 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[12px] font-semibold text-forest-700 transition hover:bg-forest-50;
+    @apply inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[13px] font-semibold text-forest-700 transition hover:bg-forest-50;
   }
 
   .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.1em] text-ink-soft;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-2.5 py-1 text-[11px] font-semibold text-ink-soft;
   }
 
   .metric-number {
@@ -203,7 +205,14 @@
   }
 
   .card {
-    box-shadow: none !important;
     break-inside: avoid;
+  }
+
+  details > summary {
+    display: none !important;
+  }
+
+  details > *:not(summary) {
+    display: block !important;
   }
 }
