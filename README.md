@@ -1,5 +1,7 @@
 # Cardia — Heart Disease Detection with Machine Learning
 
+Academic mini-project: **Heart Disease Risk Detection Using Machine Learning**.
+
 An end-to-end academic machine-learning application that classifies **presence of
 angiographic coronary artery disease** from 13 structured findings in the official
 UCI Cleveland heart-disease dataset. It includes a reproducible training pipeline,
@@ -320,10 +322,11 @@ pipeline, API health and model-info, real inference, deterministic predictions,
 optional-field handling, out-of-range and unknown-field validation, CORS, and
 OpenAPI documentation.
 
-The frontend suite (32 tests) covers form validation and payload conversion,
+The frontend suite (33 tests) covers form validation and payload conversion,
 formatting, preset integrity, empty/positive/negative result rendering, reload
-semantics, preset loading, reset, client-side validation, mocked API submission,
-and navigation. Tests use jsdom and do not require a running backend.
+semantics, preset loading, reset, client-side validation, mocked API submission
+and navigation, and server-side field-error display. Tests use jsdom and do not
+require a running backend.
 
 ## Design and privacy decisions
 

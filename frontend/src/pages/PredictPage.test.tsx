@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { PredictPage } from "./PredictPage";
 import { AssessmentProvider } from "../state/AssessmentContext";
-import { createPrediction } from "../lib/api";
+import { createPrediction, ApiError } from "../lib/api";
 import { buildPredictionResult } from "../test/fixtures";
 
 vi.mock("../lib/api", async (importOriginal) => {
@@ -120,5 +120,32 @@ describe("PredictPage", () => {
     expect(screen.getByLabelText("Age")).toHaveValue(null);
     expect(screen.getByText("0%")).toBeInTheDocument();
     expect(mockedCreatePrediction).not.toHaveBeenCalled();
+  });
+
+  it("surfaces server-side validation errors next to the affected field", async () => {
+    mockedCreatePrediction.mockRejectedValue(
+      new ApiError("Check the highlighted fields and try again.", 422, {
+        age: "Input should be less than or equal to 100",
+      }),
+    );
+    renderPredictPage();
+    const user = userEvent.setup();
+
+    await user.click(
+      screen.getByRole("button", { name: /Atypical chest pain/i }),
+    );
+    await user.click(
+      screen.getAllByRole("button", { name: /Run assessment/i })[0],
+    );
+
+    expect(
+      await screen.findByText(/Check the highlighted fields and try again/),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Input should be less than or equal to 100"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("button", { name: /Run assessment/i })[0],
+    ).toBeEnabled();
   });
 });
