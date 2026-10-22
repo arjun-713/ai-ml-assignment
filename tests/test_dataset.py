@@ -97,5 +97,24 @@ def test_pipeline_imputes_missing_optional_fields(pipeline, valid_patient) -> No
     probabilities = pipeline.predict_proba(incomplete)
 
     assert probabilities.shape == (1, 2)
-    assert probabilities[0, 1] == pytest.approx(probabilities[0, 1])
     assert 0.0 <= probabilities[0, 1] <= 1.0
+
+    preprocessor = pipeline.named_steps["preprocessor"]
+    numeric_imputer = preprocessor.named_transformers_["num"].named_steps["imputer"]
+    categorical_imputer = (
+        preprocessor.named_transformers_["cat"].named_steps["imputer"]
+    )
+    numeric_features = list(preprocessor.transformers[0][2])
+    categorical_features = list(preprocessor.transformers[1][2])
+
+    explicitly_imputed = base.copy()
+    explicitly_imputed.loc[0, "ca"] = numeric_imputer.statistics_[
+        numeric_features.index("ca")
+    ]
+    explicitly_imputed.loc[0, "thal"] = categorical_imputer.statistics_[
+        categorical_features.index("thal")
+    ]
+
+    assert probabilities[0, 1] == pytest.approx(
+        pipeline.predict_proba(explicitly_imputed)[0, 1]
+    )
