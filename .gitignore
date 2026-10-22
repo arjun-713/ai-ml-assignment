@@ -1,0 +1,25 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/coverage/
+*.tsbuildinfo
+
+# Local environment
+.env
+.DS_Store
+*.log
+
+# Browser-automation scratch space
+.playwright-cli/
+
+# Training artifacts are intentionally committed so the API and frontend can
+# run from a fresh clone. Regenerate them with `python -m ml.train`.
