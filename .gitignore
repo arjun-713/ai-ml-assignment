@@ -6,20 +6,26 @@ __pycache__/
 .ipynb_checkpoints/
 *.egg-info/
 
-# Node
-frontend/node_modules/
-frontend/dist/
-frontend/.vite/
-frontend/coverage/
+# Node / Next.js
+node_modules/
+.next/
+out/
+coverage/
 *.tsbuildinfo
+npm-debug.log*
+
+# Vercel
+.vercel/
 
 # Local environment
 .env
+.env.local
+.env.*.local
 .DS_Store
 *.log
 
 # Browser-automation scratch space
 .playwright-cli/
 
-# Training artifacts are intentionally committed so the API and frontend can
-# run from a fresh clone. Regenerate them with `python -m ml.train`.
+# Training artifacts are intentionally committed so the Next.js app can run
+# from a fresh clone and deploy to Vercel without a Python runtime.

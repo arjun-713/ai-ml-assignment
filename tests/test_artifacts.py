@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 from pathlib import Path
 
 import numpy as np
@@ -16,7 +17,6 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 
-from backend.predictor import ArtifactLoadError, HeartDiseasePredictor
 from ml.dataset import (
     FEATURE_NAMES,
     TARGET_DESCRIPTION,
@@ -129,11 +129,76 @@ def test_schema_marks_ca_and_thal_optional_and_nullable(feature_schema) -> None:
     assert feature_schema["preprocessing"]["nullable_fields"] == ["ca", "thal"]
 
 
-def test_predictor_fails_clearly_when_artifacts_are_missing(tmp_path: Path) -> None:
-    with pytest.raises(ArtifactLoadError, match="Missing pipeline"):
-        HeartDiseasePredictor(tmp_path)
+def test_next_bundle_reproduces_the_fitted_preprocessing(
+    pipeline, model_bundle
+) -> None:
+    preprocessor = pipeline.named_steps["preprocessor"]
+    numeric = preprocessor.named_transformers_["num"]
+    categorical = preprocessor.named_transformers_["cat"]
+    exported = model_bundle["preprocessing"]
+
+    assert exported["numeric_features"] == list(numeric.feature_names_in_)
+    assert exported["numeric_impute"] == pytest.approx(
+        numeric.named_steps["imputer"].statistics_.tolist()
+    )
+    assert exported["numeric_mean"] == pytest.approx(
+        numeric.named_steps["scaler"].mean_.tolist()
+    )
+    assert exported["numeric_scale"] == pytest.approx(
+        numeric.named_steps["scaler"].scale_.tolist()
+    )
+    assert exported["categorical_features"] == list(categorical.feature_names_in_)
+    assert exported["categorical_impute"] == pytest.approx(
+        categorical.named_steps["imputer"].statistics_.tolist()
+    )
+    assert exported["categorical_categories"] == [
+        values.tolist() for values in categorical.named_steps["onehot"].categories_
+    ]
+    assert exported["output_feature_names"] == list(
+        preprocessor.get_feature_names_out()
+    )
+
+
+def test_next_bundle_matches_the_logistic_coefficients(
+    pipeline, model_bundle, metadata
+) -> None:
+    classifier = pipeline.named_steps["classifier"]
+    exported = model_bundle["classifier"]
+
+    assert exported["classes"] == classifier.classes_.astype(int).tolist()
+    assert exported["intercept"] == pytest.approx(float(classifier.intercept_[0]))
+    assert exported["coefficients"] == pytest.approx(classifier.coef_[0].tolist())
+    assert model_bundle["model"]["key"] == metadata["selected_model"]["key"]
+    assert model_bundle["model"]["threshold"] == 0.5
+    assert (
+        model_bundle["model_info"]["test_metrics"]
+        == json.loads((PROJECT_ROOT / "artifacts" / "metrics.json").read_text())[
+            "test_evaluation"
+        ]["metrics"]
+    )
+
+
+def test_parity_fixture_covers_every_cohort_row(
+    pipeline, parity_fixture, feature_schema
+) -> None:
+    frame = load_raw_dataset()
+    features, _ = prepare_dataset(frame)
+    probabilities = pipeline.predict_proba(features[FEATURE_NAMES])[:, 1]
+
+    assert len(parity_fixture["rows"]) == 303
+    assert parity_fixture["threshold"] == 0.5
+    assert feature_schema["model_input_order"] == FEATURE_NAMES
+
+    for index, row in enumerate(parity_fixture["rows"]):
+        assert row["probability"] == pytest.approx(
+            float(probabilities[index]), abs=1e-9
+        )
 
 
 def test_declared_artifact_paths_exist(metadata) -> None:
     for relative_path in metadata["artifacts"].values():
         assert (PROJECT_ROOT / relative_path).is_file(), relative_path
+    assert (PROJECT_ROOT / "artifacts" / "model_bundle.json").is_file()
+    assert (
+        PROJECT_ROOT / "src" / "lib" / "model" / "__fixtures__" / "parity.json"
+    ).is_file()

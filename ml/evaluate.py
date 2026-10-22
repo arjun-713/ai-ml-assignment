@@ -49,6 +49,7 @@ from ml.dataset import (
     prepare_dataset,
     split_dataset,
 )
+from ml.export_model import export_model_bundle
 
 PIPELINE_PATH = ARTIFACTS_DIR / "heart_disease_pipeline.joblib"
 METRICS_PATH = ARTIFACTS_DIR / "metrics.json"
@@ -526,6 +527,7 @@ def main() -> None:
         f"f1={metrics['test_evaluation']['metrics']['f1']:.3f}, "
         f"roc_auc={metrics['test_evaluation']['metrics']['roc_auc']:.3f}"
     )
+    export_model_bundle()
 
 
 if __name__ == "__main__":

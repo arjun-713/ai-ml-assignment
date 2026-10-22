@@ -47,6 +47,7 @@ from ml.dataset import (
     split_dataset,
 )
 from ml.evaluate import evaluate_and_save
+from ml.export_model import export_model_bundle
 
 PIPELINE_PATH = ARTIFACTS_DIR / "heart_disease_pipeline.joblib"
 METRICS_PATH = ARTIFACTS_DIR / "metrics.json"
@@ -446,6 +447,7 @@ def main() -> None:
     print(f"Saved metrics:  {METRICS_PATH}")
     print(f"Saved schema:   {SCHEMA_PATH}")
     print(f"Saved metadata: {METADATA_PATH}")
+    export_model_bundle()
 
 
 if __name__ == "__main__":

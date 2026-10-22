@@ -1,0 +1,2047 @@
+{
+  "schema_version": "1.0.0",
+  "exported_at_utc": "2026-10-22T17:30:53+00:00",
+  "model": {
+    "key": "logistic_regression",
+    "label": "Logistic Regression",
+    "version": "1.0.0",
+    "trained_at_utc": "2026-10-22T13:04:31+00:00",
+    "threshold": 0.5,
+    "hyperparameters": {
+      "C": 0.1,
+      "class_weight": null
+    }
+  },
+  "preprocessing": {
+    "numeric_features": [
+      "age",
+      "trestbps",
+      "chol",
+      "thalach",
+      "oldpeak",
+      "ca"
+    ],
+    "numeric_impute": [
+      56.0,
+      130.0,
+      244.5,
+      153.5,
+      0.8,
+      0.0
+    ],
+    "numeric_mean": [
+      54.549586776859506,
+      130.95867768595042,
+      249.8388429752066,
+      149.96280991735537,
+      0.9991735537190083,
+      0.6074380165289256
+    ],
+    "numeric_scale": [
+      8.978372765440131,
+      17.58610302878636,
+      52.737566192586975,
+      22.639527461380734,
+      1.1206178835595506,
+      0.8807083258655833
+    ],
+    "categorical_features": [
+      "sex",
+      "cp",
+      "fbs",
+      "restecg",
+      "exang",
+      "slope",
+      "thal"
+    ],
+    "categorical_impute": [
+      1.0,
+      4.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      3.0
+    ],
+    "categorical_categories": [
+      [
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ],
+      [
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        2.0
+      ],
+      [
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        2.0,
+        3.0
+      ],
+      [
+        3.0,
+        6.0,
+        7.0
+      ]
+    ],
+    "output_feature_names": [
+      "num__age",
+      "num__trestbps",
+      "num__chol",
+      "num__thalach",
+      "num__oldpeak",
+      "num__ca",
+      "cat__sex_0.0",
+      "cat__sex_1.0",
+      "cat__cp_1.0",
+      "cat__cp_2.0",
+      "cat__cp_3.0",
+      "cat__cp_4.0",
+      "cat__fbs_0.0",
+      "cat__fbs_1.0",
+      "cat__restecg_0.0",
+      "cat__restecg_1.0",
+      "cat__restecg_2.0",
+      "cat__exang_0.0",
+      "cat__exang_1.0",
+      "cat__slope_1.0",
+      "cat__slope_2.0",
+      "cat__slope_3.0",
+      "cat__thal_3.0",
+      "cat__thal_6.0",
+      "cat__thal_7.0"
+    ],
+    "numeric_imputation": "median",
+    "categorical_imputation": "most_frequent",
+    "numeric_scaling": "standard",
+    "categorical_encoding": "one_hot(handle_unknown=ignore)"
+  },
+  "classifier": {
+    "classes": [
+      0,
+      1
+    ],
+    "intercept": -0.3241770657397502,
+    "coefficients": [
+      -0.007718994309681303,
+      0.17316337474980037,
+      0.10669507365058489,
+      -0.32065398971077663,
+      0.22976745782757374,
+      0.702549121987202,
+      -0.38594162878968513,
+      0.38603919951234505,
+      -0.195205662957077,
+      -0.059406669873392125,
+      -0.28133940839879623,
+      0.5360493119519252,
+      0.04141420459577852,
+      -0.041316633873118624,
+      -0.12567101066245184,
+      -0.019473276936799813,
+      0.1452418583219116,
+      -0.26574523755739826,
+      0.2658428082800581,
+      -0.2550282691743007,
+      0.3011542939520086,
+      -0.046028454055047956,
+      -0.47949358175541484,
+      -0.023086812864399328,
+      0.5026779653424742
+    ],
+    "n_features": 25
+  },
+  "target_definition": "Original angiographic disease status (`num`): 0 = less than 50% diameter narrowing, 1\u20134 = greater than 50% narrowing in at least one major vessel. For modelling, values 1\u20134 are combined into a binary 'disease indicated' class.",
+  "disclaimer": "Educational decision-support demo only. This output is not a medical diagnosis, not a clinically validated risk score, and must not be used to guide patient care. Consult a qualified clinician for any medical concern.",
+  "feature_schema": {
+    "schema_version": "1.0.0",
+    "project": "Heart Disease Risk Detection Using Machine Learning",
+    "target": {
+      "name": "num",
+      "model_name": "disease",
+      "labels": {
+        "0": "No disease indicated",
+        "1": "Disease indicated"
+      },
+      "description": "Original angiographic disease status (`num`): 0 = less than 50% diameter narrowing, 1\u20134 = greater than 50% narrowing in at least one major vessel. For modelling, values 1\u20134 are combined into a binary 'disease indicated' class."
+    },
+    "features": [
+      {
+        "key": "age",
+        "label": "Age",
+        "group": "patient",
+        "type": "number",
+        "unit": "years",
+        "min": 18,
+        "max": 100,
+        "observed_min": 29,
+        "observed_max": 77,
+        "required": true,
+        "description": "Age of the patient at the time of the examination."
+      },
+      {
+        "key": "sex",
+        "label": "Sex",
+        "group": "patient",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 0,
+            "label": "Female"
+          },
+          {
+            "value": 1,
+            "label": "Male"
+          }
+        ],
+        "description": "Recorded biological sex (UCI coding: 0 = female, 1 = male)."
+      },
+      {
+        "key": "trestbps",
+        "label": "Resting blood pressure",
+        "group": "measurements",
+        "type": "number",
+        "unit": "mm Hg",
+        "min": 80,
+        "max": 250,
+        "observed_min": 94,
+        "observed_max": 200,
+        "required": true,
+        "description": "Resting systolic blood pressure on admission to hospital."
+      },
+      {
+        "key": "chol",
+        "label": "Serum cholesterol",
+        "group": "measurements",
+        "type": "number",
+        "unit": "mg/dL",
+        "min": 100,
+        "max": 600,
+        "observed_min": 126,
+        "observed_max": 564,
+        "required": true,
+        "description": "Total serum cholesterol measured at the examination."
+      },
+      {
+        "key": "fbs",
+        "label": "Fasting blood sugar",
+        "group": "measurements",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 0,
+            "label": "120 mg/dL or below"
+          },
+          {
+            "value": 1,
+            "label": "Above 120 mg/dL"
+          }
+        ],
+        "description": "Whether fasting blood sugar exceeds 120 mg/dL (UCI coding: 1 = true)."
+      },
+      {
+        "key": "thalach",
+        "label": "Maximum heart rate",
+        "group": "measurements",
+        "type": "number",
+        "unit": "bpm",
+        "min": 50,
+        "max": 220,
+        "observed_min": 71,
+        "observed_max": 202,
+        "required": true,
+        "description": "Maximum heart rate achieved during the exercise stress test."
+      },
+      {
+        "key": "cp",
+        "label": "Chest pain type",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 1,
+            "label": "Typical angina"
+          },
+          {
+            "value": 2,
+            "label": "Atypical angina"
+          },
+          {
+            "value": 3,
+            "label": "Non-anginal pain"
+          },
+          {
+            "value": 4,
+            "label": "Asymptomatic"
+          }
+        ],
+        "description": "Chest pain category recorded at presentation (original UCI 1\u20134 coding)."
+      },
+      {
+        "key": "restecg",
+        "label": "Resting ECG",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 0,
+            "label": "Normal"
+          },
+          {
+            "value": 1,
+            "label": "ST-T wave abnormality"
+          },
+          {
+            "value": 2,
+            "label": "Left ventricular hypertrophy"
+          }
+        ],
+        "description": "Resting electrocardiographic findings (UCI coding: 0 = normal, 1 = ST-T abnormality, 2 = probable/definite LVH)."
+      },
+      {
+        "key": "exang",
+        "label": "Exercise-induced angina",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 0,
+            "label": "No"
+          },
+          {
+            "value": 1,
+            "label": "Yes"
+          }
+        ],
+        "description": "Whether exercise provoked angina during the stress test."
+      },
+      {
+        "key": "oldpeak",
+        "label": "ST depression (oldpeak)",
+        "group": "cardiac",
+        "type": "number",
+        "unit": "mm",
+        "min": 0,
+        "max": 10,
+        "step": 0.1,
+        "observed_min": 0.0,
+        "observed_max": 6.2,
+        "required": true,
+        "description": "ST depression induced by exercise relative to rest, measured on the ECG."
+      },
+      {
+        "key": "slope",
+        "label": "ST segment slope",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 1,
+            "label": "Upsloping"
+          },
+          {
+            "value": 2,
+            "label": "Flat"
+          },
+          {
+            "value": 3,
+            "label": "Downsloping"
+          }
+        ],
+        "description": "Slope of the peak-exercise ST segment (UCI coding: 1 = upsloping, 2 = flat, 3 = downsloping)."
+      },
+      {
+        "key": "ca",
+        "label": "Major vessels coloured",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": false,
+        "options": [
+          {
+            "value": 0,
+            "label": "0 vessels"
+          },
+          {
+            "value": 1,
+            "label": "1 vessel"
+          },
+          {
+            "value": 2,
+            "label": "2 vessels"
+          },
+          {
+            "value": 3,
+            "label": "3 vessels"
+          }
+        ],
+        "description": "Number of major vessels (0\u20133) coloured by fluoroscopy. May be left unrecorded; the training pipeline imputes the median."
+      },
+      {
+        "key": "thal",
+        "label": "Thalassemia scan",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": false,
+        "options": [
+          {
+            "value": 3,
+            "label": "Normal"
+          },
+          {
+            "value": 6,
+            "label": "Fixed defect"
+          },
+          {
+            "value": 7,
+            "label": "Reversible defect"
+          }
+        ],
+        "description": "Thallium stress-test result (original UCI coding: 3 = normal, 6 = fixed defect, 7 = reversible defect). May be left unrecorded; the training pipeline imputes the most frequent value."
+      }
+    ],
+    "model_input_order": [
+      "age",
+      "sex",
+      "cp",
+      "trestbps",
+      "chol",
+      "fbs",
+      "restecg",
+      "thalach",
+      "exang",
+      "oldpeak",
+      "slope",
+      "ca",
+      "thal"
+    ],
+    "preprocessing": {
+      "numeric_features": [
+        "age",
+        "trestbps",
+        "chol",
+        "thalach",
+        "oldpeak",
+        "ca"
+      ],
+      "categorical_features": [
+        "sex",
+        "cp",
+        "fbs",
+        "restecg",
+        "exang",
+        "slope",
+        "thal"
+      ],
+      "numeric_imputation": "median (fitted on training folds only)",
+      "categorical_imputation": "most frequent (fitted on training folds only)",
+      "numeric_scaling": "StandardScaler (fitted on training folds only)",
+      "categorical_encoding": "OneHotEncoder(handle_unknown='ignore'); one reference level per feature",
+      "nullable_fields": [
+        "ca",
+        "thal"
+      ]
+    },
+    "encoding_notes": "Uses the original UCI Cleveland codes, not the modified Kaggle encodings: cp 1\u20134, restecg 0\u20132, slope 1\u20133, thal 3/6/7, and num 0\u20134 mapped to binary via num > 0."
+  },
+  "model_info": {
+    "model": {
+      "key": "logistic_regression",
+      "label": "Logistic Regression",
+      "version": "1.0.0",
+      "trained_at_utc": "2026-10-22T13:04:31+00:00",
+      "threshold": 0.5,
+      "hyperparameters": {
+        "C": 0.1,
+        "class_weight": null
+      }
+    },
+    "selection": {
+      "selected_model_key": "logistic_regression",
+      "selected_model_name": "Logistic Regression",
+      "primary_metric": "f1",
+      "primary_metric_label": "Mean 5-fold cross-validated F1",
+      "tie_breaker": "Mean 5-fold cross-validated ROC-AUC",
+      "selected_cv_scores": {
+        "accuracy": {
+          "mean": 0.8511,
+          "std": 0.025,
+          "folds": [
+            0.8776,
+            0.8571,
+            0.875,
+            0.8125,
+            0.8333
+          ]
+        },
+        "precision": {
+          "mean": 0.8776,
+          "std": 0.0606,
+          "folds": [
+            0.8696,
+            0.9412,
+            0.9444,
+            0.7826,
+            0.85
+          ]
+        },
+        "recall": {
+          "mean": 0.7921,
+          "std": 0.0482,
+          "folds": [
+            0.8696,
+            0.7273,
+            0.7727,
+            0.8182,
+            0.7727
+          ]
+        },
+        "f1": {
+          "mean": 0.8299,
+          "std": 0.026,
+          "folds": [
+            0.8696,
+            0.8205,
+            0.85,
+            0.8,
+            0.8095
+          ]
+        },
+        "roc_auc": {
+          "mean": 0.9113,
+          "std": 0.018,
+          "folds": [
+            0.9231,
+            0.9343,
+            0.9056,
+            0.9126,
+            0.8811
+          ]
+        }
+      },
+      "runner_up": "Random Forest",
+      "rationale": "Logistic Regression had the highest mean 5-fold CV F1 (0.830 \u00b1 0.026) and positive-class recall of 0.792. F1 balances positive-class recall against false positives, while ROC-AUC served as a tie-breaker. The held-out test set was not used for model or hyperparameter selection.",
+      "selection_protocol": "Hyperparameters were tuned with 5-fold stratified GridSearchCV using ROC-AUC. All models were then scored with the same 5-fold splits on the training partition. The final model was chosen by mean CV F1, then evaluated once on the untouched stratified 20% holdout.",
+      "rankings": [
+        {
+          "rank": 1,
+          "model": "Logistic Regression",
+          "cv_f1": 0.8299,
+          "cv_recall": 0.7921,
+          "cv_roc_auc": 0.9113
+        },
+        {
+          "rank": 2,
+          "model": "Random Forest",
+          "cv_f1": 0.7765,
+          "cv_recall": 0.7644,
+          "cv_roc_auc": 0.8992
+        },
+        {
+          "rank": 3,
+          "model": "Decision Tree",
+          "cv_f1": 0.7554,
+          "cv_recall": 0.7375,
+          "cv_roc_auc": 0.8508
+        }
+      ]
+    },
+    "validation": {
+      "split": "stratified 80/20 train/test",
+      "random_seed": 42,
+      "test_size": 0.2,
+      "cv_folds": 5,
+      "cv_shuffle": true,
+      "grid_search_scoring": "roc_auc",
+      "selection_scoring": "mean cross-validated F1 (ROC-AUC tie-break)",
+      "test_set_used_for_selection": false
+    },
+    "test_metrics": {
+      "accuracy": 0.8852,
+      "precision": 0.8387,
+      "recall": 0.9286,
+      "f1": 0.8814,
+      "roc_auc": 0.961
+    },
+    "comparison": [
+      {
+        "key": "logistic_regression",
+        "label": "Logistic Regression",
+        "description": "Linear baseline on log-odds. Fast, stable and interpretable; coefficients can be inspected per transformed feature.",
+        "cv": {
+          "accuracy": {
+            "mean": 0.8511,
+            "std": 0.025,
+            "folds": [
+              0.8776,
+              0.8571,
+              0.875,
+              0.8125,
+              0.8333
+            ]
+          },
+          "precision": {
+            "mean": 0.8776,
+            "std": 0.0606,
+            "folds": [
+              0.8696,
+              0.9412,
+              0.9444,
+              0.7826,
+              0.85
+            ]
+          },
+          "recall": {
+            "mean": 0.7921,
+            "std": 0.0482,
+            "folds": [
+              0.8696,
+              0.7273,
+              0.7727,
+              0.8182,
+              0.7727
+            ]
+          },
+          "f1": {
+            "mean": 0.8299,
+            "std": 0.026,
+            "folds": [
+              0.8696,
+              0.8205,
+              0.85,
+              0.8,
+              0.8095
+            ]
+          },
+          "roc_auc": {
+            "mean": 0.9113,
+            "std": 0.018,
+            "folds": [
+              0.9231,
+              0.9343,
+              0.9056,
+              0.9126,
+              0.8811
+            ]
+          }
+        },
+        "best_params": {
+          "C": 0.1,
+          "class_weight": null
+        },
+        "tuning": {
+          "scoring": "roc_auc",
+          "candidates_evaluated": 8,
+          "best_grid_cv_roc_auc": 0.9113,
+          "folds": 5
+        },
+        "fit_seconds": 0.89,
+        "rank": 1
+      },
+      {
+        "key": "random_forest",
+        "label": "Random Forest",
+        "description": "Bagged ensemble of decision trees. Captures non-linear effects and interactions while averaging away some single-tree variance.",
+        "cv": {
+          "accuracy": {
+            "mean": 0.8014,
+            "std": 0.0292,
+            "folds": [
+              0.8571,
+              0.7959,
+              0.7917,
+              0.7708,
+              0.7917
+            ]
+          },
+          "precision": {
+            "mean": 0.8018,
+            "std": 0.0528,
+            "folds": [
+              0.8077,
+              0.875,
+              0.8333,
+              0.72,
+              0.7727
+            ]
+          },
+          "recall": {
+            "mean": 0.7644,
+            "std": 0.0983,
+            "folds": [
+              0.913,
+              0.6364,
+              0.6818,
+              0.8182,
+              0.7727
+            ]
+          },
+          "f1": {
+            "mean": 0.7765,
+            "std": 0.0422,
+            "folds": [
+              0.8571,
+              0.7368,
+              0.75,
+              0.766,
+              0.7727
+            ]
+          },
+          "roc_auc": {
+            "mean": 0.8992,
+            "std": 0.0272,
+            "folds": [
+              0.9515,
+              0.8872,
+              0.8724,
+              0.8916,
+              0.8934
+            ]
+          }
+        },
+        "best_params": {
+          "class_weight": "balanced_subsample",
+          "max_depth": 4,
+          "max_features": "sqrt",
+          "min_samples_leaf": 1,
+          "n_estimators": 500
+        },
+        "tuning": {
+          "scoring": "roc_auc",
+          "candidates_evaluated": 48,
+          "best_grid_cv_roc_auc": 0.8992,
+          "folds": 5
+        },
+        "fit_seconds": 164.96,
+        "rank": 2
+      },
+      {
+        "key": "decision_tree",
+        "label": "Decision Tree",
+        "description": "A single interpretable tree. Useful as a transparent comparison but more prone to overfitting than the ensemble alternatives.",
+        "cv": {
+          "accuracy": {
+            "mean": 0.7853,
+            "std": 0.0417,
+            "folds": [
+              0.7959,
+              0.7347,
+              0.75,
+              0.7917,
+              0.8542
+            ]
+          },
+          "precision": {
+            "mean": 0.784,
+            "std": 0.0456,
+            "folds": [
+              0.7407,
+              0.7368,
+              0.8125,
+              0.7727,
+              0.8571
+            ]
+          },
+          "recall": {
+            "mean": 0.7375,
+            "std": 0.1067,
+            "folds": [
+              0.8696,
+              0.6364,
+              0.5909,
+              0.7727,
+              0.8182
+            ]
+          },
+          "f1": {
+            "mean": 0.7554,
+            "std": 0.0621,
+            "folds": [
+              0.8,
+              0.6829,
+              0.6842,
+              0.7727,
+              0.8372
+            ]
+          },
+          "roc_auc": {
+            "mean": 0.8508,
+            "std": 0.0426,
+            "folds": [
+              0.8863,
+              0.7997,
+              0.7998,
+              0.8706,
+              0.8977
+            ]
+          }
+        },
+        "best_params": {
+          "class_weight": "balanced",
+          "criterion": "gini",
+          "max_depth": 3,
+          "min_samples_leaf": 1
+        },
+        "tuning": {
+          "scoring": "roc_auc",
+          "candidates_evaluated": 32,
+          "best_grid_cv_roc_auc": 0.8508,
+          "folds": 5
+        },
+        "fit_seconds": 3.66,
+        "rank": 3
+      }
+    ],
+    "confusion_matrix": {
+      "labels": [
+        "No disease indicated",
+        "Disease indicated"
+      ],
+      "matrix": [
+        [
+          28,
+          5
+        ],
+        [
+          2,
+          26
+        ]
+      ],
+      "tn": 28,
+      "fp": 5,
+      "fn": 2,
+      "tp": 26
+    },
+    "roc_curve": {
+      "fpr": [
+        0.0,
+        0.0,
+        0.0,
+        0.0303,
+        0.0303,
+        0.0606,
+        0.0606,
+        0.2121,
+        0.2121,
+        0.3333,
+        0.3333,
+        1.0
+      ],
+      "tpr": [
+        0.0,
+        0.0357,
+        0.3214,
+        0.3214,
+        0.8929,
+        0.8929,
+        0.9286,
+        0.9286,
+        0.9643,
+        0.9643,
+        1.0,
+        1.0
+      ],
+      "auc": 0.961
+    },
+    "calibration": {
+      "mean_predicted": [
+        0.096,
+        0.2025,
+        0.3938,
+        0.5927,
+        0.7603,
+        0.9186
+      ],
+      "fraction_positive": [
+        0.0,
+        0.0,
+        0.25,
+        0.4286,
+        1.0,
+        0.9412
+      ],
+      "brier_score": 0.0869,
+      "n_bins": 6,
+      "note": "Reliability is estimated from only 61 held-out patients. Bin-level points are unstable and the score is not a clinically calibrated risk."
+    },
+    "classification_report": {
+      "no_disease": {
+        "precision": 0.9333,
+        "recall": 0.8485,
+        "f1-score": 0.8889,
+        "support": 33
+      },
+      "disease": {
+        "precision": 0.8387,
+        "recall": 0.9286,
+        "f1-score": 0.8814,
+        "support": 28
+      },
+      "macro_avg": {
+        "precision": 0.886,
+        "recall": 0.8885,
+        "f1-score": 0.8851,
+        "support": 61
+      },
+      "weighted_avg": {
+        "precision": 0.8899,
+        "recall": 0.8852,
+        "f1-score": 0.8854,
+        "support": 61
+      }
+    },
+    "permutation_importance": [
+      {
+        "feature": "ca",
+        "label": "Major vessels coloured",
+        "mean_decrease_roc_auc": 0.0773,
+        "std": 0.0235
+      },
+      {
+        "feature": "cp",
+        "label": "Chest pain type",
+        "mean_decrease_roc_auc": 0.0245,
+        "std": 0.0092
+      },
+      {
+        "feature": "oldpeak",
+        "label": "ST depression (oldpeak)",
+        "mean_decrease_roc_auc": 0.0141,
+        "std": 0.0062
+      },
+      {
+        "feature": "exang",
+        "label": "Exercise-induced angina",
+        "mean_decrease_roc_auc": 0.0122,
+        "std": 0.0054
+      },
+      {
+        "feature": "thal",
+        "label": "Thalassemia scan",
+        "mean_decrease_roc_auc": 0.0115,
+        "std": 0.0081
+      },
+      {
+        "feature": "thalach",
+        "label": "Maximum heart rate",
+        "mean_decrease_roc_auc": 0.0109,
+        "std": 0.0082
+      },
+      {
+        "feature": "slope",
+        "label": "ST segment slope",
+        "mean_decrease_roc_auc": 0.0056,
+        "std": 0.0058
+      },
+      {
+        "feature": "trestbps",
+        "label": "Resting blood pressure",
+        "mean_decrease_roc_auc": 0.0034,
+        "std": 0.004
+      },
+      {
+        "feature": "sex",
+        "label": "Sex",
+        "mean_decrease_roc_auc": 0.0018,
+        "std": 0.0069
+      },
+      {
+        "feature": "restecg",
+        "label": "Resting ECG",
+        "mean_decrease_roc_auc": 0.0008,
+        "std": 0.0019
+      },
+      {
+        "feature": "age",
+        "label": "Age",
+        "mean_decrease_roc_auc": -0.0001,
+        "std": 0.0002
+      },
+      {
+        "feature": "fbs",
+        "label": "Fasting blood sugar",
+        "mean_decrease_roc_auc": -0.0003,
+        "std": 0.0005
+      },
+      {
+        "feature": "chol",
+        "label": "Serum cholesterol",
+        "mean_decrease_roc_auc": -0.0026,
+        "std": 0.0024
+      }
+    ],
+    "coefficient_analysis": {
+      "available": true,
+      "intercept": -0.3242,
+      "terms": [
+        {
+          "term": "num__ca",
+          "feature": "ca",
+          "term_label": "Major vessels coloured",
+          "coefficient": 0.7025,
+          "odds_ratio": 2.0189
+        },
+        {
+          "term": "cat__cp_4.0",
+          "feature": "cp",
+          "term_label": "Chest pain type",
+          "coefficient": 0.536,
+          "odds_ratio": 1.7092
+        },
+        {
+          "term": "cat__thal_7.0",
+          "feature": "thal",
+          "term_label": "Thalassemia scan",
+          "coefficient": 0.5027,
+          "odds_ratio": 1.6531
+        },
+        {
+          "term": "cat__thal_3.0",
+          "feature": "thal",
+          "term_label": "Thalassemia scan",
+          "coefficient": -0.4795,
+          "odds_ratio": 0.6191
+        },
+        {
+          "term": "cat__sex_1.0",
+          "feature": "sex",
+          "term_label": "Sex",
+          "coefficient": 0.386,
+          "odds_ratio": 1.4711
+        },
+        {
+          "term": "cat__sex_0.0",
+          "feature": "sex",
+          "term_label": "Sex",
+          "coefficient": -0.3859,
+          "odds_ratio": 0.6798
+        },
+        {
+          "term": "num__thalach",
+          "feature": "thalach",
+          "term_label": "Maximum heart rate",
+          "coefficient": -0.3207,
+          "odds_ratio": 0.7257
+        },
+        {
+          "term": "cat__slope_2.0",
+          "feature": "slope",
+          "term_label": "ST segment slope",
+          "coefficient": 0.3012,
+          "odds_ratio": 1.3514
+        },
+        {
+          "term": "cat__cp_3.0",
+          "feature": "cp",
+          "term_label": "Chest pain type",
+          "coefficient": -0.2813,
+          "odds_ratio": 0.7548
+        },
+        {
+          "term": "cat__exang_1.0",
+          "feature": "exang",
+          "term_label": "Exercise-induced angina",
+          "coefficient": 0.2658,
+          "odds_ratio": 1.3045
+        },
+        {
+          "term": "cat__exang_0.0",
+          "feature": "exang",
+          "term_label": "Exercise-induced angina",
+          "coefficient": -0.2657,
+          "odds_ratio": 0.7666
+        },
+        {
+          "term": "cat__slope_1.0",
+          "feature": "slope",
+          "term_label": "ST segment slope",
+          "coefficient": -0.255,
+          "odds_ratio": 0.7749
+        },
+        {
+          "term": "num__oldpeak",
+          "feature": "oldpeak",
+          "term_label": "ST depression (oldpeak)",
+          "coefficient": 0.2298,
+          "odds_ratio": 1.2583
+        },
+        {
+          "term": "cat__cp_1.0",
+          "feature": "cp",
+          "term_label": "Chest pain type",
+          "coefficient": -0.1952,
+          "odds_ratio": 0.8227
+        },
+        {
+          "term": "num__trestbps",
+          "feature": "trestbps",
+          "term_label": "Resting blood pressure",
+          "coefficient": 0.1732,
+          "odds_ratio": 1.1891
+        },
+        {
+          "term": "cat__restecg_2.0",
+          "feature": "restecg",
+          "term_label": "Resting ECG",
+          "coefficient": 0.1452,
+          "odds_ratio": 1.1563
+        },
+        {
+          "term": "cat__restecg_0.0",
+          "feature": "restecg",
+          "term_label": "Resting ECG",
+          "coefficient": -0.1257,
+          "odds_ratio": 0.8819
+        },
+        {
+          "term": "num__chol",
+          "feature": "chol",
+          "term_label": "Serum cholesterol",
+          "coefficient": 0.1067,
+          "odds_ratio": 1.1126
+        },
+        {
+          "term": "cat__cp_2.0",
+          "feature": "cp",
+          "term_label": "Chest pain type",
+          "coefficient": -0.0594,
+          "odds_ratio": 0.9423
+        },
+        {
+          "term": "cat__slope_3.0",
+          "feature": "slope",
+          "term_label": "ST segment slope",
+          "coefficient": -0.046,
+          "odds_ratio": 0.955
+        },
+        {
+          "term": "cat__fbs_0.0",
+          "feature": "fbs",
+          "term_label": "Fasting blood sugar",
+          "coefficient": 0.0414,
+          "odds_ratio": 1.0423
+        },
+        {
+          "term": "cat__fbs_1.0",
+          "feature": "fbs",
+          "term_label": "Fasting blood sugar",
+          "coefficient": -0.0413,
+          "odds_ratio": 0.9595
+        },
+        {
+          "term": "cat__thal_6.0",
+          "feature": "thal",
+          "term_label": "Thalassemia scan",
+          "coefficient": -0.0231,
+          "odds_ratio": 0.9772
+        },
+        {
+          "term": "cat__restecg_1.0",
+          "feature": "restecg",
+          "term_label": "Resting ECG",
+          "coefficient": -0.0195,
+          "odds_ratio": 0.9807
+        },
+        {
+          "term": "num__age",
+          "feature": "age",
+          "term_label": "Age",
+          "coefficient": -0.0077,
+          "odds_ratio": 0.9923
+        }
+      ],
+      "note": "Coefficients are in log-odds units on the transformed (scaled or one-hot) feature space. A term's coefficient is not a causal effect."
+    },
+    "dataset": {
+      "n_rows": 303,
+      "n_features": 13,
+      "target_distribution_original": {
+        "0": 164,
+        "1": 55,
+        "2": 36,
+        "3": 35,
+        "4": 13
+      },
+      "binary_class_counts": {
+        "no_disease": 164,
+        "disease": 139
+      },
+      "missing_values": {
+        "ca": 4,
+        "thal": 2
+      },
+      "feature_ranges": {
+        "age": {
+          "min": 29.0,
+          "max": 77.0
+        },
+        "sex": {
+          "min": 0.0,
+          "max": 1.0
+        },
+        "cp": {
+          "min": 1.0,
+          "max": 4.0
+        },
+        "trestbps": {
+          "min": 94.0,
+          "max": 200.0
+        },
+        "chol": {
+          "min": 126.0,
+          "max": 564.0
+        },
+        "fbs": {
+          "min": 0.0,
+          "max": 1.0
+        },
+        "restecg": {
+          "min": 0.0,
+          "max": 2.0
+        },
+        "thalach": {
+          "min": 71.0,
+          "max": 202.0
+        },
+        "exang": {
+          "min": 0.0,
+          "max": 1.0
+        },
+        "oldpeak": {
+          "min": 0.0,
+          "max": 6.2
+        },
+        "slope": {
+          "min": 1.0,
+          "max": 3.0
+        },
+        "ca": {
+          "min": 0.0,
+          "max": 3.0
+        },
+        "thal": {
+          "min": 3.0,
+          "max": 7.0
+        }
+      },
+      "correlation": {
+        "features": [
+          "age",
+          "sex",
+          "cp",
+          "trestbps",
+          "chol",
+          "fbs",
+          "restecg",
+          "thalach",
+          "exang",
+          "oldpeak",
+          "slope",
+          "ca",
+          "thal",
+          "target"
+        ],
+        "labels": [
+          "Age",
+          "Sex",
+          "Chest pain type",
+          "Resting blood pressure",
+          "Serum cholesterol",
+          "Fasting blood sugar",
+          "Resting ECG",
+          "Maximum heart rate",
+          "Exercise-induced angina",
+          "ST depression (oldpeak)",
+          "ST segment slope",
+          "Major vessels coloured",
+          "Thalassemia scan",
+          "Disease indicated"
+        ],
+        "matrix": [
+          [
+            1.0,
+            -0.098,
+            0.104,
+            0.285,
+            0.209,
+            0.119,
+            0.149,
+            -0.394,
+            0.092,
+            0.204,
+            0.162,
+            0.363,
+            0.127,
+            0.223
+          ],
+          [
+            -0.098,
+            1.0,
+            0.01,
+            -0.064,
+            -0.2,
+            0.048,
+            0.022,
+            -0.049,
+            0.146,
+            0.102,
+            0.038,
+            0.093,
+            0.381,
+            0.277
+          ],
+          [
+            0.104,
+            0.01,
+            1.0,
+            -0.036,
+            0.072,
+            -0.04,
+            0.068,
+            -0.334,
+            0.384,
+            0.202,
+            0.152,
+            0.233,
+            0.265,
+            0.414
+          ],
+          [
+            0.285,
+            -0.064,
+            -0.036,
+            1.0,
+            0.13,
+            0.175,
+            0.147,
+            -0.045,
+            0.065,
+            0.189,
+            0.117,
+            0.099,
+            0.134,
+            0.151
+          ],
+          [
+            0.209,
+            -0.2,
+            0.072,
+            0.13,
+            1.0,
+            0.01,
+            0.171,
+            -0.003,
+            0.061,
+            0.047,
+            -0.004,
+            0.119,
+            0.014,
+            0.085
+          ],
+          [
+            0.119,
+            0.048,
+            -0.04,
+            0.175,
+            0.01,
+            1.0,
+            0.07,
+            -0.008,
+            0.026,
+            0.006,
+            0.06,
+            0.145,
+            0.071,
+            0.025
+          ],
+          [
+            0.149,
+            0.022,
+            0.068,
+            0.147,
+            0.171,
+            0.07,
+            1.0,
+            -0.083,
+            0.085,
+            0.114,
+            0.134,
+            0.128,
+            0.025,
+            0.169
+          ],
+          [
+            -0.394,
+            -0.049,
+            -0.334,
+            -0.045,
+            -0.003,
+            -0.008,
+            -0.083,
+            1.0,
+            -0.378,
+            -0.343,
+            -0.386,
+            -0.264,
+            -0.28,
+            -0.417
+          ],
+          [
+            0.092,
+            0.146,
+            0.384,
+            0.065,
+            0.061,
+            0.026,
+            0.085,
+            -0.378,
+            1.0,
+            0.288,
+            0.258,
+            0.146,
+            0.33,
+            0.432
+          ],
+          [
+            0.204,
+            0.102,
+            0.202,
+            0.189,
+            0.047,
+            0.006,
+            0.114,
+            -0.343,
+            0.288,
+            1.0,
+            0.578,
+            0.296,
+            0.341,
+            0.425
+          ],
+          [
+            0.162,
+            0.038,
+            0.152,
+            0.117,
+            -0.004,
+            0.06,
+            0.134,
+            -0.386,
+            0.258,
+            0.578,
+            1.0,
+            0.11,
+            0.287,
+            0.339
+          ],
+          [
+            0.363,
+            0.093,
+            0.233,
+            0.099,
+            0.119,
+            0.145,
+            0.128,
+            -0.264,
+            0.146,
+            0.296,
+            0.11,
+            1.0,
+            0.256,
+            0.46
+          ],
+          [
+            0.127,
+            0.381,
+            0.265,
+            0.134,
+            0.014,
+            0.071,
+            0.025,
+            -0.28,
+            0.33,
+            0.341,
+            0.287,
+            0.256,
+            1.0,
+            0.526
+          ],
+          [
+            0.223,
+            0.277,
+            0.414,
+            0.151,
+            0.085,
+            0.025,
+            0.169,
+            -0.417,
+            0.432,
+            0.425,
+            0.339,
+            0.46,
+            0.526,
+            1.0
+          ]
+        ]
+      },
+      "categorical_associations": [
+        {
+          "feature": "sex",
+          "label": "Sex",
+          "groups": [
+            {
+              "label": "Female",
+              "n": 97,
+              "disease_rate": 0.2577
+            },
+            {
+              "label": "Male",
+              "n": 206,
+              "disease_rate": 0.5534
+            }
+          ]
+        },
+        {
+          "feature": "cp",
+          "label": "Chest pain type",
+          "groups": [
+            {
+              "label": "Typical angina",
+              "n": 23,
+              "disease_rate": 0.3043
+            },
+            {
+              "label": "Atypical angina",
+              "n": 50,
+              "disease_rate": 0.18
+            },
+            {
+              "label": "Non-anginal pain",
+              "n": 86,
+              "disease_rate": 0.2093
+            },
+            {
+              "label": "Asymptomatic",
+              "n": 144,
+              "disease_rate": 0.7292
+            }
+          ]
+        },
+        {
+          "feature": "fbs",
+          "label": "Fasting blood sugar",
+          "groups": [
+            {
+              "label": "120 mg/dL or below",
+              "n": 258,
+              "disease_rate": 0.4535
+            },
+            {
+              "label": "Above 120 mg/dL",
+              "n": 45,
+              "disease_rate": 0.4889
+            }
+          ]
+        },
+        {
+          "feature": "restecg",
+          "label": "Resting ECG",
+          "groups": [
+            {
+              "label": "Normal",
+              "n": 151,
+              "disease_rate": 0.3709
+            },
+            {
+              "label": "ST-T wave abnormality",
+              "n": 4,
+              "disease_rate": 0.75
+            },
+            {
+              "label": "Left ventricular hypertrophy",
+              "n": 148,
+              "disease_rate": 0.5405
+            }
+          ]
+        },
+        {
+          "feature": "exang",
+          "label": "Exercise-induced angina",
+          "groups": [
+            {
+              "label": "No",
+              "n": 204,
+              "disease_rate": 0.3088
+            },
+            {
+              "label": "Yes",
+              "n": 99,
+              "disease_rate": 0.7677
+            }
+          ]
+        },
+        {
+          "feature": "slope",
+          "label": "ST segment slope",
+          "groups": [
+            {
+              "label": "Upsloping",
+              "n": 142,
+              "disease_rate": 0.2535
+            },
+            {
+              "label": "Flat",
+              "n": 140,
+              "disease_rate": 0.65
+            },
+            {
+              "label": "Downsloping",
+              "n": 21,
+              "disease_rate": 0.5714
+            }
+          ]
+        },
+        {
+          "feature": "thal",
+          "label": "Thalassemia scan",
+          "groups": [
+            {
+              "label": "Normal",
+              "n": 166,
+              "disease_rate": 0.2229
+            },
+            {
+              "label": "Fixed defect",
+              "n": 18,
+              "disease_rate": 0.6667
+            },
+            {
+              "label": "Reversible defect",
+              "n": 117,
+              "disease_rate": 0.7607
+            }
+          ]
+        },
+        {
+          "feature": "ca",
+          "label": "Major vessels coloured",
+          "groups": [
+            {
+              "label": "0 vessels",
+              "n": 176,
+              "disease_rate": 0.2614
+            },
+            {
+              "label": "1 vessel",
+              "n": 65,
+              "disease_rate": 0.6769
+            },
+            {
+              "label": "2 vessels",
+              "n": 38,
+              "disease_rate": 0.8158
+            },
+            {
+              "label": "3 vessels",
+              "n": 20,
+              "disease_rate": 0.85
+            }
+          ]
+        }
+      ],
+      "numeric_by_class": [
+        {
+          "feature": "age",
+          "label": "Age",
+          "unit": "years",
+          "no_disease_mean": 52.59,
+          "disease_mean": 56.63,
+          "overall_median": 56.0,
+          "overall_min": 29.0,
+          "overall_max": 77.0
+        },
+        {
+          "feature": "trestbps",
+          "label": "Resting blood pressure",
+          "unit": "mm Hg",
+          "no_disease_mean": 129.25,
+          "disease_mean": 134.57,
+          "overall_median": 130.0,
+          "overall_min": 94.0,
+          "overall_max": 200.0
+        },
+        {
+          "feature": "chol",
+          "label": "Serum cholesterol",
+          "unit": "mg/dL",
+          "no_disease_mean": 242.64,
+          "disease_mean": 251.47,
+          "overall_median": 241.0,
+          "overall_min": 126.0,
+          "overall_max": 564.0
+        },
+        {
+          "feature": "thalach",
+          "label": "Maximum heart rate",
+          "unit": "bpm",
+          "no_disease_mean": 158.38,
+          "disease_mean": 139.26,
+          "overall_median": 153.0,
+          "overall_min": 71.0,
+          "overall_max": 202.0
+        },
+        {
+          "feature": "oldpeak",
+          "label": "ST depression (oldpeak)",
+          "unit": "mm",
+          "no_disease_mean": 0.59,
+          "disease_mean": 1.57,
+          "overall_median": 0.8,
+          "overall_min": 0.0,
+          "overall_max": 6.2
+        },
+        {
+          "feature": "ca",
+          "label": "Major vessels coloured",
+          "unit": null,
+          "no_disease_mean": 0.27,
+          "disease_mean": 1.14,
+          "overall_median": 0.0,
+          "overall_min": 0.0,
+          "overall_max": 3.0
+        }
+      ]
+    },
+    "features": [
+      {
+        "key": "age",
+        "label": "Age",
+        "group": "patient",
+        "type": "number",
+        "unit": "years",
+        "min": 18,
+        "max": 100,
+        "observed_min": 29,
+        "observed_max": 77,
+        "required": true,
+        "description": "Age of the patient at the time of the examination."
+      },
+      {
+        "key": "sex",
+        "label": "Sex",
+        "group": "patient",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 0,
+            "label": "Female"
+          },
+          {
+            "value": 1,
+            "label": "Male"
+          }
+        ],
+        "description": "Recorded biological sex (UCI coding: 0 = female, 1 = male)."
+      },
+      {
+        "key": "trestbps",
+        "label": "Resting blood pressure",
+        "group": "measurements",
+        "type": "number",
+        "unit": "mm Hg",
+        "min": 80,
+        "max": 250,
+        "observed_min": 94,
+        "observed_max": 200,
+        "required": true,
+        "description": "Resting systolic blood pressure on admission to hospital."
+      },
+      {
+        "key": "chol",
+        "label": "Serum cholesterol",
+        "group": "measurements",
+        "type": "number",
+        "unit": "mg/dL",
+        "min": 100,
+        "max": 600,
+        "observed_min": 126,
+        "observed_max": 564,
+        "required": true,
+        "description": "Total serum cholesterol measured at the examination."
+      },
+      {
+        "key": "fbs",
+        "label": "Fasting blood sugar",
+        "group": "measurements",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 0,
+            "label": "120 mg/dL or below"
+          },
+          {
+            "value": 1,
+            "label": "Above 120 mg/dL"
+          }
+        ],
+        "description": "Whether fasting blood sugar exceeds 120 mg/dL (UCI coding: 1 = true)."
+      },
+      {
+        "key": "thalach",
+        "label": "Maximum heart rate",
+        "group": "measurements",
+        "type": "number",
+        "unit": "bpm",
+        "min": 50,
+        "max": 220,
+        "observed_min": 71,
+        "observed_max": 202,
+        "required": true,
+        "description": "Maximum heart rate achieved during the exercise stress test."
+      },
+      {
+        "key": "cp",
+        "label": "Chest pain type",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 1,
+            "label": "Typical angina"
+          },
+          {
+            "value": 2,
+            "label": "Atypical angina"
+          },
+          {
+            "value": 3,
+            "label": "Non-anginal pain"
+          },
+          {
+            "value": 4,
+            "label": "Asymptomatic"
+          }
+        ],
+        "description": "Chest pain category recorded at presentation (original UCI 1\u20134 coding)."
+      },
+      {
+        "key": "restecg",
+        "label": "Resting ECG",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 0,
+            "label": "Normal"
+          },
+          {
+            "value": 1,
+            "label": "ST-T wave abnormality"
+          },
+          {
+            "value": 2,
+            "label": "Left ventricular hypertrophy"
+          }
+        ],
+        "description": "Resting electrocardiographic findings (UCI coding: 0 = normal, 1 = ST-T abnormality, 2 = probable/definite LVH)."
+      },
+      {
+        "key": "exang",
+        "label": "Exercise-induced angina",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 0,
+            "label": "No"
+          },
+          {
+            "value": 1,
+            "label": "Yes"
+          }
+        ],
+        "description": "Whether exercise provoked angina during the stress test."
+      },
+      {
+        "key": "oldpeak",
+        "label": "ST depression (oldpeak)",
+        "group": "cardiac",
+        "type": "number",
+        "unit": "mm",
+        "min": 0,
+        "max": 10,
+        "step": 0.1,
+        "observed_min": 0.0,
+        "observed_max": 6.2,
+        "required": true,
+        "description": "ST depression induced by exercise relative to rest, measured on the ECG."
+      },
+      {
+        "key": "slope",
+        "label": "ST segment slope",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": true,
+        "options": [
+          {
+            "value": 1,
+            "label": "Upsloping"
+          },
+          {
+            "value": 2,
+            "label": "Flat"
+          },
+          {
+            "value": 3,
+            "label": "Downsloping"
+          }
+        ],
+        "description": "Slope of the peak-exercise ST segment (UCI coding: 1 = upsloping, 2 = flat, 3 = downsloping)."
+      },
+      {
+        "key": "ca",
+        "label": "Major vessels coloured",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": false,
+        "options": [
+          {
+            "value": 0,
+            "label": "0 vessels"
+          },
+          {
+            "value": 1,
+            "label": "1 vessel"
+          },
+          {
+            "value": 2,
+            "label": "2 vessels"
+          },
+          {
+            "value": 3,
+            "label": "3 vessels"
+          }
+        ],
+        "description": "Number of major vessels (0\u20133) coloured by fluoroscopy. May be left unrecorded; the training pipeline imputes the median."
+      },
+      {
+        "key": "thal",
+        "label": "Thalassemia scan",
+        "group": "cardiac",
+        "type": "category",
+        "unit": null,
+        "required": false,
+        "options": [
+          {
+            "value": 3,
+            "label": "Normal"
+          },
+          {
+            "value": 6,
+            "label": "Fixed defect"
+          },
+          {
+            "value": 7,
+            "label": "Reversible defect"
+          }
+        ],
+        "description": "Thallium stress-test result (original UCI coding: 3 = normal, 6 = fixed defect, 7 = reversible defect). May be left unrecorded; the training pipeline imputes the most frequent value."
+      }
+    ],
+    "preprocessing": {
+      "numeric_features": [
+        "age",
+        "trestbps",
+        "chol",
+        "thalach",
+        "oldpeak",
+        "ca"
+      ],
+      "categorical_features": [
+        "sex",
+        "cp",
+        "fbs",
+        "restecg",
+        "exang",
+        "slope",
+        "thal"
+      ],
+      "numeric_imputation": "median (fitted on training folds only)",
+      "categorical_imputation": "most frequent (fitted on training folds only)",
+      "numeric_scaling": "StandardScaler (fitted on training folds only)",
+      "categorical_encoding": "OneHotEncoder(handle_unknown='ignore'); one reference level per feature",
+      "nullable_fields": [
+        "ca",
+        "thal"
+      ]
+    },
+    "dataset_info": {
+      "name": "UCI Heart Disease \u2014 Cleveland",
+      "source_url": "https://archive.ics.uci.edu/dataset/45/heart+disease",
+      "raw_file": "data/raw/processed.cleveland.data",
+      "sha256": "a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8",
+      "n_rows": 303,
+      "n_predictors": 13,
+      "missing_cells": {
+        "ca": 4,
+        "thal": 2
+      },
+      "class_counts": {
+        "no_disease": 164,
+        "disease": 139
+      },
+      "positive_class_definition": "num > 0: >50% diameter narrowing in at least one major vessel. This is presence of angiographic disease, not future risk."
+    },
+    "limitations": [
+      "Only 303 records from a single 1980s Cleveland cohort; results may not generalise.",
+      "The target reflects angiographic disease presence, not future heart-disease risk.",
+      "The small 61-patient holdout makes metrics, especially calibration, uncertain.",
+      "The 0.5 decision threshold is a default and was not selected for clinical utility.",
+      "No external or temporal validation was performed.",
+      "Probability outputs are model scores and have not been clinically calibrated."
+    ],
+    "intended_use": "Academic demonstration of a supervised classification workflow. Not a medical device and not validated for clinical decision-making.",
+    "target_definition": "Original angiographic disease status (`num`): 0 = less than 50% diameter narrowing, 1\u20134 = greater than 50% narrowing in at least one major vessel. For modelling, values 1\u20134 are combined into a binary 'disease indicated' class.",
+    "disclaimer": "Educational decision-support demo only. This output is not a medical diagnosis, not a clinically validated risk score, and must not be used to guide patient care. Consult a qualified clinician for any medical concern."
+  },
+  "parity_fixture": "src/lib/model/__fixtures__/parity.json"
+}

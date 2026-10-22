@@ -4,9 +4,9 @@ Academic mini-project: **Heart Disease Risk Detection Using Machine Learning**.
 
 An end-to-end academic machine-learning application that classifies **presence of
 angiographic coronary artery disease** from 13 structured findings in the official
-UCI Cleveland heart-disease dataset. It includes a reproducible training pipeline,
-held-out evaluation, a FastAPI inference service, and a React/TypeScript interface
-with a model-insights dashboard driven by the real evaluation artifacts.
+UCI Cleveland heart-disease dataset. It combines a reproducible Python training
+pipeline, a held-out evaluation, and a single **Next.js** application that serves
+the model, API, and interface from one deployable codebase.
 
 > **Research and teaching use only.** This is not a medical device, not a clinical
 > risk score, and not a diagnosis. The target is disease presence at the time of
@@ -24,9 +24,11 @@ with a model-insights dashboard driven by the real evaluation artifacts.
 - [Results](#results)
 - [Method](#method)
 - [Dataset](#dataset)
+- [Architecture](#architecture)
 - [Project structure](#project-structure)
 - [Setup](#setup)
 - [Run the application](#run-the-application)
+- [Deploy to Vercel](#deploy-to-vercel)
 - [Retrain and reproduce](#retrain-and-reproduce)
 - [API](#api)
 - [Tests](#tests)
@@ -39,16 +41,16 @@ with a model-insights dashboard driven by the real evaluation artifacts.
 - Accepts the 13 original UCI Cleveland predictors through a grouped clinical form
   with validation, complete-record presets, and an explicit missing-value path for
   `ca` and `thal`.
-- Sends the profile to a locally running FastAPI service that loads **one fitted
-  scikit-learn pipeline** at startup. Preprocessing and classification are executed
-  together, so serving cannot diverge from training.
+- Runs the fitted model **inside Next.js route handlers**. The runtime applies the
+  exact fitted imputers, scaler, one-hot categories, and logistic-regression
+  coefficients exported from the scikit-learn pipeline. There is no FastAPI or
+  Python process in production.
 - Shows the thresholded model output, the estimated probability for the
   disease-indicated class, the decision threshold, an input summary, and the top
   local additive contributions for the linear model.
 - Publishes model selection, cross-validation, held-out metrics, ROC, confusion
   matrix, calibration, permutation importance, coefficients, and dataset summaries
-  in the **Model insights** page, all read from `artifacts/metrics.json` and
-  `artifacts/model_metadata.json`.
+  in the **Model insights** page, all driven by the committed evaluation artifacts.
 - Keeps assessment data in application memory only. Results disappear on reload;
   there is no database, authentication layer, browser storage, or server-side
   patient-data persistence.
@@ -107,8 +109,10 @@ they are not a claim of clinical validity.
    ROC-AUC as the tie-breaker. The holdout is not used for tuning or selection.
 7. **Evaluate once.** The selected pipeline is scored once on the untouched holdout,
    with metrics and plots written to `artifacts/`.
-8. **Serialize the whole estimator.** `joblib` stores preprocessing and classifier
-   as one object; the API loads that same object at startup.
+8. **Export for serving.** `ml/export_model.py` reads the fitted `ColumnTransformer`
+   and Logistic Regression parameters and writes `artifacts/model_bundle.json`.
+   Next.js evaluates the resulting linear model in TypeScript. A 303-row parity
+   fixture proves that the TypeScript probabilities match scikit-learn.
 
 The model version, hyperparameters, validation protocol, Python/library versions,
 dataset SHA-256, intended use, and limitations are recorded in
@@ -131,46 +135,74 @@ The interface uses the original UCI encodings rather than the remapped encodings
 common in some Kaggle copies. The target reflects **presence of angiographic
 coronary artery disease at examination**, not future heart-disease risk.
 
+## Architecture
+
+```text
+Browser
+  └── Next.js App Router (React 19, TypeScript, Tailwind, Recharts)
+        ├── /predict, /results, /insights, /docs   UI routes
+        └── /api/health, /api/model-info, /api/predict
+              └── TypeScript inference
+                    └── artifacts/model_bundle.json
+                          └── exported from artifacts/heart_disease_pipeline.joblib
+```
+
+Python is used for training, evaluation, and artifact export only. The production
+deployment is one Next.js application with no separate API host and no Python
+runtime. `artifacts/model_bundle.json` and the parity fixture are committed, so a
+fresh clone and a Vercel build do not need to retrain or run Python.
+
 ## Project structure
 
 ```text
 .
-├── artifacts/                     # committed serving + evaluation artifacts
+├── src/
+│   ├── app/                       # Next.js App Router
+│   │   ├── api/                   # health, model-info and predict route handlers
+│   │   ├── predict/               # assessment page
+│   │   ├── results/               # in-memory result page
+│   │   ├── insights/              # evaluation dashboard
+│   │   ├── docs/                  # API reference
+│   │   ├── layout.tsx
+│   │   └── globals.css
+│   ├── components/                # layout, fields, feedback, API status
+│   ├── data/                      # feature definitions and real presets
+│   ├── lib/
+│   │   ├── model/                 # JSON-backed inference + parity fixture
+│   │   ├── api.ts                 # browser API client
+│   │   ├── form.ts                # form validation/payload conversion
+│   │   └── http.ts                # JSON + CORS response helpers
+│   ├── state/                     # in-memory assessment context
+│   ├── views/                     # Predict, Results, Insights client views
+│   └── types.ts
+├── artifacts/
 │   ├── heart_disease_pipeline.joblib
+│   ├── model_bundle.json          # JSON export used by the Next.js runtime
 │   ├── feature_schema.json
 │   ├── metrics.json
 │   ├── model_metadata.json
 │   └── plots/                     # EDA and evaluation PNGs
-├── backend/
-│   ├── main.py                    # FastAPI app, CORS, error handling
-│   ├── predictor.py               # startup-loaded pipeline + local explanations
-│   ├── schemas.py                 # 13-feature Pydantic contract
-│   └── requirements.txt
 ├── data/
 │   ├── raw/                       # official UCI files, unmodified
 │   └── README.md                  # provenance and verification
 ├── docs/screenshots/
-├── frontend/
-│   ├── src/
-│   │   ├── pages/                 # Predict, Results, Insights
-│   │   ├── components/            # layout, fields, feedback
-│   │   ├── lib/                   # API client, validation, formatting
-│   │   ├── state/                 # in-memory assessment context
-│   │   └── data/                  # feature definitions and real presets
-│   └── package.json
 ├── ml/
 │   ├── dataset.py                 # loader, schema, split
 │   ├── train.py                   # tuning, selection, serialization
 │   ├── evaluate.py                # held-out metrics, analysis, plots
+│   ├── export_model.py            # sklearn → Next.js JSON export
 │   ├── eda.ipynb                  # executed exploratory notebook
 │   └── requirements.txt
-├── tests/                         # backend + ML pytest suite
+├── tests/                         # Python dataset/artifact/export tests
+├── next.config.ts
+├── vercel.json
+├── package.json
 └── pytest.ini
 ```
 
 ## Setup
 
-Requires **Python 3.12** and **Node.js 20+** (verified with Python 3.12.13,
+Requires **Python 3.12** and **Node.js 20.9+** (verified with Python 3.12.13,
 Node 22.23.1, npm 10.9.8).
 
 ```bash
@@ -180,50 +212,38 @@ python -m pip install --upgrade pip
 pip install -r ml/requirements.txt
 pip install -r tests/requirements.txt
 
-cd frontend
 npm ci
-cd ..
 ```
 
-`tests/requirements.txt` includes the backend dependencies. `ml/requirements.txt`
-adds the training, plotting, and notebook packages. The production frontend is
-built with Vite; no global CLI is required.
+`ml/requirements.txt` contains the training, plotting, and notebook packages.
+`tests/requirements.txt` adds pytest. The Next.js app uses the committed JSON
+bundle; Python is not required to run, test, or deploy the web application.
 
 ## Run the application
 
-Open two terminals from the repository root.
-
-**1. API**
+From the repository root:
 
 ```bash
-source .venv/bin/activate
-uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
-```
-
-- API docs: <http://127.0.0.1:8000/docs>
-- Health: <http://127.0.0.1:8000/api/health>
-
-**2. Frontend**
-
-```bash
-cd frontend
 npm run dev
 ```
 
-Open <http://127.0.0.1:5173>. Vite proxies `/api` to the local backend, so the
-default development setup needs no environment variables.
+Open <http://localhost:3000>. The UI and API run in the same process:
+
+- Assessment: <http://localhost:3000/predict>
+- API reference: <http://localhost:3000/docs>
+- Health: <http://localhost:3000/api/health>
 
 For a production build:
 
 ```bash
-cd frontend
 npm run build
-npm run preview
+npm start
 ```
 
-The preview server runs on port 4173 and uses the same `/api` proxy. To point a
-deployed frontend at another API origin, set `VITE_API_URL` at build time and add
-that origin to the backend's comma-separated `CORS_ORIGINS` environment variable.
+The default setup needs no environment variables. `NEXT_PUBLIC_API_BASE_URL` may
+be set if the browser client should call a different deployment. `CORS_ALLOW_ORIGIN`
+may be set to restrict cross-origin API access (default `*`; no credentials are
+used).
 
 ### Suggested demonstration
 
@@ -231,15 +251,42 @@ that origin to the backend's comma-separated `CORS_ORIGINS` environment variable
    record). The form fills with its 13 values and shows 11/11 required fields.
 2. Run the assessment. The live result shows a below-threshold probability and the
    local contributions for that profile.
-3. Return and choose **Exercise-limited**, then run again. The same pipeline returns
+3. Return and choose **Exercise-limited**, then run again. The same model returns
    a disease-indicated result with a different probability and explanation.
 4. Reload the result page: the in-memory result is cleared by design.
 5. Open **Model insights** to inspect cross-validation, the holdout confusion
    matrix, ROC, calibration, importance, and the exact selection protocol.
+6. Open **API reference** from the sidebar arrow to inspect the three route
+   handlers and a prediction example.
 
 Presets are copied from zero-based rows 4, 1, and 6 of
 `processed.cleveland.data`. No prediction or outcome is embedded in the frontend;
-every result is produced by the running API.
+every result is produced by the Next.js inference layer.
+
+## Deploy to Vercel
+
+The repository root is the Next.js application. No separate frontend/backend
+projects or Python build step are required.
+
+**Dashboard**
+
+1. Import the GitHub repository into Vercel.
+2. Keep the detected framework as **Next.js** and the root directory as `./`.
+3. Leave the build command (`next build`), output settings, and Node.js version at
+   their defaults. Add no environment variables for a same-origin deployment.
+4. Deploy.
+
+**CLI**
+
+```bash
+npm i -g vercel
+vercel login
+vercel --prod
+```
+
+`vercel.json` declares the Next.js framework. The route handlers run on the
+Node.js runtime; `artifacts/model_bundle.json` is bundled by the import graph, so
+it is available in the serverless function without filesystem tracing configuration.
 
 ## Retrain and reproduce
 
@@ -251,19 +298,28 @@ python -m ml.evaluate
 ```
 
 `python -m ml.train` performs tuning, model selection, the single holdout
-evaluation, and writes:
+evaluation, writes the training artifacts, and calls the Next.js export. It writes:
 
 - `artifacts/heart_disease_pipeline.joblib`
 - `artifacts/metrics.json`
 - `artifacts/feature_schema.json`
 - `artifacts/model_metadata.json`
+- `artifacts/model_bundle.json`
+- `src/lib/model/__fixtures__/parity.json`
 - evaluation plots in `artifacts/plots/`
 
-`python -m ml.evaluate` re-scores the saved pipeline on the same seeded holdout and
-regenerates `metrics.json` and the evaluation plots without retuning. Because the
-split, CV folds, estimator seeds, and selection rule are fixed, the reported
-metrics are reproducible on the pinned library versions; timestamp fields will
-change.
+`python -m ml.evaluate` re-scores the saved pipeline on the same seeded holdout,
+regenerates `metrics.json` and the evaluation plots, and re-exports the serving
+bundle. Because the split, CV folds, estimator seeds, and selection rule are fixed,
+the reported metrics are reproducible on the pinned library versions; timestamp
+fields will change.
+
+To regenerate only the serving bundle and parity fixture from an existing fitted
+pipeline:
+
+```bash
+python -m ml.export_model
+```
 
 To re-execute the exploratory notebook and regenerate its plots:
 
@@ -279,14 +335,14 @@ metadata.
 
 | Method | Path | Purpose |
 | --- | --- | --- |
-| `GET` | `/api/health` | Process and model-artifact status |
+| `GET` | `/api/health` | Model and bundle status |
 | `GET` | `/api/model-info` | Metrics, schema, dataset summary, limitations |
 | `POST` | `/api/predict` | Classify one de-identified profile |
 
 Example:
 
 ```bash
-curl -s http://127.0.0.1:8000/api/predict \
+curl -s http://localhost:3000/api/predict \
   -H 'Content-Type: application/json' \
   -d '{
     "age": 63, "sex": 1, "cp": 4, "trestbps": 145, "chol": 233,
@@ -300,9 +356,9 @@ version, a classification and explanation, up to four local linear
 `contributions`, the target definition, and a disclaimer. `ca` and `thal` may be
 omitted or sent as `null`; the fitted training imputers handle them.
 
-Validation is enforced by Pydantic and returns structured `422` errors with a
-`field` and `message` per invalid input. Unknown fields are rejected. The API
-loads the model once at startup and keeps no patient data.
+Validation is enforced with Zod at the route boundary and returns structured `422`
+errors with a `field` and `message` per invalid input. Unknown fields are rejected.
+Predictions are not cached and no patient data is stored or logged.
 
 ## Tests
 
@@ -310,29 +366,32 @@ loads the model once at startup and keeps no patient data.
 source .venv/bin/activate
 python -m pytest
 
-cd frontend
 npm test
+npm run typecheck
+npm run lint
 npm run build
 ```
 
-The backend/ML suite (42 tests) checks the real dataset shape and missingness, the
+The Python suite (17 tests) checks the real dataset shape and missingness, the
 stratified split, training-fold-fitted preprocessing, artifact/schema/metadata
 consistency, recomputation of the reported holdout metrics from the saved
-pipeline, API health and model-info, real inference, deterministic predictions,
-optional-field handling, out-of-range and unknown-field validation, CORS, and
-OpenAPI documentation.
+pipeline, the exported preprocessing/coefficients, and the 303-row parity fixture.
 
-The frontend suite (33 tests) covers form validation and payload conversion,
+The Next.js/Vitest suite (48 tests) covers form validation and payload conversion,
 formatting, preset integrity, empty/positive/negative result rendering, reload
-semantics, preset loading, reset, client-side validation, mocked API submission
-and navigation, and server-side field-error display. Tests use jsdom and do not
-require a running backend.
+semantics, preset loading, reset, client-side validation, API submission, and
+server-side field-error display. It also runs real route-handler requests against
+the committed model bundle: health, model-info, valid inference, optional-field
+handling, malformed JSON, unknown fields, range errors, determinism, no-store
+headers, CORS preflight, and exact TypeScript/sklearn parity for all 303 cohort
+rows. Tests use jsdom and do not require a running server.
 
 ## Design and privacy decisions
 
-- **One pipeline, one source of truth.** There is no separately fitted scaler or
-  encoder in the API. The serialized object is the complete preprocessing +
-  classification graph.
+- **One fitted pipeline, one exported contract.** Training still produces one
+  scikit-learn pipeline. The export script reads its fitted preprocessing and
+  classifier parameters; the TypeScript path applies the same operations in the
+  same order. The parity test compares every cohort row against scikit-learn.
 - **No test-set leakage.** Hyperparameters and model choice use only training data
   and cross-validation. The holdout is evaluated once after selection.
 - **Uncertainty is visible.** The UI states the 61-patient holdout size, the default
@@ -342,11 +401,13 @@ require a running backend.
   log-odds terms grouped back to the 13 inputs. They explain this model's output,
   not causation or independent clinical risk.
 - **In-memory results.** `AssessmentContext` holds the latest result in React state
-  only. There is no localStorage, sessionStorage, result URL, or backend database.
-  Reloading clears the assessment.
-- **Artifact-driven insights.** The dashboard fetches `/api/model-info`, which reads
-  committed JSON written during training/evaluation. No metric is hardcoded in the
-  frontend.
+  only. There is no localStorage, sessionStorage, result URL, or server-side
+  database. Reloading clears the assessment.
+- **Artifact-driven insights.** The dashboard fetches `/api/model-info`, which is
+  served from the committed bundle generated from training/evaluation artifacts.
+  No metric is hardcoded in the frontend.
+- **One deployable runtime.** Next.js App Router serves the UI and the API on the
+  same origin; CORS is available for external callers but not required for the app.
 
 ## Limitations
 

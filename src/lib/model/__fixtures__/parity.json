@@ -1,0 +1,6067 @@
+{
+  "schema_version": "1.0.0",
+  "model_version": "1.0.0",
+  "threshold": 0.5,
+  "rows": [
+    {
+      "row_index": 0,
+      "input": {
+        "age": 63.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 145.0,
+        "chol": 233.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 150.0,
+        "exang": 0.0,
+        "oldpeak": 2.3,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 6.0
+      },
+      "probability": 0.3809021939,
+      "log_odds": -0.4857206337
+    },
+    {
+      "row_index": 1,
+      "input": {
+        "age": 67.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 160.0,
+        "chol": 286.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 108.0,
+        "exang": 1.0,
+        "oldpeak": 1.5,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 3.0
+      },
+      "probability": 0.9786699796,
+      "log_odds": 3.8260789953
+    },
+    {
+      "row_index": 2,
+      "input": {
+        "age": 67.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 229.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 129.0,
+        "exang": 1.0,
+        "oldpeak": 2.6,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9686128409,
+      "log_odds": 3.4294661245
+    },
+    {
+      "row_index": 3,
+      "input": {
+        "age": 37.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 250.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 187.0,
+        "exang": 0.0,
+        "oldpeak": 3.5,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1700320416,
+      "log_odds": -1.5854001964
+    },
+    {
+      "row_index": 4,
+      "input": {
+        "age": 41.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 204.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 172.0,
+        "exang": 0.0,
+        "oldpeak": 1.4,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0840798056,
+      "log_odds": -2.3881628228
+    },
+    {
+      "row_index": 5,
+      "input": {
+        "age": 56.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 236.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 178.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1051075693,
+      "log_odds": -2.1417192266
+    },
+    {
+      "row_index": 6,
+      "input": {
+        "age": 62.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 268.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 160.0,
+        "exang": 0.0,
+        "oldpeak": 3.6,
+        "slope": 3.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.6990220009,
+      "log_odds": 0.842645047
+    },
+    {
+      "row_index": 7,
+      "input": {
+        "age": 57.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 354.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 163.0,
+        "exang": 1.0,
+        "oldpeak": 0.6,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2014362959,
+      "log_odds": -1.3773415623
+    },
+    {
+      "row_index": 8,
+      "input": {
+        "age": 63.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 254.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 147.0,
+        "exang": 0.0,
+        "oldpeak": 1.4,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.85216284,
+      "log_odds": 1.7516662378
+    },
+    {
+      "row_index": 9,
+      "input": {
+        "age": 53.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 203.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 155.0,
+        "exang": 1.0,
+        "oldpeak": 3.1,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.7849533543,
+      "log_odds": 1.2947693335
+    },
+    {
+      "row_index": 10,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 192.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 148.0,
+        "exang": 0.0,
+        "oldpeak": 0.4,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 6.0
+      },
+      "probability": 0.479079662,
+      "log_odds": -0.0837302353
+    },
+    {
+      "row_index": 11,
+      "input": {
+        "age": 56.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 140.0,
+        "chol": 294.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 153.0,
+        "exang": 0.0,
+        "oldpeak": 1.3,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2115302135,
+      "log_odds": -1.3157262462
+    },
+    {
+      "row_index": 12,
+      "input": {
+        "age": 56.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 256.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 142.0,
+        "exang": 1.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 6.0
+      },
+      "probability": 0.6844335973,
+      "log_odds": 0.7742225028
+    },
+    {
+      "row_index": 13,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 263.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 173.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.233649384,
+      "log_odds": -1.1878181557
+    },
+    {
+      "row_index": 14,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 172.0,
+        "chol": 199.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 0.5,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.2976527367,
+      "log_odds": -0.8585004649
+    },
+    {
+      "row_index": 15,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 150.0,
+        "chol": 168.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 174.0,
+        "exang": 0.0,
+        "oldpeak": 1.6,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1206802987,
+      "log_odds": -1.986003652
+    },
+    {
+      "row_index": 16,
+      "input": {
+        "age": 48.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 110.0,
+        "chol": 229.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 168.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.2944941121,
+      "log_odds": -0.8736561072
+    },
+    {
+      "row_index": 17,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 239.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 160.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2680408083,
+      "log_odds": -1.0045855248
+    },
+    {
+      "row_index": 18,
+      "input": {
+        "age": 48.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 275.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 139.0,
+        "exang": 0.0,
+        "oldpeak": 0.2,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0743278962,
+      "log_odds": -2.5220337378
+    },
+    {
+      "row_index": 19,
+      "input": {
+        "age": 49.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 266.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 171.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1280396267,
+      "log_odds": -1.9184041799
+    },
+    {
+      "row_index": 20,
+      "input": {
+        "age": 64.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 110.0,
+        "chol": 211.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 144.0,
+        "exang": 1.0,
+        "oldpeak": 1.8,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.4041596059,
+      "log_odds": -0.388162972
+    },
+    {
+      "row_index": 21,
+      "input": {
+        "age": 58.0,
+        "sex": 0.0,
+        "cp": 1.0,
+        "trestbps": 150.0,
+        "chol": 283.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0993087742,
+      "log_odds": -2.2049285699
+    },
+    {
+      "row_index": 22,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 284.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 160.0,
+        "exang": 0.0,
+        "oldpeak": 1.8,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3188081946,
+      "log_odds": -0.7592542682
+    },
+    {
+      "row_index": 23,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 132.0,
+        "chol": 224.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 173.0,
+        "exang": 0.0,
+        "oldpeak": 3.2,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.7576645208,
+      "log_odds": 1.139917659
+    },
+    {
+      "row_index": 24,
+      "input": {
+        "age": 60.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 206.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 132.0,
+        "exang": 1.0,
+        "oldpeak": 2.4,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9678268387,
+      "log_odds": 3.4039205821
+    },
+    {
+      "row_index": 25,
+      "input": {
+        "age": 50.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 219.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 158.0,
+        "exang": 0.0,
+        "oldpeak": 1.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1032719524,
+      "log_odds": -2.1613868124
+    },
+    {
+      "row_index": 26,
+      "input": {
+        "age": 58.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 340.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 172.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0471557785,
+      "log_odds": -3.0059948727
+    },
+    {
+      "row_index": 27,
+      "input": {
+        "age": 66.0,
+        "sex": 0.0,
+        "cp": 1.0,
+        "trestbps": 150.0,
+        "chol": 226.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 114.0,
+        "exang": 0.0,
+        "oldpeak": 2.6,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2144339171,
+      "log_odds": -1.2984029707
+    },
+    {
+      "row_index": 28,
+      "input": {
+        "age": 43.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 150.0,
+        "chol": 247.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 171.0,
+        "exang": 0.0,
+        "oldpeak": 1.5,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2739318558,
+      "log_odds": -0.974764499
+    },
+    {
+      "row_index": 29,
+      "input": {
+        "age": 40.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 167.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 114.0,
+        "exang": 1.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.8484878966,
+      "log_odds": 1.722790308
+    },
+    {
+      "row_index": 30,
+      "input": {
+        "age": 69.0,
+        "sex": 0.0,
+        "cp": 1.0,
+        "trestbps": 140.0,
+        "chol": 239.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 151.0,
+        "exang": 0.0,
+        "oldpeak": 1.8,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.3374215392,
+      "log_odds": -0.6748059753
+    },
+    {
+      "row_index": 31,
+      "input": {
+        "age": 60.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 117.0,
+        "chol": 230.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 160.0,
+        "exang": 1.0,
+        "oldpeak": 1.4,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.8597277305,
+      "log_odds": 1.8130304309
+    },
+    {
+      "row_index": 32,
+      "input": {
+        "age": 64.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 335.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 158.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1353960176,
+      "log_odds": -1.85406763
+    },
+    {
+      "row_index": 33,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 135.0,
+        "chol": 234.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 161.0,
+        "exang": 0.0,
+        "oldpeak": 0.5,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.5774788492,
+      "log_odds": 0.3124323105
+    },
+    {
+      "row_index": 34,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 233.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 179.0,
+        "exang": 1.0,
+        "oldpeak": 0.4,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1387718158,
+      "log_odds": -1.8255285204
+    },
+    {
+      "row_index": 35,
+      "input": {
+        "age": 42.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 226.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 178.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1792325959,
+      "log_odds": -1.5215553808
+    },
+    {
+      "row_index": 36,
+      "input": {
+        "age": 43.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 177.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 120.0,
+        "exang": 1.0,
+        "oldpeak": 2.5,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.8648821529,
+      "log_odds": 1.8564459193
+    },
+    {
+      "row_index": 37,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 150.0,
+        "chol": 276.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 112.0,
+        "exang": 1.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 6.0
+      },
+      "probability": 0.9117973511,
+      "log_odds": 2.3357807668
+    },
+    {
+      "row_index": 38,
+      "input": {
+        "age": 55.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 132.0,
+        "chol": 353.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 132.0,
+        "exang": 1.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9176356078,
+      "log_odds": 2.4106471598
+    },
+    {
+      "row_index": 39,
+      "input": {
+        "age": 61.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 150.0,
+        "chol": 243.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 137.0,
+        "exang": 1.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3937343549,
+      "log_odds": -0.4316417924
+    },
+    {
+      "row_index": 40,
+      "input": {
+        "age": 65.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 150.0,
+        "chol": 225.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 114.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9567698658,
+      "log_odds": 3.0970250851
+    },
+    {
+      "row_index": 41,
+      "input": {
+        "age": 40.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 140.0,
+        "chol": 199.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 178.0,
+        "exang": 1.0,
+        "oldpeak": 1.4,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.3763886911,
+      "log_odds": -0.5049049094
+    },
+    {
+      "row_index": 42,
+      "input": {
+        "age": 71.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 160.0,
+        "chol": 302.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 0.4,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.3409224784,
+      "log_odds": -0.6591860476
+    },
+    {
+      "row_index": 43,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 150.0,
+        "chol": 212.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 157.0,
+        "exang": 0.0,
+        "oldpeak": 1.6,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1492294578,
+      "log_odds": -1.7406573522
+    },
+    {
+      "row_index": 44,
+      "input": {
+        "age": 61.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 330.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 169.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1419061686,
+      "log_odds": -1.7995473993
+    },
+    {
+      "row_index": 45,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 112.0,
+        "chol": 230.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 165.0,
+        "exang": 0.0,
+        "oldpeak": 2.5,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.6644926494,
+      "log_odds": 0.6833799507
+    },
+    {
+      "row_index": 46,
+      "input": {
+        "age": 51.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 110.0,
+        "chol": 175.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 123.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1366676676,
+      "log_odds": -1.8432475118
+    },
+    {
+      "row_index": 47,
+      "input": {
+        "age": 50.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 150.0,
+        "chol": 243.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 128.0,
+        "exang": 0.0,
+        "oldpeak": 2.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.8395603563,
+      "log_odds": 1.6549605497
+    },
+    {
+      "row_index": 48,
+      "input": {
+        "age": 65.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 417.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 157.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.21468256,
+      "log_odds": -1.2969275462
+    },
+    {
+      "row_index": 49,
+      "input": {
+        "age": 53.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 197.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 152.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1833127374,
+      "log_odds": -1.4940625925
+    },
+    {
+      "row_index": 50,
+      "input": {
+        "age": 41.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 105.0,
+        "chol": 198.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 168.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.0870604069,
+      "log_odds": -2.3500675048
+    },
+    {
+      "row_index": 51,
+      "input": {
+        "age": 65.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 177.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 140.0,
+        "exang": 0.0,
+        "oldpeak": 0.4,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.4415195635,
+      "log_odds": -0.2349972589
+    },
+    {
+      "row_index": 52,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 112.0,
+        "chol": 290.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 153.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.4386135586,
+      "log_odds": -0.2467907634
+    },
+    {
+      "row_index": 53,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 219.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 188.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1088947729,
+      "log_odds": -2.1020804908
+    },
+    {
+      "row_index": 54,
+      "input": {
+        "age": 60.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 253.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 144.0,
+        "exang": 1.0,
+        "oldpeak": 1.4,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.8174559178,
+      "log_odds": 1.4992052883
+    },
+    {
+      "row_index": 55,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 124.0,
+        "chol": 266.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 109.0,
+        "exang": 1.0,
+        "oldpeak": 2.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9506604215,
+      "log_odds": 2.9584303549
+    },
+    {
+      "row_index": 56,
+      "input": {
+        "age": 50.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 233.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 163.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.5841606376,
+      "log_odds": 0.3398769718
+    },
+    {
+      "row_index": 57,
+      "input": {
+        "age": 41.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 172.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 158.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.4039606268,
+      "log_odds": -0.3889893127
+    },
+    {
+      "row_index": 58,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 125.0,
+        "chol": 273.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 152.0,
+        "exang": 0.0,
+        "oldpeak": 0.5,
+        "slope": 3.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.3422051394,
+      "log_odds": -0.6534827405
+    },
+    {
+      "row_index": 59,
+      "input": {
+        "age": 51.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 125.0,
+        "chol": 213.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 125.0,
+        "exang": 1.0,
+        "oldpeak": 1.4,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.5506696235,
+      "log_odds": 0.2033766126
+    },
+    {
+      "row_index": 60,
+      "input": {
+        "age": 51.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 305.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 142.0,
+        "exang": 1.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.6424371729,
+      "log_odds": 0.5859579396
+    },
+    {
+      "row_index": 61,
+      "input": {
+        "age": 46.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 142.0,
+        "chol": 177.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 160.0,
+        "exang": 1.0,
+        "oldpeak": 1.4,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1624228575,
+      "log_odds": -1.640310204
+    },
+    {
+      "row_index": 62,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 128.0,
+        "chol": 216.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 131.0,
+        "exang": 1.0,
+        "oldpeak": 2.2,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9848880704,
+      "log_odds": 4.1770435269
+    },
+    {
+      "row_index": 63,
+      "input": {
+        "age": 54.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 135.0,
+        "chol": 304.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 170.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0482414125,
+      "log_odds": -2.9820935857
+    },
+    {
+      "row_index": 64,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 188.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 113.0,
+        "exang": 0.0,
+        "oldpeak": 1.4,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.8504399421,
+      "log_odds": 1.7380557569
+    },
+    {
+      "row_index": 65,
+      "input": {
+        "age": 60.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 145.0,
+        "chol": 282.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 142.0,
+        "exang": 1.0,
+        "oldpeak": 2.8,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9745623383,
+      "log_odds": 3.6457576653
+    },
+    {
+      "row_index": 66,
+      "input": {
+        "age": 60.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 185.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 155.0,
+        "exang": 0.0,
+        "oldpeak": 3.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3386304113,
+      "log_odds": -0.6694035388
+    },
+    {
+      "row_index": 67,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 150.0,
+        "chol": 232.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 165.0,
+        "exang": 0.0,
+        "oldpeak": 1.6,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.3838145564,
+      "log_odds": -0.4733884533
+    },
+    {
+      "row_index": 68,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 170.0,
+        "chol": 326.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 140.0,
+        "exang": 1.0,
+        "oldpeak": 3.4,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.8993974948,
+      "log_odds": 2.1905479288
+    },
+    {
+      "row_index": 69,
+      "input": {
+        "age": 46.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 150.0,
+        "chol": 231.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 147.0,
+        "exang": 0.0,
+        "oldpeak": 3.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.377441845,
+      "log_odds": -0.5004205418
+    },
+    {
+      "row_index": 70,
+      "input": {
+        "age": 65.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 155.0,
+        "chol": 269.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 148.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0905389374,
+      "log_odds": -2.3070721793
+    },
+    {
+      "row_index": 71,
+      "input": {
+        "age": 67.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 125.0,
+        "chol": 254.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 163.0,
+        "exang": 0.0,
+        "oldpeak": 0.2,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.8416292468,
+      "log_odds": 1.670400769
+    },
+    {
+      "row_index": 72,
+      "input": {
+        "age": 62.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 267.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 99.0,
+        "exang": 1.0,
+        "oldpeak": 1.8,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9707049942,
+      "log_odds": 3.5006055532
+    },
+    {
+      "row_index": 73,
+      "input": {
+        "age": 65.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 248.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 158.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 6.0
+      },
+      "probability": 0.7184549654,
+      "log_odds": 0.9368106094
+    },
+    {
+      "row_index": 74,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 197.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 177.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.3111907619,
+      "log_odds": -0.7945582584
+    },
+    {
+      "row_index": 75,
+      "input": {
+        "age": 65.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 160.0,
+        "chol": 360.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 151.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1364243058,
+      "log_odds": -1.8453116291
+    },
+    {
+      "row_index": 76,
+      "input": {
+        "age": 60.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 125.0,
+        "chol": 258.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 141.0,
+        "exang": 1.0,
+        "oldpeak": 2.8,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9319302274,
+      "log_odds": 2.6167247016
+    },
+    {
+      "row_index": 77,
+      "input": {
+        "age": 51.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 308.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 142.0,
+        "exang": 0.0,
+        "oldpeak": 1.5,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.2560302956,
+      "log_odds": -1.0667045343
+    },
+    {
+      "row_index": 78,
+      "input": {
+        "age": 48.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 245.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 180.0,
+        "exang": 0.0,
+        "oldpeak": 0.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2071122943,
+      "log_odds": -1.3424204739
+    },
+    {
+      "row_index": 79,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 150.0,
+        "chol": 270.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 111.0,
+        "exang": 1.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.8248886005,
+      "log_odds": 1.5498260077
+    },
+    {
+      "row_index": 80,
+      "input": {
+        "age": 45.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 104.0,
+        "chol": 208.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 148.0,
+        "exang": 1.0,
+        "oldpeak": 3.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.6186135848,
+      "log_odds": 0.4836677464
+    },
+    {
+      "row_index": 81,
+      "input": {
+        "age": 53.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 264.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 143.0,
+        "exang": 0.0,
+        "oldpeak": 0.4,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2850089888,
+      "log_odds": -0.9197492512
+    },
+    {
+      "row_index": 82,
+      "input": {
+        "age": 39.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 321.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 182.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1267607304,
+      "log_odds": -1.9299082984
+    },
+    {
+      "row_index": 83,
+      "input": {
+        "age": 68.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 180.0,
+        "chol": 274.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 150.0,
+        "exang": 1.0,
+        "oldpeak": 1.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.7525830864,
+      "log_odds": 1.1124365814
+    },
+    {
+      "row_index": 84,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 325.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 172.0,
+        "exang": 0.0,
+        "oldpeak": 0.2,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1195958819,
+      "log_odds": -1.9962626182
+    },
+    {
+      "row_index": 85,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 235.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 180.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1110688585,
+      "log_odds": -2.0798694209
+    },
+    {
+      "row_index": 86,
+      "input": {
+        "age": 47.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 138.0,
+        "chol": 257.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 156.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1521663747,
+      "log_odds": -1.7177099272
+    },
+    {
+      "row_index": 87,
+      "input": {
+        "age": 53.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 128.0,
+        "chol": 216.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 115.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": null
+      },
+      "probability": 0.1095289362,
+      "log_odds": -2.0955618358
+    },
+    {
+      "row_index": 88,
+      "input": {
+        "age": 53.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 138.0,
+        "chol": 234.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 160.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1442233474,
+      "log_odds": -1.7806463009
+    },
+    {
+      "row_index": 89,
+      "input": {
+        "age": 51.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 256.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 149.0,
+        "exang": 0.0,
+        "oldpeak": 0.5,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0853123639,
+      "log_odds": -2.3722632353
+    },
+    {
+      "row_index": 90,
+      "input": {
+        "age": 66.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 302.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 151.0,
+        "exang": 0.0,
+        "oldpeak": 0.4,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.4270641296,
+      "log_odds": -0.293839603
+    },
+    {
+      "row_index": 91,
+      "input": {
+        "age": 62.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 160.0,
+        "chol": 164.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 145.0,
+        "exang": 0.0,
+        "oldpeak": 6.2,
+        "slope": 3.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9662551002,
+      "log_odds": 3.3545985893
+    },
+    {
+      "row_index": 92,
+      "input": {
+        "age": 62.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 231.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 146.0,
+        "exang": 0.0,
+        "oldpeak": 1.8,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9096434113,
+      "log_odds": 2.3092887282
+    },
+    {
+      "row_index": 93,
+      "input": {
+        "age": 44.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 108.0,
+        "chol": 141.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 175.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0532515177,
+      "log_odds": -2.878007158
+    },
+    {
+      "row_index": 94,
+      "input": {
+        "age": 63.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 135.0,
+        "chol": 252.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 172.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0589827046,
+      "log_odds": -2.7697172612
+    },
+    {
+      "row_index": 95,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 128.0,
+        "chol": 255.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 161.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.7236433583,
+      "log_odds": 0.9626064603
+    },
+    {
+      "row_index": 96,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 239.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 142.0,
+        "exang": 1.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.8898514055,
+      "log_odds": 2.0892241755
+    },
+    {
+      "row_index": 97,
+      "input": {
+        "age": 60.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 150.0,
+        "chol": 258.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 157.0,
+        "exang": 0.0,
+        "oldpeak": 2.6,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.8898693715,
+      "log_odds": 2.089407485
+    },
+    {
+      "row_index": 98,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 134.0,
+        "chol": 201.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 158.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.2708608944,
+      "log_odds": -0.9902591468
+    },
+    {
+      "row_index": 99,
+      "input": {
+        "age": 48.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 122.0,
+        "chol": 222.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 186.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1744459265,
+      "log_odds": -1.5544399486
+    },
+    {
+      "row_index": 100,
+      "input": {
+        "age": 45.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 115.0,
+        "chol": 260.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 185.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1780310733,
+      "log_odds": -1.5297444884
+    },
+    {
+      "row_index": 101,
+      "input": {
+        "age": 34.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 118.0,
+        "chol": 182.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 174.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0976151058,
+      "log_odds": -2.2240088871
+    },
+    {
+      "row_index": 102,
+      "input": {
+        "age": 57.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 128.0,
+        "chol": 303.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 159.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.2827051532,
+      "log_odds": -0.931082486
+    },
+    {
+      "row_index": 103,
+      "input": {
+        "age": 71.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 110.0,
+        "chol": 265.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 130.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.1562214007,
+      "log_odds": -1.6866159006
+    },
+    {
+      "row_index": 104,
+      "input": {
+        "age": 49.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 188.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 139.0,
+        "exang": 0.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9067984629,
+      "log_odds": 2.2751560094
+    },
+    {
+      "row_index": 105,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 108.0,
+        "chol": 309.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 156.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.2727465938,
+      "log_odds": -0.9807318447
+    },
+    {
+      "row_index": 106,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 177.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 162.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.7115204162,
+      "log_odds": 0.9027797951
+    },
+    {
+      "row_index": 107,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 128.0,
+        "chol": 229.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 150.0,
+        "exang": 0.0,
+        "oldpeak": 0.4,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.6505909084,
+      "log_odds": 0.6216376216
+    },
+    {
+      "row_index": 108,
+      "input": {
+        "age": 61.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 260.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 140.0,
+        "exang": 1.0,
+        "oldpeak": 3.6,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.92258207,
+      "log_odds": 2.4779579288
+    },
+    {
+      "row_index": 109,
+      "input": {
+        "age": 39.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 118.0,
+        "chol": 219.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 140.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.6394195707,
+      "log_odds": 0.5728458076
+    },
+    {
+      "row_index": 110,
+      "input": {
+        "age": 61.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 145.0,
+        "chol": 307.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 146.0,
+        "exang": 1.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.711433767,
+      "log_odds": 0.9023576871
+    },
+    {
+      "row_index": 111,
+      "input": {
+        "age": 56.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 125.0,
+        "chol": 249.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 144.0,
+        "exang": 1.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.7625125955,
+      "log_odds": 1.1665044384
+    },
+    {
+      "row_index": 112,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 118.0,
+        "chol": 186.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 190.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 6.0
+      },
+      "probability": 0.1907078154,
+      "log_odds": -1.4454175251
+    },
+    {
+      "row_index": 113,
+      "input": {
+        "age": 43.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 132.0,
+        "chol": 341.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 136.0,
+        "exang": 1.0,
+        "oldpeak": 3.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.7904417236,
+      "log_odds": 1.3275900631
+    },
+    {
+      "row_index": 114,
+      "input": {
+        "age": 62.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 263.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 97.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.6405189741,
+      "log_odds": 0.577617348
+    },
+    {
+      "row_index": 115,
+      "input": {
+        "age": 41.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 135.0,
+        "chol": 203.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 132.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 6.0
+      },
+      "probability": 0.366373049,
+      "log_odds": -0.547808302
+    },
+    {
+      "row_index": 116,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 211.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 165.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1180799137,
+      "log_odds": -2.0107398169
+    },
+    {
+      "row_index": 117,
+      "input": {
+        "age": 35.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 138.0,
+        "chol": 183.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 182.0,
+        "exang": 0.0,
+        "oldpeak": 1.4,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1030478706,
+      "log_odds": -2.1638088494
+    },
+    {
+      "row_index": 118,
+      "input": {
+        "age": 63.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 330.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 132.0,
+        "exang": 1.0,
+        "oldpeak": 1.8,
+        "slope": 1.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9755884331,
+      "log_odds": 3.6879837355
+    },
+    {
+      "row_index": 119,
+      "input": {
+        "age": 65.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 135.0,
+        "chol": 254.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 127.0,
+        "exang": 0.0,
+        "oldpeak": 2.8,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9144717546,
+      "log_odds": 2.3694999044
+    },
+    {
+      "row_index": 120,
+      "input": {
+        "age": 48.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 256.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 150.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.8937328766,
+      "log_odds": 2.1294509782
+    },
+    {
+      "row_index": 121,
+      "input": {
+        "age": 63.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 150.0,
+        "chol": 407.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 154.0,
+        "exang": 0.0,
+        "oldpeak": 4.0,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9711263038,
+      "log_odds": 3.5155255229
+    },
+    {
+      "row_index": 122,
+      "input": {
+        "age": 51.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 100.0,
+        "chol": 222.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 143.0,
+        "exang": 1.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2851406938,
+      "log_odds": -0.9191030281
+    },
+    {
+      "row_index": 123,
+      "input": {
+        "age": 55.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 217.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 111.0,
+        "exang": 1.0,
+        "oldpeak": 5.6,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.9062747455,
+      "log_odds": 2.268974833
+    },
+    {
+      "row_index": 124,
+      "input": {
+        "age": 65.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 138.0,
+        "chol": 282.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 174.0,
+        "exang": 0.0,
+        "oldpeak": 1.4,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.4272197992,
+      "log_odds": -0.2932034164
+    },
+    {
+      "row_index": 125,
+      "input": {
+        "age": 45.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 234.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 175.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1211862133,
+      "log_odds": -1.9812447126
+    },
+    {
+      "row_index": 126,
+      "input": {
+        "age": 56.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 200.0,
+        "chol": 288.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 133.0,
+        "exang": 1.0,
+        "oldpeak": 4.0,
+        "slope": 3.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9668986283,
+      "log_odds": 3.3745189376
+    },
+    {
+      "row_index": 127,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 239.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 126.0,
+        "exang": 1.0,
+        "oldpeak": 2.8,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.915078576,
+      "log_odds": 2.3772835315
+    },
+    {
+      "row_index": 128,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 220.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 170.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0984564511,
+      "log_odds": -2.2144940187
+    },
+    {
+      "row_index": 129,
+      "input": {
+        "age": 62.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 124.0,
+        "chol": 209.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 163.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0919363588,
+      "log_odds": -2.2902178804
+    },
+    {
+      "row_index": 130,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 258.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 147.0,
+        "exang": 0.0,
+        "oldpeak": 0.4,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.462295717,
+      "log_odds": -0.1511039828
+    },
+    {
+      "row_index": 131,
+      "input": {
+        "age": 51.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 94.0,
+        "chol": 227.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 154.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.4635123456,
+      "log_odds": -0.1462105304
+    },
+    {
+      "row_index": 132,
+      "input": {
+        "age": 29.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 204.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 202.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0896578382,
+      "log_odds": -2.3178199033
+    },
+    {
+      "row_index": 133,
+      "input": {
+        "age": 51.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 261.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 186.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3166326951,
+      "log_odds": -0.769290085
+    },
+    {
+      "row_index": 134,
+      "input": {
+        "age": 43.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 122.0,
+        "chol": 213.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 165.0,
+        "exang": 0.0,
+        "oldpeak": 0.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0735081175,
+      "log_odds": -2.5340094417
+    },
+    {
+      "row_index": 135,
+      "input": {
+        "age": 55.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 135.0,
+        "chol": 250.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 161.0,
+        "exang": 0.0,
+        "oldpeak": 1.4,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1756761296,
+      "log_odds": -1.5459213719
+    },
+    {
+      "row_index": 136,
+      "input": {
+        "age": 70.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 145.0,
+        "chol": 174.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 125.0,
+        "exang": 1.0,
+        "oldpeak": 2.6,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.8029633893,
+      "log_odds": 1.404919568
+    },
+    {
+      "row_index": 137,
+      "input": {
+        "age": 62.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 281.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 103.0,
+        "exang": 0.0,
+        "oldpeak": 1.4,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.850231853,
+      "log_odds": 1.7364206692
+    },
+    {
+      "row_index": 138,
+      "input": {
+        "age": 35.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 198.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 130.0,
+        "exang": 1.0,
+        "oldpeak": 1.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.7873004519,
+      "log_odds": 1.3087293465
+    },
+    {
+      "row_index": 139,
+      "input": {
+        "age": 51.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 125.0,
+        "chol": 245.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 166.0,
+        "exang": 0.0,
+        "oldpeak": 2.4,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2593157919,
+      "log_odds": -1.0495277716
+    },
+    {
+      "row_index": 140,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 140.0,
+        "chol": 221.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 164.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1959399037,
+      "log_odds": -1.4118660143
+    },
+    {
+      "row_index": 141,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 170.0,
+        "chol": 288.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 159.0,
+        "exang": 0.0,
+        "oldpeak": 0.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.5677768458,
+      "log_odds": 0.2727864488
+    },
+    {
+      "row_index": 142,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 128.0,
+        "chol": 205.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 184.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.079149059,
+      "log_odds": -2.4539652815
+    },
+    {
+      "row_index": 143,
+      "input": {
+        "age": 64.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 125.0,
+        "chol": 309.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 131.0,
+        "exang": 1.0,
+        "oldpeak": 1.8,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.6828830369,
+      "log_odds": 0.7670529213
+    },
+    {
+      "row_index": 144,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 105.0,
+        "chol": 240.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 154.0,
+        "exang": 1.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.5336472666,
+      "log_odds": 0.134792785
+    },
+    {
+      "row_index": 145,
+      "input": {
+        "age": 47.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 108.0,
+        "chol": 243.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 152.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0948597081,
+      "log_odds": -2.2556909075
+    },
+    {
+      "row_index": 146,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 165.0,
+        "chol": 289.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 124.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9807101493,
+      "log_odds": 3.928697866
+    },
+    {
+      "row_index": 147,
+      "input": {
+        "age": 41.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 112.0,
+        "chol": 250.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 179.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0704761877,
+      "log_odds": -2.5793975355
+    },
+    {
+      "row_index": 148,
+      "input": {
+        "age": 45.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 128.0,
+        "chol": 308.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 170.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1560874544,
+      "log_odds": -1.6876324152
+    },
+    {
+      "row_index": 149,
+      "input": {
+        "age": 60.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 102.0,
+        "chol": 318.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 160.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.0943372027,
+      "log_odds": -2.2617914224
+    },
+    {
+      "row_index": 150,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 152.0,
+        "chol": 298.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 178.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.4265561627,
+      "log_odds": -0.295915961
+    },
+    {
+      "row_index": 151,
+      "input": {
+        "age": 42.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 102.0,
+        "chol": 265.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 122.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3003705289,
+      "log_odds": -0.8455340588
+    },
+    {
+      "row_index": 152,
+      "input": {
+        "age": 67.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 115.0,
+        "chol": 564.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 160.0,
+        "exang": 0.0,
+        "oldpeak": 1.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.4249471536,
+      "log_odds": -0.3024971267
+    },
+    {
+      "row_index": 153,
+      "input": {
+        "age": 55.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 160.0,
+        "chol": 289.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 145.0,
+        "exang": 1.0,
+        "oldpeak": 0.8,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.928351947,
+      "log_odds": 2.5616449347
+    },
+    {
+      "row_index": 154,
+      "input": {
+        "age": 64.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 246.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 96.0,
+        "exang": 1.0,
+        "oldpeak": 2.2,
+        "slope": 3.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.8487402498,
+      "log_odds": 1.7247546321
+    },
+    {
+      "row_index": 155,
+      "input": {
+        "age": 70.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 322.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 109.0,
+        "exang": 0.0,
+        "oldpeak": 2.4,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 3.0
+      },
+      "probability": 0.9623017984,
+      "log_odds": 3.2397157297
+    },
+    {
+      "row_index": 156,
+      "input": {
+        "age": 51.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 299.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 173.0,
+        "exang": 1.0,
+        "oldpeak": 1.6,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.6297235005,
+      "log_odds": 0.5310308124
+    },
+    {
+      "row_index": 157,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 125.0,
+        "chol": 300.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 171.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.8044509332,
+      "log_odds": 1.4143486453
+    },
+    {
+      "row_index": 158,
+      "input": {
+        "age": 60.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 293.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 170.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9139270846,
+      "log_odds": 2.3625560022
+    },
+    {
+      "row_index": 159,
+      "input": {
+        "age": 68.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 118.0,
+        "chol": 277.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 151.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.4731727483,
+      "log_odds": -0.1074121589
+    },
+    {
+      "row_index": 160,
+      "input": {
+        "age": 46.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 101.0,
+        "chol": 197.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 156.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.2055269549,
+      "log_odds": -1.352101866
+    },
+    {
+      "row_index": 161,
+      "input": {
+        "age": 77.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 125.0,
+        "chol": 304.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 162.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 3.0,
+        "thal": 3.0
+      },
+      "probability": 0.8676918618,
+      "log_odds": 1.880703071
+    },
+    {
+      "row_index": 162,
+      "input": {
+        "age": 54.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 110.0,
+        "chol": 214.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 158.0,
+        "exang": 0.0,
+        "oldpeak": 1.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0933494233,
+      "log_odds": -2.2734074318
+    },
+    {
+      "row_index": 163,
+      "input": {
+        "age": 58.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 100.0,
+        "chol": 248.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 122.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3033572302,
+      "log_odds": -0.8313616654
+    },
+    {
+      "row_index": 164,
+      "input": {
+        "age": 48.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 124.0,
+        "chol": 255.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 175.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.2915641633,
+      "log_odds": -0.8877993971
+    },
+    {
+      "row_index": 165,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 132.0,
+        "chol": 207.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 168.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.5009326168,
+      "log_odds": 0.0037304716
+    },
+    {
+      "row_index": 166,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 138.0,
+        "chol": 223.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 169.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": null,
+        "thal": 3.0
+      },
+      "probability": 0.0957095166,
+      "log_odds": -2.2458329046
+    },
+    {
+      "row_index": 167,
+      "input": {
+        "age": 54.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 132.0,
+        "chol": 288.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 159.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.2561525826,
+      "log_odds": -1.0660626371
+    },
+    {
+      "row_index": 168,
+      "input": {
+        "age": 35.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 126.0,
+        "chol": 282.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 156.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.6355668723,
+      "log_odds": 0.5561742416
+    },
+    {
+      "row_index": 169,
+      "input": {
+        "age": 45.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 112.0,
+        "chol": 160.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 138.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1017360601,
+      "log_odds": -2.1780821312
+    },
+    {
+      "row_index": 170,
+      "input": {
+        "age": 70.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 160.0,
+        "chol": 269.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 112.0,
+        "exang": 1.0,
+        "oldpeak": 2.9,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9103532094,
+      "log_odds": 2.317955266
+    },
+    {
+      "row_index": 171,
+      "input": {
+        "age": 53.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 142.0,
+        "chol": 226.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 111.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.7724689149,
+      "log_odds": 1.2223049016
+    },
+    {
+      "row_index": 172,
+      "input": {
+        "age": 59.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 174.0,
+        "chol": 249.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 143.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.4149975352,
+      "log_odds": -0.3433434795
+    },
+    {
+      "row_index": 173,
+      "input": {
+        "age": 62.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 394.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 157.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3542812617,
+      "log_odds": -0.6002728971
+    },
+    {
+      "row_index": 174,
+      "input": {
+        "age": 64.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 145.0,
+        "chol": 212.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 132.0,
+        "exang": 0.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 6.0
+      },
+      "probability": 0.9184111165,
+      "log_odds": 2.4209521084
+    },
+    {
+      "row_index": 175,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 152.0,
+        "chol": 274.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 88.0,
+        "exang": 1.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9556052819,
+      "log_odds": 3.069224443
+    },
+    {
+      "row_index": 176,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 108.0,
+        "chol": 233.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 147.0,
+        "exang": 0.0,
+        "oldpeak": 0.1,
+        "slope": 1.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.8722562595,
+      "log_odds": 1.9210570261
+    },
+    {
+      "row_index": 177,
+      "input": {
+        "age": 56.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 132.0,
+        "chol": 184.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 105.0,
+        "exang": 1.0,
+        "oldpeak": 2.1,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 6.0
+      },
+      "probability": 0.9152872849,
+      "log_odds": 2.3799722787
+    },
+    {
+      "row_index": 178,
+      "input": {
+        "age": 43.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 315.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 1.9,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.300626266,
+      "log_odds": -0.8443174166
+    },
+    {
+      "row_index": 179,
+      "input": {
+        "age": 53.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 246.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 173.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 3.0,
+        "thal": 3.0
+      },
+      "probability": 0.5611233447,
+      "log_odds": 0.2457223409
+    },
+    {
+      "row_index": 180,
+      "input": {
+        "age": 48.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 124.0,
+        "chol": 274.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 166.0,
+        "exang": 0.0,
+        "oldpeak": 0.5,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.6211889102,
+      "log_odds": 0.494597602
+    },
+    {
+      "row_index": 181,
+      "input": {
+        "age": 56.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 134.0,
+        "chol": 409.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 150.0,
+        "exang": 1.0,
+        "oldpeak": 1.9,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9386588107,
+      "log_odds": 2.7280005116
+    },
+    {
+      "row_index": 182,
+      "input": {
+        "age": 42.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 148.0,
+        "chol": 244.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 178.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.4732104823,
+      "log_odds": -0.1072607879
+    },
+    {
+      "row_index": 183,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 178.0,
+        "chol": 270.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 145.0,
+        "exang": 0.0,
+        "oldpeak": 4.2,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.7283751125,
+      "log_odds": 0.9863941555
+    },
+    {
+      "row_index": 184,
+      "input": {
+        "age": 60.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 158.0,
+        "chol": 305.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 161.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1884285669,
+      "log_odds": -1.4602534293
+    },
+    {
+      "row_index": 185,
+      "input": {
+        "age": 63.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 140.0,
+        "chol": 195.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 179.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.1996459333,
+      "log_odds": -1.3885087492
+    },
+    {
+      "row_index": 186,
+      "input": {
+        "age": 42.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 240.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 194.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.1882077598,
+      "log_odds": -1.4616979875
+    },
+    {
+      "row_index": 187,
+      "input": {
+        "age": 66.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 160.0,
+        "chol": 246.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 120.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 6.0
+      },
+      "probability": 0.9457582079,
+      "log_odds": 2.8585352592
+    },
+    {
+      "row_index": 188,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 192.0,
+        "chol": 283.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 195.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.5768922351,
+      "log_odds": 0.3100285717
+    },
+    {
+      "row_index": 189,
+      "input": {
+        "age": 69.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 254.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 146.0,
+        "exang": 0.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9404862039,
+      "log_odds": 2.7601888263
+    },
+    {
+      "row_index": 190,
+      "input": {
+        "age": 50.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 129.0,
+        "chol": 196.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 163.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0909263155,
+      "log_odds": -2.3023766935
+    },
+    {
+      "row_index": 191,
+      "input": {
+        "age": 51.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 298.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 122.0,
+        "exang": 1.0,
+        "oldpeak": 4.2,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9912832062,
+      "log_odds": 4.733748788
+    },
+    {
+      "row_index": 192,
+      "input": {
+        "age": 43.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 132.0,
+        "chol": 247.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 143.0,
+        "exang": 1.0,
+        "oldpeak": 0.1,
+        "slope": 2.0,
+        "ca": null,
+        "thal": 7.0
+      },
+      "probability": 0.7712965402,
+      "log_odds": 1.215646688
+    },
+    {
+      "row_index": 193,
+      "input": {
+        "age": 62.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 138.0,
+        "chol": 294.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 106.0,
+        "exang": 0.0,
+        "oldpeak": 1.9,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 3.0
+      },
+      "probability": 0.8892463895,
+      "log_odds": 2.083066342
+    },
+    {
+      "row_index": 194,
+      "input": {
+        "age": 68.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 211.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 115.0,
+        "exang": 0.0,
+        "oldpeak": 1.5,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2085629984,
+      "log_odds": -1.3336091364
+    },
+    {
+      "row_index": 195,
+      "input": {
+        "age": 67.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 100.0,
+        "chol": 299.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 125.0,
+        "exang": 1.0,
+        "oldpeak": 0.9,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.8909103445,
+      "log_odds": 2.1000737275
+    },
+    {
+      "row_index": 196,
+      "input": {
+        "age": 69.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 160.0,
+        "chol": 234.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 131.0,
+        "exang": 0.0,
+        "oldpeak": 0.1,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.5412445501,
+      "log_odds": 0.1653539311
+    },
+    {
+      "row_index": 197,
+      "input": {
+        "age": 45.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 138.0,
+        "chol": 236.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 152.0,
+        "exang": 1.0,
+        "oldpeak": 0.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3710682752,
+      "log_odds": -0.5276366295
+    },
+    {
+      "row_index": 198,
+      "input": {
+        "age": 50.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 244.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 1.1,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0688666573,
+      "log_odds": -2.6042303609
+    },
+    {
+      "row_index": 199,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 160.0,
+        "chol": 273.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 125.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2781151516,
+      "log_odds": -0.9538303941
+    },
+    {
+      "row_index": 200,
+      "input": {
+        "age": 50.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 254.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 159.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1192926278,
+      "log_odds": -1.999145885
+    },
+    {
+      "row_index": 201,
+      "input": {
+        "age": 64.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 180.0,
+        "chol": 325.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 154.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3001076982,
+      "log_odds": -0.8467850645
+    },
+    {
+      "row_index": 202,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 150.0,
+        "chol": 126.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 173.0,
+        "exang": 0.0,
+        "oldpeak": 0.2,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.3437306782,
+      "log_odds": -0.6467128176
+    },
+    {
+      "row_index": 203,
+      "input": {
+        "age": 64.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 313.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 133.0,
+        "exang": 0.0,
+        "oldpeak": 0.2,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.2152961102,
+      "log_odds": -1.293292099
+    },
+    {
+      "row_index": 204,
+      "input": {
+        "age": 43.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 211.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 161.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.3485974796,
+      "log_odds": -0.625209859
+    },
+    {
+      "row_index": 205,
+      "input": {
+        "age": 45.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 142.0,
+        "chol": 309.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 147.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 3.0,
+        "thal": 7.0
+      },
+      "probability": 0.9788870235,
+      "log_odds": 3.836528383
+    },
+    {
+      "row_index": 206,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 128.0,
+        "chol": 259.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 130.0,
+        "exang": 1.0,
+        "oldpeak": 3.0,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9745316777,
+      "log_odds": 3.6445216081
+    },
+    {
+      "row_index": 207,
+      "input": {
+        "age": 50.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 144.0,
+        "chol": 200.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 126.0,
+        "exang": 1.0,
+        "oldpeak": 0.9,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.84815966,
+      "log_odds": 1.7202393222
+    },
+    {
+      "row_index": 208,
+      "input": {
+        "age": 55.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 262.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 155.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1384693515,
+      "log_odds": -1.8280616184
+    },
+    {
+      "row_index": 209,
+      "input": {
+        "age": 62.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 150.0,
+        "chol": 244.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 154.0,
+        "exang": 1.0,
+        "oldpeak": 1.4,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.386723985,
+      "log_odds": -0.4611038822
+    },
+    {
+      "row_index": 210,
+      "input": {
+        "age": 37.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 215.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 170.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0386978353,
+      "log_odds": -3.2125051231
+    },
+    {
+      "row_index": 211,
+      "input": {
+        "age": 38.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 120.0,
+        "chol": 231.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 182.0,
+        "exang": 1.0,
+        "oldpeak": 3.8,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.5881296553,
+      "log_odds": 0.3562388232
+    },
+    {
+      "row_index": 212,
+      "input": {
+        "age": 41.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 214.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 168.0,
+        "exang": 0.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2531229624,
+      "log_odds": -1.0820251754
+    },
+    {
+      "row_index": 213,
+      "input": {
+        "age": 66.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 178.0,
+        "chol": 228.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 165.0,
+        "exang": 1.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.8845088324,
+      "log_odds": 2.0358384429
+    },
+    {
+      "row_index": 214,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 112.0,
+        "chol": 230.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 160.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.3218869472,
+      "log_odds": -0.7451136304
+    },
+    {
+      "row_index": 215,
+      "input": {
+        "age": 56.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 120.0,
+        "chol": 193.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 1.9,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.4742501598,
+      "log_odds": -0.1030905649
+    },
+    {
+      "row_index": 216,
+      "input": {
+        "age": 46.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 105.0,
+        "chol": 204.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 172.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0392942343,
+      "log_odds": -3.1965903881
+    },
+    {
+      "row_index": 217,
+      "input": {
+        "age": 46.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 138.0,
+        "chol": 243.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 152.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3646259804,
+      "log_odds": -0.5553417156
+    },
+    {
+      "row_index": 218,
+      "input": {
+        "age": 64.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 303.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 122.0,
+        "exang": 0.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.7502024313,
+      "log_odds": 1.0996922138
+    },
+    {
+      "row_index": 219,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 138.0,
+        "chol": 271.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 182.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2226025163,
+      "log_odds": -1.250564039
+    },
+    {
+      "row_index": 220,
+      "input": {
+        "age": 41.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 112.0,
+        "chol": 268.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 172.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0821628395,
+      "log_odds": -2.4133168636
+    },
+    {
+      "row_index": 221,
+      "input": {
+        "age": 54.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 108.0,
+        "chol": 267.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 167.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0508506295,
+      "log_odds": -2.9266736811
+    },
+    {
+      "row_index": 222,
+      "input": {
+        "age": 39.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 94.0,
+        "chol": 199.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 179.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0258292884,
+      "log_odds": -3.6300775011
+    },
+    {
+      "row_index": 223,
+      "input": {
+        "age": 53.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 123.0,
+        "chol": 282.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 95.0,
+        "exang": 1.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9750567163,
+      "log_odds": 3.6658910457
+    },
+    {
+      "row_index": 224,
+      "input": {
+        "age": 63.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 108.0,
+        "chol": 269.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 169.0,
+        "exang": 1.0,
+        "oldpeak": 1.8,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.6547621488,
+      "log_odds": 0.640038435
+    },
+    {
+      "row_index": 225,
+      "input": {
+        "age": 34.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 118.0,
+        "chol": 210.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 192.0,
+        "exang": 0.0,
+        "oldpeak": 0.7,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.039700835,
+      "log_odds": -3.1858726448
+    },
+    {
+      "row_index": 226,
+      "input": {
+        "age": 47.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 112.0,
+        "chol": 204.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 143.0,
+        "exang": 0.0,
+        "oldpeak": 0.1,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.209185307,
+      "log_odds": -1.3298431754
+    },
+    {
+      "row_index": 227,
+      "input": {
+        "age": 67.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 152.0,
+        "chol": 277.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 172.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.1162543005,
+      "log_odds": -2.0283893135
+    },
+    {
+      "row_index": 228,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 206.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 108.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.7824671051,
+      "log_odds": 1.2801018032
+    },
+    {
+      "row_index": 229,
+      "input": {
+        "age": 66.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 112.0,
+        "chol": 212.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 132.0,
+        "exang": 1.0,
+        "oldpeak": 0.1,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.6049217134,
+      "log_odds": 0.426015111
+    },
+    {
+      "row_index": 230,
+      "input": {
+        "age": 52.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 136.0,
+        "chol": 196.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 169.0,
+        "exang": 0.0,
+        "oldpeak": 0.1,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0958221301,
+      "log_odds": -2.2445324388
+    },
+    {
+      "row_index": 231,
+      "input": {
+        "age": 55.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 180.0,
+        "chol": 327.0,
+        "fbs": 0.0,
+        "restecg": 1.0,
+        "thalach": 117.0,
+        "exang": 1.0,
+        "oldpeak": 3.4,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.7404965128,
+      "log_odds": 1.0485507837
+    },
+    {
+      "row_index": 232,
+      "input": {
+        "age": 49.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 118.0,
+        "chol": 149.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 126.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 3.0,
+        "thal": 3.0
+      },
+      "probability": 0.6999795899,
+      "log_odds": 0.8472006713
+    },
+    {
+      "row_index": 233,
+      "input": {
+        "age": 74.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 269.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 121.0,
+        "exang": 1.0,
+        "oldpeak": 0.2,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.3594144467,
+      "log_odds": -0.577906515
+    },
+    {
+      "row_index": 234,
+      "input": {
+        "age": 54.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 160.0,
+        "chol": 201.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 163.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.1229563974,
+      "log_odds": -1.9647269091
+    },
+    {
+      "row_index": 235,
+      "input": {
+        "age": 54.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 122.0,
+        "chol": 286.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 116.0,
+        "exang": 1.0,
+        "oldpeak": 3.2,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.9478775531,
+      "log_odds": 2.9006296313
+    },
+    {
+      "row_index": 236,
+      "input": {
+        "age": 56.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 283.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 103.0,
+        "exang": 1.0,
+        "oldpeak": 1.6,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.8562540841,
+      "log_odds": 1.7845198908
+    },
+    {
+      "row_index": 237,
+      "input": {
+        "age": 46.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 249.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 144.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.5555884496,
+      "log_odds": 0.2232767732
+    },
+    {
+      "row_index": 238,
+      "input": {
+        "age": 49.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 134.0,
+        "chol": 271.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1110311806,
+      "log_odds": -2.0802510929
+    },
+    {
+      "row_index": 239,
+      "input": {
+        "age": 42.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 295.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1248008744,
+      "log_odds": -1.9477319704
+    },
+    {
+      "row_index": 240,
+      "input": {
+        "age": 41.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 110.0,
+        "chol": 235.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 153.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1151426056,
+      "log_odds": -2.0392550871
+    },
+    {
+      "row_index": 241,
+      "input": {
+        "age": 41.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 126.0,
+        "chol": 306.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 163.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0658853882,
+      "log_odds": -2.6516824512
+    },
+    {
+      "row_index": 242,
+      "input": {
+        "age": 49.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 269.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 163.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1092355168,
+      "log_odds": -2.0985738085
+    },
+    {
+      "row_index": 243,
+      "input": {
+        "age": 61.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 134.0,
+        "chol": 234.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 145.0,
+        "exang": 0.0,
+        "oldpeak": 2.6,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.6984757169,
+      "log_odds": 0.8400498597
+    },
+    {
+      "row_index": 244,
+      "input": {
+        "age": 60.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 178.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 96.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0877221779,
+      "log_odds": -2.3417698222
+    },
+    {
+      "row_index": 245,
+      "input": {
+        "age": 67.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 237.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 71.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.6362171133,
+      "log_odds": 0.5589826537
+    },
+    {
+      "row_index": 246,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 100.0,
+        "chol": 234.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 156.0,
+        "exang": 0.0,
+        "oldpeak": 0.1,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.5495840645,
+      "log_odds": 0.198990289
+    },
+    {
+      "row_index": 247,
+      "input": {
+        "age": 47.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 275.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 118.0,
+        "exang": 1.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.8159458343,
+      "log_odds": 1.4891178799
+    },
+    {
+      "row_index": 248,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 125.0,
+        "chol": 212.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 168.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.7717264223,
+      "log_odds": 1.2180853
+    },
+    {
+      "row_index": 249,
+      "input": {
+        "age": 62.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 128.0,
+        "chol": 208.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 140.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1733042234,
+      "log_odds": -1.5623881965
+    },
+    {
+      "row_index": 250,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 201.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 126.0,
+        "exang": 1.0,
+        "oldpeak": 1.5,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 6.0
+      },
+      "probability": 0.6699157475,
+      "log_odds": 0.7078040222
+    },
+    {
+      "row_index": 251,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 146.0,
+        "chol": 218.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 105.0,
+        "exang": 0.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9078492049,
+      "log_odds": 2.2876519782
+    },
+    {
+      "row_index": 252,
+      "input": {
+        "age": 64.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 128.0,
+        "chol": 263.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 105.0,
+        "exang": 1.0,
+        "oldpeak": 0.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9136325983,
+      "log_odds": 2.3588182098
+    },
+    {
+      "row_index": 253,
+      "input": {
+        "age": 51.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 295.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 157.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0769426429,
+      "log_odds": -2.484631127
+    },
+    {
+      "row_index": 254,
+      "input": {
+        "age": 43.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 115.0,
+        "chol": 303.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 181.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2987906913,
+      "log_odds": -0.8530631292
+    },
+    {
+      "row_index": 255,
+      "input": {
+        "age": 42.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 209.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 173.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0620794407,
+      "log_odds": -2.7152503868
+    },
+    {
+      "row_index": 256,
+      "input": {
+        "age": 67.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 106.0,
+        "chol": 223.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 142.0,
+        "exang": 0.0,
+        "oldpeak": 0.3,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.3801127618,
+      "log_odds": -0.4890696373
+    },
+    {
+      "row_index": 257,
+      "input": {
+        "age": 76.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 140.0,
+        "chol": 197.0,
+        "fbs": 0.0,
+        "restecg": 1.0,
+        "thalach": 116.0,
+        "exang": 0.0,
+        "oldpeak": 1.1,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1926671516,
+      "log_odds": -1.4327719381
+    },
+    {
+      "row_index": 258,
+      "input": {
+        "age": 70.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 156.0,
+        "chol": 245.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 143.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2353283401,
+      "log_odds": -1.1784648081
+    },
+    {
+      "row_index": 259,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 124.0,
+        "chol": 261.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 141.0,
+        "exang": 0.0,
+        "oldpeak": 0.3,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.3432345417,
+      "log_odds": -0.6489129573
+    },
+    {
+      "row_index": 260,
+      "input": {
+        "age": 44.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 118.0,
+        "chol": 242.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 149.0,
+        "exang": 0.0,
+        "oldpeak": 0.3,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.1868276418,
+      "log_odds": -1.4707565993
+    },
+    {
+      "row_index": 261,
+      "input": {
+        "age": 58.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 136.0,
+        "chol": 319.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 152.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.3538559157,
+      "log_odds": -0.6021327073
+    },
+    {
+      "row_index": 262,
+      "input": {
+        "age": 60.0,
+        "sex": 0.0,
+        "cp": 1.0,
+        "trestbps": 150.0,
+        "chol": 240.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 171.0,
+        "exang": 0.0,
+        "oldpeak": 0.9,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0672450247,
+      "log_odds": -2.6297995128
+    },
+    {
+      "row_index": 263,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 120.0,
+        "chol": 226.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 169.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0824039033,
+      "log_odds": -2.4101245057
+    },
+    {
+      "row_index": 264,
+      "input": {
+        "age": 61.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 138.0,
+        "chol": 166.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 125.0,
+        "exang": 1.0,
+        "oldpeak": 3.6,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.877204043,
+      "log_odds": 1.9662155339
+    },
+    {
+      "row_index": 265,
+      "input": {
+        "age": 42.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 136.0,
+        "chol": 315.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 125.0,
+        "exang": 1.0,
+        "oldpeak": 1.8,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 6.0
+      },
+      "probability": 0.7829639424,
+      "log_odds": 1.2830231403
+    },
+    {
+      "row_index": 266,
+      "input": {
+        "age": 52.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 128.0,
+        "chol": 204.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 156.0,
+        "exang": 1.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": null
+      },
+      "probability": 0.4573169863,
+      "log_odds": -0.1711486062
+    },
+    {
+      "row_index": 267,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 126.0,
+        "chol": 218.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 134.0,
+        "exang": 0.0,
+        "oldpeak": 2.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 6.0
+      },
+      "probability": 0.5730345356,
+      "log_odds": 0.294242856
+    },
+    {
+      "row_index": 268,
+      "input": {
+        "age": 40.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 152.0,
+        "chol": 223.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 181.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.3850743571,
+      "log_odds": -0.4680649038
+    },
+    {
+      "row_index": 269,
+      "input": {
+        "age": 42.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 180.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 150.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1058455657,
+      "log_odds": -2.1338974012
+    },
+    {
+      "row_index": 270,
+      "input": {
+        "age": 61.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 207.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 138.0,
+        "exang": 1.0,
+        "oldpeak": 1.9,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.87676645,
+      "log_odds": 1.9621593161
+    },
+    {
+      "row_index": 271,
+      "input": {
+        "age": 66.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 160.0,
+        "chol": 228.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 138.0,
+        "exang": 0.0,
+        "oldpeak": 2.3,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 6.0
+      },
+      "probability": 0.604495257,
+      "log_odds": 0.4242310445
+    },
+    {
+      "row_index": 272,
+      "input": {
+        "age": 46.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 311.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 120.0,
+        "exang": 1.0,
+        "oldpeak": 1.8,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9707695614,
+      "log_odds": 3.5028785344
+    },
+    {
+      "row_index": 273,
+      "input": {
+        "age": 71.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 112.0,
+        "chol": 149.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 125.0,
+        "exang": 0.0,
+        "oldpeak": 1.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.246930529,
+      "log_odds": -1.1150504446
+    },
+    {
+      "row_index": 274,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 134.0,
+        "chol": 204.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 162.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 3.0
+      },
+      "probability": 0.40493321,
+      "log_odds": -0.3849515114
+    },
+    {
+      "row_index": 275,
+      "input": {
+        "age": 64.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 170.0,
+        "chol": 227.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 155.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.5704641473,
+      "log_odds": 0.2837451097
+    },
+    {
+      "row_index": 276,
+      "input": {
+        "age": 66.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 146.0,
+        "chol": 278.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 152.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.2740398717,
+      "log_odds": -0.9742214809
+    },
+    {
+      "row_index": 277,
+      "input": {
+        "age": 39.0,
+        "sex": 0.0,
+        "cp": 3.0,
+        "trestbps": 138.0,
+        "chol": 220.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 152.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0983454424,
+      "log_odds": -2.2157452698
+    },
+    {
+      "row_index": 278,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 154.0,
+        "chol": 232.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 164.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.3289350433,
+      "log_odds": -0.7130056436
+    },
+    {
+      "row_index": 279,
+      "input": {
+        "age": 58.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 197.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 131.0,
+        "exang": 0.0,
+        "oldpeak": 0.6,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.2460962715,
+      "log_odds": -1.1195418717
+    },
+    {
+      "row_index": 280,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 110.0,
+        "chol": 335.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 143.0,
+        "exang": 1.0,
+        "oldpeak": 3.0,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.9144446601,
+      "log_odds": 2.3691535356
+    },
+    {
+      "row_index": 281,
+      "input": {
+        "age": 47.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 130.0,
+        "chol": 253.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 179.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0830776044,
+      "log_odds": -2.4012476766
+    },
+    {
+      "row_index": 282,
+      "input": {
+        "age": 55.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 128.0,
+        "chol": 205.0,
+        "fbs": 0.0,
+        "restecg": 1.0,
+        "thalach": 130.0,
+        "exang": 1.0,
+        "oldpeak": 2.0,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.8317960586,
+      "log_odds": 1.5984101089
+    },
+    {
+      "row_index": 283,
+      "input": {
+        "age": 35.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 122.0,
+        "chol": 192.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 174.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0910927563,
+      "log_odds": -2.30036476
+    },
+    {
+      "row_index": 284,
+      "input": {
+        "age": 61.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 148.0,
+        "chol": 203.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 161.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.6259802006,
+      "log_odds": 0.5150100068
+    },
+    {
+      "row_index": 285,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 114.0,
+        "chol": 318.0,
+        "fbs": 0.0,
+        "restecg": 1.0,
+        "thalach": 140.0,
+        "exang": 0.0,
+        "oldpeak": 4.4,
+        "slope": 3.0,
+        "ca": 3.0,
+        "thal": 6.0
+      },
+      "probability": 0.9525700081,
+      "log_odds": 2.9999088354
+    },
+    {
+      "row_index": 286,
+      "input": {
+        "age": 58.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 170.0,
+        "chol": 225.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 146.0,
+        "exang": 1.0,
+        "oldpeak": 2.8,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 6.0
+      },
+      "probability": 0.9122316808,
+      "log_odds": 2.3411933871
+    },
+    {
+      "row_index": 287,
+      "input": {
+        "age": 58.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 125.0,
+        "chol": 220.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 144.0,
+        "exang": 0.0,
+        "oldpeak": 0.4,
+        "slope": 2.0,
+        "ca": null,
+        "thal": 7.0
+      },
+      "probability": 0.4529697688,
+      "log_odds": -0.1886786806
+    },
+    {
+      "row_index": 288,
+      "input": {
+        "age": 56.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 221.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 163.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.316026518,
+      "log_odds": -0.7720930203
+    },
+    {
+      "row_index": 289,
+      "input": {
+        "age": 56.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 240.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 169.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.1233388732,
+      "log_odds": -1.9611848837
+    },
+    {
+      "row_index": 290,
+      "input": {
+        "age": 67.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 152.0,
+        "chol": 212.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 150.0,
+        "exang": 0.0,
+        "oldpeak": 0.8,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.5247973638,
+      "log_odds": 0.0992708986
+    },
+    {
+      "row_index": 291,
+      "input": {
+        "age": 55.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 132.0,
+        "chol": 342.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 166.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0888099329,
+      "log_odds": -2.3282530101
+    },
+    {
+      "row_index": 292,
+      "input": {
+        "age": 44.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 120.0,
+        "chol": 169.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 144.0,
+        "exang": 1.0,
+        "oldpeak": 2.8,
+        "slope": 3.0,
+        "ca": 0.0,
+        "thal": 6.0
+      },
+      "probability": 0.6027959618,
+      "log_odds": 0.417128669
+    },
+    {
+      "row_index": 293,
+      "input": {
+        "age": 63.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 187.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 144.0,
+        "exang": 1.0,
+        "oldpeak": 4.0,
+        "slope": 1.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9553525009,
+      "log_odds": 3.0632820885
+    },
+    {
+      "row_index": 294,
+      "input": {
+        "age": 63.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 124.0,
+        "chol": 197.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 136.0,
+        "exang": 1.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.3004467816,
+      "log_odds": -0.8451712329
+    },
+    {
+      "row_index": 295,
+      "input": {
+        "age": 41.0,
+        "sex": 1.0,
+        "cp": 2.0,
+        "trestbps": 120.0,
+        "chol": 157.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 182.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": 0.0,
+        "thal": 3.0
+      },
+      "probability": 0.0752064413,
+      "log_odds": -2.5093336502
+    },
+    {
+      "row_index": 296,
+      "input": {
+        "age": 59.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 164.0,
+        "chol": 176.0,
+        "fbs": 1.0,
+        "restecg": 2.0,
+        "thalach": 90.0,
+        "exang": 0.0,
+        "oldpeak": 1.0,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 6.0
+      },
+      "probability": 0.9451427411,
+      "log_odds": 2.8466014466
+    },
+    {
+      "row_index": 297,
+      "input": {
+        "age": 57.0,
+        "sex": 0.0,
+        "cp": 4.0,
+        "trestbps": 140.0,
+        "chol": 241.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 123.0,
+        "exang": 1.0,
+        "oldpeak": 0.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.648819542,
+      "log_odds": 0.6138544057
+    },
+    {
+      "row_index": 298,
+      "input": {
+        "age": 45.0,
+        "sex": 1.0,
+        "cp": 1.0,
+        "trestbps": 110.0,
+        "chol": 264.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 132.0,
+        "exang": 0.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 0.0,
+        "thal": 7.0
+      },
+      "probability": 0.4905032002,
+      "log_odds": -0.037991768
+    },
+    {
+      "row_index": 299,
+      "input": {
+        "age": 68.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 144.0,
+        "chol": 193.0,
+        "fbs": 1.0,
+        "restecg": 0.0,
+        "thalach": 141.0,
+        "exang": 0.0,
+        "oldpeak": 3.4,
+        "slope": 2.0,
+        "ca": 2.0,
+        "thal": 7.0
+      },
+      "probability": 0.9370813795,
+      "log_odds": 2.7009279766
+    },
+    {
+      "row_index": 300,
+      "input": {
+        "age": 57.0,
+        "sex": 1.0,
+        "cp": 4.0,
+        "trestbps": 130.0,
+        "chol": 131.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 115.0,
+        "exang": 1.0,
+        "oldpeak": 1.2,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 7.0
+      },
+      "probability": 0.8985191492,
+      "log_odds": 2.1808778999
+    },
+    {
+      "row_index": 301,
+      "input": {
+        "age": 57.0,
+        "sex": 0.0,
+        "cp": 2.0,
+        "trestbps": 130.0,
+        "chol": 236.0,
+        "fbs": 0.0,
+        "restecg": 2.0,
+        "thalach": 174.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 2.0,
+        "ca": 1.0,
+        "thal": 3.0
+      },
+      "probability": 0.2143898773,
+      "log_odds": -1.2986644285
+    },
+    {
+      "row_index": 302,
+      "input": {
+        "age": 38.0,
+        "sex": 1.0,
+        "cp": 3.0,
+        "trestbps": 138.0,
+        "chol": 175.0,
+        "fbs": 0.0,
+        "restecg": 0.0,
+        "thalach": 173.0,
+        "exang": 0.0,
+        "oldpeak": 0.0,
+        "slope": 1.0,
+        "ca": null,
+        "thal": 3.0
+      },
+      "probability": 0.0841261763,
+      "log_odds": -2.387560838
+    }
+  ]
+}

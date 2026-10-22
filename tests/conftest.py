@@ -1,4 +1,4 @@
-"""Shared fixtures for the backend and ML tests."""
+"""Shared fixtures for the training, artifact and export tests."""
 
 from __future__ import annotations
 
@@ -7,19 +7,9 @@ from pathlib import Path
 
 import joblib
 import pytest
-from fastapi.testclient import TestClient
-
-from backend.main import app
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS_DIR = PROJECT_ROOT / "artifacts"
-
-
-@pytest.fixture(scope="session")
-def client():
-    """A TestClient whose context manager runs FastAPI's startup lifespan."""
-    with TestClient(app) as test_client:
-        yield test_client
 
 
 @pytest.fixture(scope="session")
@@ -45,6 +35,17 @@ def metadata() -> dict:
 @pytest.fixture(scope="session")
 def metrics() -> dict:
     return json.loads((ARTIFACTS_DIR / "metrics.json").read_text())
+
+
+@pytest.fixture(scope="session")
+def model_bundle() -> dict:
+    return json.loads((ARTIFACTS_DIR / "model_bundle.json").read_text())
+
+
+@pytest.fixture(scope="session")
+def parity_fixture() -> dict:
+    path = PROJECT_ROOT / "src" / "lib" / "model" / "__fixtures__" / "parity.json"
+    return json.loads(path.read_text())
 
 
 @pytest.fixture
