@@ -4,7 +4,7 @@
   "private": true,
   "description": "Heart Disease Risk Detection Using Machine Learning — Next.js application",
   "engines": {
-    "node": ">=20.9.0"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "next dev",

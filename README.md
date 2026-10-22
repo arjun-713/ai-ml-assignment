@@ -2,6 +2,8 @@
 
 Academic mini-project: **Heart Disease Risk Detection Using Machine Learning**.
 
+**Live demo:** <https://cardia-heart-disease-alpha.vercel.app>
+
 An end-to-end academic machine-learning application that classifies **presence of
 angiographic coronary artery disease** from 13 structured findings in the official
 UCI Cleveland heart-disease dataset. It combines a reproducible Python training
@@ -266,7 +268,8 @@ every result is produced by the Next.js inference layer.
 ## Deploy to Vercel
 
 The repository root is the Next.js application. No separate frontend/backend
-projects or Python build step are required.
+projects or Python build step are required. The deployed project is
+<https://cardia-heart-disease-alpha.vercel.app>.
 
 **Dashboard**
 
