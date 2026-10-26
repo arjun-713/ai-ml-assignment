@@ -196,6 +196,13 @@ fresh clone and a Vercel build do not need to retrain or run Python.
 │   ├── eda.ipynb                  # executed exploratory notebook
 │   └── requirements.txt
 ├── tests/                         # Python dataset/artifact/export tests
+├── report/
+│   ├── cardia-academic-report.ipynb   # executed, reproducible report
+│   ├── cardia-academic-report.pdf     # designed A4 edition
+│   ├── cardia-academic-report.html    # print source for the PDF
+│   ├── cardia-academic-report-notebook.html
+│   ├── build_notebook.py              # notebook generator
+│   └── build_report.py                # Chromium/PyMuPDF PDF builder
 ├── next.config.ts
 ├── vercel.json
 ├── package.json
@@ -388,6 +395,35 @@ the committed model bundle: health, model-info, valid inference, optional-field
 handling, malformed JSON, unknown fields, range errors, determinism, no-store
 headers, CORS preflight, and exact TypeScript/sklearn parity for all 303 cohort
 rows. Tests use jsdom and do not require a running server.
+
+## Academic report
+
+The report is available as an executed notebook and as a designed A4 PDF:
+
+- [`report/cardia-academic-report.ipynb`](report/cardia-academic-report.ipynb) —
+  the reproducible notebook. It loads the committed metrics, metadata, schema,
+  model bundle, and 303-row parity fixture, then renders the narrative, metric
+  tables, figures, and interface screenshots. All code cells are executed.
+- [`report/cardia-academic-report.pdf`](report/cardia-academic-report.pdf) —
+  the designed report, generated from `report/cardia-academic-report.html`.
+- [`report/cardia-academic-report-notebook.html`](report/cardia-academic-report-notebook.html) —
+  a browser-rendered export of the executed notebook.
+
+To rebuild the notebook and regenerate its rendered HTML:
+
+```bash
+.venv/bin/python report/build_notebook.py
+.venv/bin/jupyter nbconvert --to notebook --execute --inplace report/cardia-academic-report.ipynb
+.venv/bin/jupyter nbconvert --to html report/cardia-academic-report.ipynb \
+  --output cardia-academic-report-notebook.html
+```
+
+To rebuild the designed PDF, use a Python environment with Playwright, PyMuPDF,
+and Google Chrome installed:
+
+```bash
+python report/build_report.py
+```
 
 ## Design and privacy decisions
 

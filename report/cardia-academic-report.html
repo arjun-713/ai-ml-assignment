@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heart Disease Detection Using Machine Learning — Academic Report</title>
+<meta name="author" content="Arjun">
+<meta name="description" content="Academic mini-project report: a reproducible heart-disease classification pipeline and a single-runtime Next.js deployment.">
+<style>
+  @page {
+    size: A4;
+    margin: 17mm 17mm 18mm 17mm;
+  }
+
+  :root {
+    --forest: #245244;
+    --forest-dark: #092821;
+    --sage: #7da48a;
+    --sage-light: #eef3ec;
+    --coral: #c45d41;
+    --coral-light: #fbf2ed;
+    --gold: #be9750;
+    --ink: #14251f;
+    --muted: #5f6e67;
+    --paper: #fcfbf6;
+    --line: #dde2d9;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    font-size: 10.4pt;
+    color: var(--ink);
+    background: var(--white);
+  }
+
+  body {
+    margin: 0;
+    font-family: "Liberation Serif", "Source Serif 4", "Iowan Old Style", Georgia, serif;
+    line-height: 1.5;
+    background: var(--white);
+  }
+
+  h1, h2, h3, h4, .sans {
+    font-family: "Liberation Sans", "Inter", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  h1, h2, h3, h4 { color: var(--forest-dark); }
+
+  p { margin: 0 0 7pt; text-align: justify; hyphens: auto; }
+  a { color: var(--forest); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  strong { color: var(--forest-dark); }
+
+  .cover {
+    min-height: 253mm;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
+    position: relative;
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8mm;
+    margin-bottom: 16mm;
+  }
+
+  .brand {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 23pt;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--forest-dark);
+    line-height: 1;
+  }
+
+  .brand span { color: var(--coral); }
+
+  .eyebrow {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 8.4pt;
+    line-height: 1.55;
+    text-align: right;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .pulse {
+    margin: 0 0 11mm;
+    height: 16mm;
+    width: 100%;
+  }
+
+  .cover h1 {
+    font-size: 32pt;
+    line-height: 1.07;
+    letter-spacing: -0.035em;
+    margin: 0 0 7mm;
+    max-width: 155mm;
+    font-weight: 800;
+  }
+
+  .cover h1 em {
+    font-style: normal;
+    color: var(--forest);
+  }
+
+  .cover .subtitle {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 13pt;
+    line-height: 1.35;
+    color: var(--muted);
+    max-width: 143mm;
+    margin: 0 0 8mm;
+    font-weight: 400;
+  }
+
+  .cover .lead {
+    font-size: 11.2pt;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 153mm;
+    margin: 0 0 14mm;
+    border-left: 3px solid var(--coral);
+    padding-left: 6mm;
+    text-align: left;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 31mm 1fr;
+    gap: 2.2mm 4mm;
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 9.2pt;
+    line-height: 1.4;
+    margin-top: auto;
+    padding-top: 8mm;
+    border-top: 1px solid var(--line);
+    max-width: 160mm;
+  }
+
+  .cover-meta dt {
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 7.8pt;
+    letter-spacing: 0.05em;
+    padding-top: 0.6mm;
+  }
+
+  .cover-meta dd { margin: 0; color: var(--ink); }
+
+  .cover-note {
+    margin-top: 8mm;
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 7.9pt;
+    line-height: 1.45;
+    color: var(--muted);
+    max-width: 155mm;
+    padding: 4mm 5mm;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+
+  .frontmatter {
+    page-break-after: always;
+  }
+
+  .section-label {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 7.8pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--coral);
+    font-weight: 700;
+    margin-bottom: 3mm;
+  }
+
+  .abstract h2, .toc h2 {
+    font-size: 22pt;
+    letter-spacing: -0.02em;
+    margin: 0 0 6mm;
+    color: var(--forest-dark);
+  }
+
+  .abstract p { font-size: 10.6pt; line-height: 1.56; }
+  .abstract .keywords {
+    margin-top: 7mm;
+    padding-top: 4mm;
+    border-top: 1px solid var(--line);
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 8.4pt;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .abstract .keywords strong { color: var(--forest); }
+
+  .toc-list {
+    list-style: none;
+    margin: 4mm 0 0;
+    padding: 0;
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 9.5pt;
+  }
+
+  .toc-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    padding: 2.15mm 0;
+    border-bottom: 0.4pt solid #edf0ea;
+  }
+
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-list .toc-num {
+    color: var(--coral);
+    font-weight: 700;
+    min-width: 7mm;
+    font-size: 8.4pt;
+    letter-spacing: 0.03em;
+  }
+  .toc-list .toc-title { flex: 1; color: var(--ink); }
+  .toc-list .toc-dots {
+    flex: 1;
+    border-bottom: 0.4pt dotted #b9c5bb;
+    margin: 0 1mm 1.4mm;
+    min-width: 8mm;
+  }
+  .toc-list .pg {
+    color: var(--forest);
+    font-weight: 700;
+    font-size: 8.8pt;
+    min-width: 7mm;
+    text-align: right;
+  }
+
+  .toc-note {
+    margin-top: 12mm;
+    padding: 4mm 5mm;
+    background: var(--sage-light);
+    border-left: 3px solid var(--sage);
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 8pt;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .body h2 {
+    font-size: 19pt;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 0 0 5mm;
+    padding-bottom: 2.4mm;
+    border-bottom: 1px solid var(--line);
+    page-break-after: avoid;
+  }
+
+  .body h2 .secnum {
+    color: var(--coral);
+    font-size: 12pt;
+    vertical-align: 0.18em;
+    margin-right: 2.2mm;
+    letter-spacing: 0;
+  }
+
+  .body h3 {
+    font-size: 11.3pt;
+    line-height: 1.3;
+    margin: 6mm 0 2.2mm;
+    color: var(--forest);
+    page-break-after: avoid;
+  }
+
+  .body h4 {
+    font-size: 9.8pt;
+    margin: 4mm 0 1.4mm;
+    color: var(--forest-dark);
+    page-break-after: avoid;
+  }
+
+  .body p { orphans: 3; widows: 3; }
+  .body ul, .body ol { margin: 1mm 0 3mm; padding-left: 5.5mm; }
+  .body li { margin-bottom: 1.2mm; text-align: justify; }
+  .body li::marker { color: var(--coral); }
+
+  .section { margin-bottom: 7mm; }
+
+  .lead-in {
+    font-size: 11pt;
+    color: var(--forest);
+    border-left: 2.5pt solid var(--sage);
+    padding-left: 4mm;
+    margin: 0 0 5mm;
+    text-align: left;
+  }
+
+  .callout {
+    background: var(--coral-light);
+    border-left: 3pt solid var(--coral);
+    padding: 3.5mm 4.5mm;
+    margin: 5mm 0;
+    font-size: 9.1pt;
+    line-height: 1.48;
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    page-break-inside: avoid;
+  }
+  .callout strong { color: var(--coral); }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3mm;
+    margin: 5mm 0 6mm;
+    page-break-inside: avoid;
+  }
+
+  .metric {
+    background: #f8faf6;
+    border: 1px solid var(--line);
+    border-left: 3pt solid var(--forest);
+    padding: 3.2mm 4mm;
+    min-height: 18mm;
+  }
+  .metric .k {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 7.3pt;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.2mm;
+  }
+  .metric .v {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 16pt;
+    font-weight: 750;
+    color: var(--forest-dark);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .metric .s {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 7.8pt;
+    color: var(--muted);
+    margin-top: 1.2mm;
+    line-height: 1.35;
+  }
+
+  figure {
+    margin: 5mm 0 6mm;
+    page-break-inside: avoid;
+  }
+  figure img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid var(--line);
+  }
+  .figure-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+    align-items: start;
+  }
+  .figure-grid figure { margin: 0; }
+  figcaption {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 8pt;
+    line-height: 1.42;
+    color: var(--muted);
+    margin-top: 2.4mm;
+    text-align: left;
+  }
+  figcaption strong { color: var(--forest); }
+
+  .table-wrap {
+    margin: 5mm 0 6mm;
+    page-break-inside: avoid;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 8.5pt;
+    line-height: 1.35;
+  }
+  thead th {
+    background: var(--forest-dark);
+    color: var(--white);
+    text-align: left;
+    font-weight: 650;
+    padding: 2.2mm 2.4mm;
+    vertical-align: bottom;
+  }
+  tbody td {
+    border-bottom: 0.4pt solid var(--line);
+    padding: 1.9mm 2.4mm;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) td { background: #f8faf6; }
+  tbody tr.selected td { background: #edf5ed; font-weight: 600; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .caption {
+    font-family: "Liberation Sans", "Inter", Arial, sans-serif;
+    font-size: 8pt;
+    line-height: 1.42;
+    color: var(--muted);
+    margin-top: 2.2mm;
+  }
+  .caption strong { color: var(--forest); }
+
+  .arch {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 3mm 0 1mm;
+  }
+
+  .screenshot {
+    margin: 5mm 0 7mm;
+    page-break-inside: avoid;
+  }
+  .screenshot img {
+    display: block;
+    width: 91%;
+    margin: 0 auto;
+    border: 1px solid var(--line);
+    box-shadow: 0 2mm 6mm rgba(9, 40, 33, 0.08);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+    margin: 4mm 0 5mm;
+  }
+  .two-col > div { min-width: 0; }
+
+  .refs p {
+    font-size: 9.2pt;
+    line-height: 1.43;
+    margin: 0 0 2.4mm;
+    padding-left: 6mm;
+    text-indent: -6mm;
+    text-align: left;
+  }
+  .refs p span.n { color: var(--coral); font-weight: 700; }
+
+  code {
+    font-family: "Liberation Mono", "DejaVu Sans Mono", monospace;
+    font-size: 0.86em;
+    background: #f2f5f0;
+    padding: 0.1em 0.32em;
+    border-radius: 2px;
+  }
+
+  pre {
+    font-family: "Liberation Mono", "DejaVu Sans Mono", monospace;
+    font-size: 7.7pt;
+    line-height: 1.45;
+    background: #f7f9f5;
+    border: 1px solid var(--line);
+    border-left: 3pt solid var(--sage);
+    padding: 3.4mm 4mm;
+    margin: 4mm 0 5mm;
+    white-space: pre-wrap;
+    word-break: break-word;
+    page-break-inside: avoid;
+  }
+
+  .appendix { page-break-before: always; }
+  .appendix h2 { border-bottom-color: var(--sage); }
+  .appendix h3 { color: var(--forest-dark); }
+
+  .small { font-size: 8.7pt; color: var(--muted); }
+
+  .figure-note {
+    font-size: 9.1pt;
+    line-height: 1.45;
+    color: var(--muted);
+    border-left: 2pt solid var(--sage);
+    padding-left: 4mm;
+    margin: -1mm 0 6mm;
+    text-align: left;
+  }
+
+  #discussion { page-break-before: always; }
+
+  .keep { page-break-inside: avoid; }
+
+  @media print {
+    .cover { min-height: 253mm; }
+    a { color: var(--forest); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================================================================== -->
+<!-- COVER -->
+<!-- ===================================================================== -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="brand">cardia<span>.</span></div>
+    <div class="eyebrow">Academic Mini-Project<br>Semester 5 &middot; Artificial Intelligence and Machine Learning<br>Report &middot; October 2026</div>
+  </div>
+
+  <svg class="pulse" viewBox="0 0 900 90" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 48 H250 L268 48 L283 16 L303 78 L322 27 L341 48 H900"
+          fill="none" stroke="#c45d41" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="341" cy="48" r="3.2" fill="#245244"/>
+  </svg>
+
+  <h1>Heart Disease Detection <em>Using Machine Learning</em></h1>
+  <p class="subtitle">A reproducible classification pipeline and a single-runtime Vercel deployment</p>
+
+  <p class="lead">An academic study of angiographic coronary artery disease presence in the UCI Cleveland cohort, with leakage-safe model selection, a single held-out evaluation, local explanations, and a Next.js inference application.</p>
+
+  <dl class="cover-meta">
+    <dt>Prepared by</dt><dd>Arjun</dd>
+    <dt>Course</dt><dd>Artificial Intelligence and Machine Learning</dd>
+    <dt>Assessment</dt><dd>Semester 5 &middot; Assignment 1</dd>
+    <dt>Report date</dt><dd>26 October 2026</dd>
+    <dt>Live application</dt><dd><a href="https://cardia-heart-disease-alpha.vercel.app">cardia-heart-disease-alpha.vercel.app</a></dd>
+    <dt>Source code</dt><dd><a href="https://github.com/arjun-713/ai-ml-assignment">github.com/arjun-713/ai-ml-assignment</a></dd>
+  </dl>
+
+  <div class="cover-note">Research and teaching use only. This system is not a medical device, not a clinical risk score, and not a diagnosis. The target is disease presence at the time of examination, not the probability of developing heart disease in the future.</div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- ABSTRACT -->
+<!-- ===================================================================== -->
+<section class="frontmatter abstract" id="abstract">
+  <div class="section-label">Abstract</div>
+  <h2>From clinical records to a deployable model</h2>
+
+  <p>Coronary artery disease is a major cause of morbidity and mortality, and structured clinical data contain useful diagnostic signal even when advanced imaging is unavailable. This project studies supervised classification of angiographic coronary artery disease presence from the 13 original predictors of the UCI Cleveland heart-disease dataset. The work is designed around three constraints: methodological reproducibility, protection of the untouched holdout, and deployment as one self-contained web application.</p>
+
+  <p>Three candidate classifiers &mdash; logistic regression, random forest, and decision tree &mdash; were trained inside complete scikit-learn pipelines containing median or most-frequent imputation, standardisation, and one-hot encoding. Hyperparameters were tuned with five-fold stratified cross-validation on the 242-record training partition. The model was selected on mean cross-validated F1, with cross-validated ROC-AUC as the tie-breaker, before the 61-record holdout was opened. Logistic regression with <em>C</em>&nbsp;=&nbsp;0.1 achieved the best cross-validated F1 (0.830 &plusmn; 0.026). On the single holdout evaluation it obtained accuracy 0.8852, disease-class precision 0.8387, recall 0.9286, F1 0.8814, ROC-AUC 0.9610, and Brier score 0.0869, with a confusion matrix of 28 true negatives, 5 false positives, 2 false negatives, and 26 true positives.</p>
+
+  <p>The fitted scikit-learn pipeline remains the training source of truth. Its preprocessing parameters and logistic coefficients are exported to a versioned JSON bundle, and inference is implemented in TypeScript inside Next.js route handlers. A parity test compares the TypeScript output with scikit-learn on all 303 cohort records. The resulting single application serves the assessment interface, a model-insights dashboard, an API reference, and three API routes on Vercel without a Python runtime. The report discusses the modelling decisions, the interpretation of the observed metrics, the local explanation mechanism, threats to validity, and the boundary between an educational classifier and clinical decision support.</p>
+
+  <div class="keywords"><strong>Keywords:</strong> coronary artery disease &middot; supervised learning &middot; logistic regression &middot; cross-validation &middot; calibration &middot; explainable machine learning &middot; Next.js &middot; Vercel</div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- CONTENTS -->
+<!-- ===================================================================== -->
+<section class="frontmatter toc" id="contents">
+  <div class="section-label">Contents</div>
+  <h2>Report map</h2>
+
+  <ul class="toc-list">
+    <li><span class="toc-num">01</span><span class="toc-title">Introduction</span><span class="toc-dots"></span><span class="pg" data-anchor="introduction">3</span></li>
+    <li><span class="toc-num">02</span><span class="toc-title">Background and related work</span><span class="toc-dots"></span><span class="pg" data-anchor="background">4</span></li>
+    <li><span class="toc-num">03</span><span class="toc-title">Dataset and exploratory analysis</span><span class="toc-dots"></span><span class="pg" data-anchor="dataset">5</span></li>
+    <li><span class="toc-num">04</span><span class="toc-title">Methodology</span><span class="toc-dots"></span><span class="pg" data-anchor="methodology">8</span></li>
+    <li><span class="toc-num">05</span><span class="toc-title">System design and implementation</span><span class="toc-dots"></span><span class="pg" data-anchor="system">9</span></li>
+    <li><span class="toc-num">06</span><span class="toc-title">Results</span><span class="toc-dots"></span><span class="pg" data-anchor="results">11</span></li>
+    <li><span class="toc-num">07</span><span class="toc-title">Discussion</span><span class="toc-dots"></span><span class="pg" data-anchor="discussion">20</span></li>
+    <li><span class="toc-num">08</span><span class="toc-title">Limitations and future work</span><span class="toc-dots"></span><span class="pg" data-anchor="limitations">21</span></li>
+    <li><span class="toc-num">09</span><span class="toc-title">Conclusion</span><span class="toc-dots"></span><span class="pg" data-anchor="conclusion">22</span></li>
+    <li><span class="toc-num">&mdash;</span><span class="toc-title">References</span><span class="toc-dots"></span><span class="pg" data-anchor="references">23</span></li>
+    <li><span class="toc-num">A</span><span class="toc-title">Reproducibility commands</span><span class="toc-dots"></span><span class="pg" data-anchor="appendix-a">24</span></li>
+    <li><span class="toc-num">B</span><span class="toc-title">API example</span><span class="toc-dots"></span><span class="pg" data-anchor="appendix-b">25</span></li>
+    <li><span class="toc-num">C</span><span class="toc-title">Test inventory</span><span class="toc-dots"></span><span class="pg" data-anchor="appendix-c">26</span></li>
+  </ul>
+
+  <div class="toc-note">The report is organised as an academic mini-project: problem framing, dataset and methodology, implementation, results, and a critical discussion. The live application and the committed artifacts are referenced throughout so that the claims can be checked against the deployed system.</div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 1. INTRODUCTION -->
+<!-- ===================================================================== -->
+<section class="body" id="introduction">
+  <h2><span class="secnum">1</span>Introduction</h2>
+
+  <p class="lead-in">A small, well-understood clinical dataset is a useful place to study the full path from a modelling claim to a deployable system &mdash; provided the claim is stated carefully.</p>
+
+  <h3>1.1 Background and motivation</h3>
+  <p>Cardiovascular disease remains one of the leading contributors to premature death and long-term disability worldwide. Coronary artery disease, the narrowing or obstruction of the coronary arteries that supply the myocardium, is frequently investigated through a combination of symptoms, electrocardiography, cardiac stress testing, and coronary angiography. The UCI Cleveland heart-disease dataset was assembled in 1988 to study the diagnostic value of non-invasive findings relative to angiographic results [1, 2]. It remains a standard teaching dataset because it combines a modest number of interpretable variables with a clinically meaningful binary target.</p>
+
+  <p>The dataset is attractive for an academic project, but it is also easy to misuse. A high accuracy value on a small, single-centre cohort does not establish clinical validity. The target records whether angiographic disease was present at examination, not whether a person will develop disease later. Features such as maximum heart rate and ST depression are exercise-test measurements, not general-purpose risk factors. A responsible report therefore needs to distinguish three things clearly: what the model estimates, how the estimate was validated, and what the estimate must not be used for.</p>
+
+  <p>This project addresses that distinction as an engineering problem rather than only a modelling exercise. The model is trained once, selected without touching the holdout, and evaluated once. The complete preprocessing graph and classifier are serialised, exported to a runtime-neutral representation, and served from the same application that renders the interface. The deployment consequently demonstrates both the statistical workflow and the software path from training artifacts to a reproducible production response.</p>
+
+  <h3>1.2 Problem statement</h3>
+  <p>Given 13 structured findings from a cardiac examination, estimate the probability that a record belongs to the disease-indicated class, where disease indication is defined as <code>num &gt; 0</code> in the original UCI coding. The system must:</p>
+  <ol>
+    <li>preserve the original feature semantics and missing-value behaviour;</li>
+    <li>avoid leakage from preprocessing, hyperparameter tuning, model selection, or exploratory analysis into the holdout;</li>
+    <li>report discrimination and threshold-dependent performance, not accuracy alone;</li>
+    <li>produce an inspectable local explanation for each individual prediction;</li>
+    <li>run as a single deployable application without a separate Python inference service; and</li>
+    <li>state its limitations prominently in both the interface and the documentation.</li>
+  </ol>
+
+  <h3>1.3 Objectives</h3>
+  <ul>
+    <li>Build a reproducible training and evaluation pipeline for the official UCI Cleveland file.</li>
+    <li>Compare three classifiers under identical leakage-safe preprocessing and select one using training-fold evidence.</li>
+    <li>Evaluate the selected model once on an untouched holdout and analyse discrimination, threshold behaviour, calibration, and feature importance.</li>
+    <li>Export the fitted pipeline's inference parameters and reproduce its decisions in TypeScript, with numerical parity verified across the cohort.</li>
+    <li>Deliver the complete system as a single Next.js application deployed on Vercel, with an accessible interface, a documented API, and automated tests.</li>
+  </ul>
+
+  <h3>1.4 Contributions</h3>
+  <p>The report makes four contributions. First, it documents a strict separation between model selection and holdout evaluation for a small clinical dataset. Second, it presents a deployment pattern in which scikit-learn remains the training source of truth while the production runtime is a single TypeScript application. Third, it validates the exported inference path against the original pipeline on all 303 records rather than on a few hand-picked examples. Fourth, it discusses the interpretation of the resulting metrics and the limits of local linear explanations in a clinical context.</p>
+
+  <h3>1.5 Scope and non-goals</h3>
+  <p>The system is an academic demonstration. It does not ingest electronic health records, images, laboratory time series, or free text. It does not estimate incident disease, long-term risk, treatment benefit, or prognosis. It does not claim external validity beyond the Cleveland cohort. It is not a medical device and must not be used for patient care. The interface and API return a model score with an explicit non-clinical disclaimer.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 2. BACKGROUND -->
+<!-- ===================================================================== -->
+<section class="body" id="background">
+  <h2><span class="secnum">2</span>Background and related work</h2>
+
+  <h3>2.1 The Cleveland dataset and the clinical target</h3>
+  <p>The UCI Heart Disease dataset contains four processed subsets; this project uses the Cleveland subset distributed as <code>processed.cleveland.data</code> [1]. The file contains 303 complete records and 14 columns: 13 predictors and the original <code>num</code> target. The original target ranges from 0 to 4, where 0 denotes less than 50% diameter narrowing and values 1&ndash;4 denote greater than 50% narrowing in at least one major vessel. For binary classification the target is collapsed to <code>target = 1</code> when <code>num &gt; 0</code>, yielding 164 no-disease records and 139 disease-indicated records.</p>
+
+  <p>The Cleveland data are often used with remapped categorical codes or with dropped missing rows. This project deliberately retains the original codes and rows. The only missing cells are four values of <code>ca</code> and two values of <code>thal</code>; both are handled by fitted imputers inside the pipeline. Retaining the rows avoids introducing a selection step that would be difficult to defend on a dataset of this size.</p>
+
+  <h3>2.2 Models considered</h3>
+  <p>Logistic regression is a linear probabilistic classifier. For a transformed feature vector <em>x</em>, it models</p>
+  <p style="text-align:center; font-style:italic;">p(y = 1 | x) = &sigma;(&beta;<sub>0</sub> + &beta;<sup>T</sup>x),&nbsp;&nbsp; &sigma;(z) = 1 / (1 + e<sup>&minus;z</sup>).</p>
+  <p>The model is additive in the transformed feature space, which makes it possible to decompose a prediction into signed log-odds terms. With L2 regularisation, the strength of shrinkage is controlled by the inverse regularisation parameter <em>C</em>. A small <em>C</em> penalises large coefficients more strongly, which is useful in a small-sample setting.</p>
+
+  <p>Random forests average many decorrelated decision trees and can represent non-linearities and interactions. Decision trees are highly interpretable but unstable. Both were included to test whether additional model capacity improved cross-validated performance. The comparison was not designed to prove that logistic regression is universally superior; it answers a narrower question: which candidate performed best under the pre-specified protocol on this cohort?</p>
+
+  <h3>2.3 Evaluation in small clinical datasets</h3>
+  <p>Accuracy can be misleading when the classes are not balanced or when the cost of a false negative differs from the cost of a false positive. This report therefore emphasises disease-class precision, recall, F1, and ROC-AUC. F1 is the harmonic mean of precision and recall and is used as the primary selection metric because it balances false positives and false negatives at a fixed threshold. ROC-AUC measures ranking discrimination across thresholds [4]. It does not measure calibration.</p>
+
+  <p>Calibration is reported with a reliability diagram and the Brier score [5]. The Brier score is the mean squared difference between the predicted probability and the binary outcome; lower is better. With only 61 holdout records, bin-level calibration estimates are unstable, so the report treats the Brier score as a summary rather than proof of clinical calibration.</p>
+
+  <h3>2.4 Explainability</h3>
+  <p>Global feature importance is estimated with permutation importance on the holdout: each feature is shuffled and the decrease in ROC-AUC is recorded. This measures reliance on a feature under the fitted model, not causality. At the individual level, the additive logistic model permits exact local log-odds contributions. For a transformed term <em>x<sub>j</sub></em> with coefficient <em>&beta;<sub>j</sub></em>, the term <em>&beta;<sub>j</sub>x<sub>j</sub></em> is the contribution of that term to the log-odds. Contributions are grouped back to the original 13 inputs and the four largest absolute contributions are displayed. The interface labels these as model associations, not causes.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 3. DATASET -->
+<!-- ===================================================================== -->
+<section class="body" id="dataset">
+  <h2><span class="secnum">3</span>Dataset and exploratory analysis</h2>
+
+  <h3>3.1 Data provenance and structure</h3>
+  <p>The official archive files are vendored under <code>data/raw/</code>. The loader verifies the 303 &times; 14 shape, the expected target domain, the six known missing cells, and numeric parsing before the data are used. The raw Cleveland file has SHA-256 <code>a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8</code>. The dataset is distributed under CC BY 4.0 [1]. The project records the source and checksum in <code>artifacts/model_metadata.json</code>.</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption class="caption"><strong>Table 1.</strong> The 13 predictors used by the model. Values are the original UCI codes.</caption>
+      <thead><tr><th style="width:17%">Feature</th><th style="width:15%">Type</th><th>Meaning</th><th style="width:23%">Values / range</th></tr></thead>
+      <tbody>
+        <tr><td><code>age</code></td><td>numeric</td><td>Age at examination</td><td>29&ndash;77 years</td></tr>
+        <tr><td><code>sex</code></td><td>binary</td><td>Recorded biological sex</td><td>0 female, 1 male</td></tr>
+        <tr><td><code>cp</code></td><td>categorical</td><td>Chest-pain type</td><td>1&ndash;4</td></tr>
+        <tr><td><code>trestbps</code></td><td>numeric</td><td>Resting systolic blood pressure</td><td>94&ndash;200 mm Hg</td></tr>
+        <tr><td><code>chol</code></td><td>numeric</td><td>Serum cholesterol</td><td>126&ndash;564 mg/dL</td></tr>
+        <tr><td><code>fbs</code></td><td>binary</td><td>Fasting blood sugar &gt; 120 mg/dL</td><td>0 / 1</td></tr>
+        <tr><td><code>restecg</code></td><td>categorical</td><td>Resting electrocardiographic result</td><td>0&ndash;2</td></tr>
+        <tr><td><code>thalach</code></td><td>numeric</td><td>Maximum heart rate achieved</td><td>71&ndash;202 bpm</td></tr>
+        <tr><td><code>exang</code></td><td>binary</td><td>Exercise-induced angina</td><td>0 / 1</td></tr>
+        <tr><td><code>oldpeak</code></td><td>numeric</td><td>ST depression induced by exercise</td><td>0.0&ndash;6.2 mm</td></tr>
+        <tr><td><code>slope</code></td><td>categorical</td><td>Slope of peak exercise ST segment</td><td>1&ndash;3</td></tr>
+        <tr><td><code>ca</code></td><td>numeric / count</td><td>Major vessels coloured by fluoroscopy</td><td>0&ndash;3; 4 missing</td></tr>
+        <tr><td><code>thal</code></td><td>categorical</td><td>Thalassemia / perfusion scan result</td><td>3, 6, 7; 2 missing</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3.2 Class balance and missingness</h3>
+  <p>The binary target contains 164 no-disease records (54.1%) and 139 disease-indicated records (45.9%). The classes are therefore reasonably balanced, but not equal. Figure 1 shows the distribution. The missingness is extremely narrow: only six cells are absent, all in <code>ca</code> and <code>thal</code>. This is why the interface exposes an optional path for those two fields and does not imply broad missing-data robustness.</p>
+
+  <figure>
+    <div class="figure-grid">
+      <div><img src="../artifacts/plots/eda_class_balance.png" alt="Class distribution"><figcaption><strong>Figure 1a.</strong> Binary class distribution.</figcaption></div>
+      <div><img src="../artifacts/plots/eda_missingness.png" alt="Missingness by feature"><figcaption><strong>Figure 1b.</strong> Missing cells by feature.</figcaption></div>
+    </div>
+    <figcaption><strong>Figure 1.</strong> Dataset integrity checks. Only <code>ca</code> and <code>thal</code> contain missing values.</figcaption>
+  </figure>
+
+  <h3>3.3 Relationships visible in the data</h3>
+  <p>Figure 2 shows the correlation matrix for the 13 predictors and the binary target. Correlation is descriptive and is not used for feature selection. Several patterns are consistent with the clinical literature: maximum heart rate is negatively associated with the target, exercise-induced ST depression is positively associated, and the number of coloured major vessels is positively associated. These associations are modest and do not identify a single diagnostic feature.</p>
+
+  <figure>
+    <img src="../artifacts/plots/eda_correlation.png" alt="Correlation matrix" style="width:84%">
+    <figcaption><strong>Figure 2.</strong> Pearson correlation matrix for the cohort. The target is the binary disease indicator.</figcaption>
+  </figure>
+
+  <p>Figure 3 summarises selected relationships between predictors and the binary target. The overlap between classes reinforces why a multivariable model is more appropriate than a single threshold rule.</p>
+
+  <figure>
+    <img src="../artifacts/plots/eda_key_relationships.png" alt="Selected relationships by class" style="width:96%">
+    <figcaption><strong>Figure 3.</strong> Selected predictor distributions by disease class.</figcaption>
+  </figure>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 4. METHODOLOGY -->
+<!-- ===================================================================== -->
+<section class="body" id="methodology">
+  <h2><span class="secnum">4</span>Methodology</h2>
+
+  <h3>4.1 Target definition and split</h3>
+  <p>The target is binary: <code>target = 0</code> for <code>num = 0</code> and <code>target = 1</code> for <code>num &isin; {1, 2, 3, 4}</code>. A single stratified 80/20 split with <code>random_state = 42</code> produces 242 training records and 61 holdout records. The holdout contains 33 no-disease and 28 disease-indicated records. The split indices are stored in <code>artifacts/metrics.json</code> so that the evaluation can be reproduced.</p>
+
+  <p>The holdout is created before any model fitting. It is not used for exploratory decisions, feature selection, hyperparameter tuning, threshold selection, or candidate comparison. The only operations performed on the holdout are the final evaluation and the descriptive analyses reported in this document.</p>
+
+  <h3>4.2 Leakage-safe preprocessing</h3>
+  <p>Each candidate is a scikit-learn <code>Pipeline</code> containing a <code>ColumnTransformer</code> [3]. The numeric branch includes <code>age</code>, <code>trestbps</code>, <code>chol</code>, <code>thalach</code>, <code>oldpeak</code>, and <code>ca</code>. It applies median imputation followed by <code>StandardScaler</code>. The categorical branch includes <code>sex</code>, <code>cp</code>, <code>fbs</code>, <code>restecg</code>, <code>exang</code>, <code>slope</code>, and <code>thal</code>. It applies most-frequent imputation followed by one-hot encoding with unknown categories ignored.</p>
+
+  <p>The important detail is that imputers, scaler, and encoder are fitted only on the data passed to each fit. During cross-validation, each training fold fits its own preprocessing statistics. The holdout is transformed using the statistics learned from the full training partition when the final pipeline is fitted. No target-derived statistic is used in preprocessing.</p>
+
+  <h3>4.3 Hyperparameter tuning</h3>
+  <p>Hyperparameters were tuned with <code>GridSearchCV</code> and five-fold stratified cross-validation on the training partition, using ROC-AUC as the tuning score. The search spaces were:</p>
+  <ul>
+    <li><strong>Logistic Regression:</strong> <em>C</em> &isin; {0.01, 0.1, 1, 10}; <code>class_weight</code> &isin; {None, balanced}.</li>
+    <li><strong>Random Forest:</strong> 200 and 500 trees; maximum depth 3&ndash;7; minimum samples per leaf 1 and 3; <code>max_features</code> &isin; {sqrt, log2}; class weighting None or <code>balanced_subsample</code>.</li>
+    <li><strong>Decision Tree:</strong> criterion Gini or entropy; maximum depth 2&ndash;5; minimum samples per leaf 1 and 3; class weighting None or balanced.</li>
+  </ul>
+
+  <p>The tuning score and the final selection score serve different purposes. ROC-AUC is used inside the grid search because it is threshold-independent. The candidate models are then compared by mean cross-validated F1 at the 0.5 threshold, with mean cross-validated ROC-AUC as the tie-breaker. This ordering reflects the applied interest in thresholded disease detection while retaining a ranking-based secondary criterion.</p>
+
+  <h3>4.4 Model selection and final evaluation</h3>
+  <p>All three tuned candidates are scored on the same five stratified folds of the training partition. The selected model is the one with the highest mean F1. The holdout is opened only after this selection is recorded. The selected pipeline is then fitted on the complete training partition and evaluated once on the holdout. This is the only holdout evaluation used in the report.</p>
+
+  <p>The selection rule is intentionally simple. With 242 training records and a small number of candidate families, a more elaborate nested selection scheme would add complexity without resolving the fundamental uncertainty of a 303-record cohort. The important protection is that the holdout is not reused.</p>
+
+  <h3>4.5 Metrics</h3>
+  <p>For the disease-indicated class, precision is <em>TP / (TP + FP)</em>, recall is <em>TP / (TP + FN)</em>, and F1 is <em>2PR / (P + R)</em>. Accuracy is reported for completeness. ROC-AUC is computed from the predicted probabilities. The confusion matrix uses the default threshold of 0.5. The Brier score is the mean squared difference between the predicted probability and the binary outcome, with lower values preferred.</p>
+
+  <p>A reliability diagram groups predictions into six bins and plots mean predicted probability against observed positive fraction. With 61 holdout patients, the bin-level points are unstable and are reported as descriptive evidence rather than a calibration guarantee.</p>
+
+  <h3>4.6 Local explanations</h3>
+  <p>The logistic model is additive after preprocessing. For a profile, the log-odds are <em>z = &beta;<sub>0</sub> + &Sigma; &beta;<sub>j</sub>x<sub>j</sub></em>, where the 25 transformed terms are six standardised numeric features and 19 one-hot indicators. The contribution of each transformed term is <em>&beta;<sub>j</sub>x<sub>j</sub></em>. Contributions are grouped by original feature, the largest absolute term represents each categorical feature, and the four features with the largest absolute rounded contributions are shown. The relative bar length is the absolute contribution divided by the largest absolute contribution, clipped to [0, 1].</p>
+
+  <p>This is an exact decomposition of the linear model's log-odds, not a causal explanation and not a Shapley-value approximation. A positive contribution means that the term pushed the score toward the disease-indicated class for this profile. It does not mean that changing the feature would produce a predictable clinical benefit or harm.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 5. SYSTEM -->
+<!-- ===================================================================== -->
+<section class="body" id="system">
+  <h2><span class="secnum">5</span>System design and implementation</h2>
+
+  <h3>5.1 Architecture</h3>
+  <p>The original prototype separated a React/Vite frontend from a FastAPI backend. That architecture is appropriate for local experimentation but adds a second runtime, a second deployment target, CORS configuration, and a duplicated description of the API contract. The final system consolidates the browser application and the inference API into one Next.js App Router application, as shown in Figure 4.</p>
+
+  <figure>
+    <svg class="arch" viewBox="0 0 900 420" role="img" aria-label="Architecture diagram">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#245244"/>
+        </marker>
+        <style>
+          .b { fill: #fcfbf6; stroke: #dde2d9; stroke-width: 1.2; rx: 6; }
+          .d { fill: #092821; stroke: #092821; stroke-width: 1.2; rx: 6; }
+          .t { font-family: "Liberation Sans", Arial, sans-serif; font-size: 13px; fill: #14251f; }
+          .tw { fill: #ffffff; }
+          .ts { font-family: "Liberation Sans", Arial, sans-serif; font-size: 11px; fill: #5f6e67; }
+          .a { stroke: #245244; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+        </style>
+      </defs>
+      <rect x="18" y="44" width="238" height="88" class="d"/>
+      <text x="137" y="78" text-anchor="middle" class="t tw">Browser</text>
+      <text x="137" y="99" text-anchor="middle" class="ts tw" style="fill:#cfe0d5">React 19 client components</text>
+
+      <rect x="330" y="44" width="250" height="88" class="b"/>
+      <text x="455" y="78" text-anchor="middle" class="t">Next.js App Router</text>
+      <text x="455" y="99" text-anchor="middle" class="ts">pages + route handlers</text>
+
+      <rect x="654" y="44" width="228" height="88" class="b"/>
+      <text x="768" y="73" text-anchor="middle" class="t">TypeScript inference</text>
+      <text x="768" y="93" text-anchor="middle" class="ts">impute &rarr; scale &rarr; one-hot</text>
+      <text x="768" y="110" text-anchor="middle" class="ts">&rarr; logit &rarr; probability</text>
+
+      <rect x="654" y="218" width="228" height="64" class="b"/>
+      <text x="768" y="244" text-anchor="middle" class="t">model_bundle.json</text>
+      <text x="768" y="264" text-anchor="middle" class="ts">versioned exported parameters</text>
+
+      <rect x="330" y="218" width="250" height="64" class="b"/>
+      <text x="455" y="244" text-anchor="middle" class="t">Python training</text>
+      <text x="455" y="264" text-anchor="middle" class="ts">scikit-learn joblib pipeline</text>
+
+      <rect x="18" y="218" width="238" height="64" class="b"/>
+      <text x="137" y="244" text-anchor="middle" class="t">Evaluation artifacts</text>
+      <text x="137" y="264" text-anchor="middle" class="ts">metrics, plots, parity fixture</text>
+
+      <path d="M256 88 H330" class="a"/>
+      <text x="293" y="78" text-anchor="middle" class="ts">HTTPS</text>
+      <path d="M580 88 H654" class="a"/>
+      <path d="M768 132 V218" class="a"/>
+      <path d="M654 250 H580" class="a"/>
+      <path d="M330 250 H256" class="a"/>
+      <path d="M137 282 V350 H768 V282" class="a" style="stroke-dasharray:4 4"/>
+      <text x="455" y="368" text-anchor="middle" class="ts">parity fixture and evaluation evidence</text>
+    </svg>
+    <figcaption><strong>Figure 4.</strong> Deployment architecture. Python is used for training and evaluation only; the production path is a single Next.js runtime. The parity fixture closes the loop between the exported TypeScript path and the original pipeline.</figcaption>
+  </figure>
+
+  <p>The browser calls three route handlers on the same origin: <code>/api/health</code>, <code>/api/model-info</code>, and <code>/api/predict</code>. The prediction handler validates the request with Zod, applies the exported preprocessing and logistic parameters, and returns a structured response. CORS headers are present for external callers, although the application itself is same-origin. Responses are marked <code>no-store</code>.</p>
+
+  <h3>5.2 From scikit-learn to TypeScript</h3>
+  <p>The training pipeline remains the source of truth. <code>ml/export_model.py</code> reads the fitted <code>ColumnTransformer</code> and <code>LogisticRegression</code> objects and writes a JSON bundle containing:</p>
+  <ul>
+    <li>numeric feature order, median imputation values, means, and scales;</li>
+    <li>categorical feature order, most-frequent imputation values, and one-hot categories;</li>
+    <li>transformed feature names, logistic coefficients, intercept, classes, and threshold;</li>
+    <li>the model-info payload used by the dashboard; and</li>
+    <li>target definition, intended-use statement, and disclaimer.</li>
+  </ul>
+
+  <p>The TypeScript implementation in <code>src/lib/model/inference.ts</code> applies the same transformations in the same order. It uses a stable sigmoid form to avoid overflow, computes the log-odds dot product, thresholds at 0.5, and groups local contributions back to the original feature space. Missing <code>ca</code> and <code>thal</code> values take the fitted imputation path; unknown one-hot categories fall through as all-zero indicators, matching <code>handle_unknown = ignore</code>.</p>
+
+  <p>The export is committed, so the Vercel build does not need Python. A parity fixture in <code>src/lib/model/__fixtures__/parity.json</code> records the scikit-learn probability and log-odds for every one of the 303 cohort records. The Vitest suite recomputes them with the TypeScript path and requires agreement to nine decimal places.</p>
+
+  <h3>5.3 API contract</h3>
+  <div class="table-wrap">
+    <table>
+      <caption class="caption"><strong>Table 2.</strong> Next.js route handlers. All responses are JSON and marked no-store.</caption>
+      <thead><tr><th style="width:14%">Method</th><th style="width:27%">Path</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>GET</code></td><td><code>/api/health</code></td><td>Report route health and model-bundle availability.</td></tr>
+        <tr><td><code>GET</code></td><td><code>/api/model-info</code></td><td>Return metrics, dataset summary, schema, comparison, plot data, and limitations.</td></tr>
+        <tr><td><code>POST</code></td><td><code>/api/predict</code></td><td>Validate 13 features and return the classification, probability, threshold, contributions, and disclaimer.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The prediction contract accepts 13 numerical fields. <code>ca</code> and <code>thal</code> may be omitted or sent as <code>null</code>. Unknown fields are rejected. Invalid JSON returns HTTP 400; field validation failures return HTTP 422 with a structured <code>errors</code> array containing a field name, message, and issue type. Predictions are deterministic for a given input and are never cached.</p>
+
+  <h3>5.4 Interface and privacy</h3>
+  <p>The interface has five routes: the redirecting root, <code>/predict</code>, <code>/results</code>, <code>/insights</code>, and <code>/docs</code>. The assessment form groups the 13 inputs into patient, measurement, and cardiac-examination sections. It exposes 11 required fields and two optional fields, marks observed ranges, and provides three complete-record presets drawn from the official data. The results page shows the thresholded class, probability, decision threshold, model metadata, four local contributions, and the 13 recorded inputs. The insights page is driven by the exported evaluation artifacts rather than hardcoded numbers. The API reference page documents the three route handlers and includes a copyable example.</p>
+
+  <p>Assessment data are held in a React context in memory only. The application does not write patient values to localStorage, sessionStorage, browser history state, a database, or server-side storage. Reloading the results page clears the active assessment. Predictions are not logged with input values. The deployment is public for demonstration but is marked <code>noindex</code>.</p>
+
+  <h3>5.5 Deployment</h3>
+  <p>The application is deployed on Vercel at <a href="https://cardia-heart-disease-alpha.vercel.app">cardia-heart-disease-alpha.vercel.app</a>. The repository is <a href="https://github.com/arjun-713/ai-ml-assignment">github.com/arjun-713/ai-ml-assignment</a>. The root directory is the Next.js app; the framework is detected as Next.js. The JSON bundle is imported into the server function graph, so no filesystem tracing configuration is required. The project pins Node.js 22.x and uses the Next.js 16.4.2 production build.</p>
+
+  <div class="callout"><strong>Reproducibility boundary.</strong> The committed JSON bundle and parity fixture make the deployed inference path inspectable and testable without Python. Retraining still uses the pinned Python environment and the official, checksum-verified Cleveland file.</div>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 6. RESULTS -->
+<!-- ===================================================================== -->
+<section class="body" id="results">
+  <h2><span class="secnum">6</span>Results</h2>
+
+  <div class="metric-grid">
+    <div class="metric"><div class="k">Holdout ROC-AUC</div><div class="v">0.961</div><div class="s">61 patients, one evaluation</div></div>
+    <div class="metric"><div class="k">Disease-class recall</div><div class="v">0.929</div><div class="s">26 of 28 disease-indicated patients</div></div>
+    <div class="metric"><div class="k">Disease-class F1</div><div class="v">0.881</div><div class="s">precision 0.839 / recall 0.929</div></div>
+    <div class="metric"><div class="k">Cross-validated F1</div><div class="v">0.830</div><div class="s">&plusmn; 0.026 across five folds</div></div>
+  </div>
+
+  <h3>6.1 Cross-validated model comparison</h3>
+  <p>Table 3 and Figure 5 summarise the five-fold results on the training partition. Logistic regression has the highest mean F1, recall, and ROC-AUC. Random forest trails by 0.053 F1 points; the decision tree trails by 0.075. The fold-level standard deviations are 0.026, 0.042, and 0.062 respectively, which is a reminder that the ranking is estimated with uncertainty even before the holdout is considered.</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption class="caption"><strong>Table 3.</strong> Five-fold stratified cross-validation on the 242-record training partition. Values are mean &plusmn; standard deviation across folds.</caption>
+      <thead><tr><th>Candidate</th><th class="num">Accuracy</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">ROC-AUC</th></tr></thead>
+      <tbody>
+        <tr class="selected"><td>Logistic Regression</td><td class="num">0.851 &plusmn; 0.025</td><td class="num">0.878 &plusmn; 0.061</td><td class="num">0.792 &plusmn; 0.048</td><td class="num">0.830 &plusmn; 0.026</td><td class="num">0.911 &plusmn; 0.018</td></tr>
+        <tr><td>Random Forest</td><td class="num">0.801 &plusmn; 0.029</td><td class="num">0.802 &plusmn; 0.053</td><td class="num">0.764 &plusmn; 0.098</td><td class="num">0.777 &plusmn; 0.042</td><td class="num">0.899 &plusmn; 0.027</td></tr>
+        <tr><td>Decision Tree</td><td class="num">0.785 &plusmn; 0.042</td><td class="num">0.784 &plusmn; 0.046</td><td class="num">0.738 &plusmn; 0.107</td><td class="num">0.755 &plusmn; 0.062</td><td class="num">0.851 &plusmn; 0.043</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <img src="../artifacts/plots/cv_model_comparison.png" alt="Cross-validation comparison" style="width:84%">
+    <figcaption><strong>Figure 5.</strong> Cross-validated comparison of the three candidate families. Selection uses mean F1, with ROC-AUC as the tie-breaker.</figcaption>
+  </figure>
+
+  <p>The selected hyperparameters were <em>C</em> = 0.1, <code>class_weight = None</code>, and a 0.5 decision threshold. The random forest selected <code>balanced_subsample</code>, 500 trees, maximum depth 4, <code>max_features = sqrt</code>, and <code>min_samples_leaf = 1</code>. The decision tree selected Gini, maximum depth 3, <code>min_samples_leaf = 1</code>, and balanced class weights. The full search results are retained in <code>artifacts/metrics.json</code>.</p>
+
+  <h3>6.2 Holdout performance</h3>
+  <p>The selected logistic model was evaluated once on the 61-record holdout. Table 4 reports the threshold-dependent metrics, the ranking metric, and the Brier score. Figure 6 shows the ROC curve and the confusion matrix.</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption class="caption"><strong>Table 4.</strong> Single evaluation on the untouched 61-record holdout.</caption>
+      <thead><tr><th>Metric</th><th class="num">Value</th></tr></thead>
+      <tbody>
+        <tr><td>Accuracy</td><td class="num">0.8852</td></tr>
+        <tr><td>Precision (disease class)</td><td class="num">0.8387</td></tr>
+        <tr><td>Recall (disease class)</td><td class="num">0.9286</td></tr>
+        <tr><td>F1 (disease class)</td><td class="num">0.8814</td></tr>
+        <tr><td>ROC-AUC</td><td class="num">0.9610</td></tr>
+        <tr><td>Brier score</td><td class="num">0.0869</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <div class="figure-grid">
+      <div><img src="../artifacts/plots/roc_curve.png" alt="ROC curve"><figcaption><strong>Figure 6a.</strong> ROC curve, holdout AUC 0.961.</figcaption></div>
+      <div><img src="../artifacts/plots/confusion_matrix.png" alt="Confusion matrix"><figcaption><strong>Figure 6b.</strong> Confusion matrix at threshold 0.5.</figcaption></div>
+    </div>
+    <figcaption><strong>Figure 6.</strong> Discrimination and threshold behaviour on the untouched holdout.</figcaption>
+  </figure>
+
+  <p>The confusion matrix is TN 28, FP 5, FN 2, TP 26. The model detects 26 of 28 disease-indicated holdout patients, missing two, and flags five no-disease patients. In a screening-oriented framing, the high recall is attractive, but the five false positives are not harmless. The appropriate trade-off depends on the intended downstream action, which is outside this academic project. The 0.5 threshold is a default, not a clinically optimised operating point.</p>
+
+  <h3>6.3 Calibration</h3>
+  <p>Figure 7 shows the reliability diagram. The Brier score of 0.0869 is encouraging for a small cohort, but the six-bin curve is jagged, especially in the middle and upper bins. With only 61 patients, each point is estimated from a handful of records. The correct conclusion is that the model's ranking is strong on this holdout, while its probability calibration is uncertain and not clinically validated.</p>
+
+  <figure>
+    <img src="../artifacts/plots/calibration_curve.png" alt="Calibration curve" style="width:68%">
+    <figcaption><strong>Figure 7.</strong> Reliability diagram for the selected model on the holdout. The bin-level estimates are unstable at this sample size.</figcaption>
+  </figure>
+
+  <h3>6.4 Global importance</h3>
+  <p>Figure 8 reports permutation importance on the holdout. The largest mean decrease in ROC-AUC comes from <code>ca</code> (0.0773), followed by <code>cp</code> (0.0245), <code>oldpeak</code> (0.0141), <code>exang</code> (0.0122), and <code>thal</code> (0.0115). Several features have small or negative mean decreases, meaning that shuffling them did not reliably degrade holdout ranking. Negative values are possible in permutation importance and should not be interpreted as evidence that a feature is protective.</p>
+
+  <figure>
+    <img src="../artifacts/plots/permutation_importance.png" alt="Permutation importance" style="width:84%">
+    <figcaption><strong>Figure 8.</strong> Permutation importance on the holdout. The bars measure reliance of this fitted model, not causal effects.</figcaption>
+  </figure>
+
+  <h3>6.5 Coefficient-level interpretation</h3>
+  <p>Table 5 lists the largest absolute coefficients on the transformed feature space. These are not directly comparable to raw clinical effects because numeric features are standardised and categorical features are one-hot encoded. The positive coefficient for <code>ca</code> indicates that, holding the other transformed terms fixed, a one-unit increase in the standardised coloured-vessel count is associated with higher log-odds of disease indication. The negative coefficient for maximum heart rate indicates the opposite direction for that standardised measurement. The coefficient for age is close to zero after adjustment.</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption class="caption"><strong>Table 5.</strong> Largest absolute logistic coefficients. Odds ratios are exp(&beta;) for a one-unit change in the transformed term.</caption>
+      <thead><tr><th>Feature</th><th>Term</th><th class="num">Coefficient</th><th class="num">Odds ratio</th></tr></thead>
+      <tbody>
+        <tr><td><code>ca</code></td><td>standardised coloured vessels</td><td class="num">0.7025</td><td class="num">2.019</td></tr>
+        <tr><td><code>cp</code></td><td>asymptomatic (code 4)</td><td class="num">0.5360</td><td class="num">1.709</td></tr>
+        <tr><td><code>thal</code></td><td>code 7</td><td class="num">0.5027</td><td class="num">1.653</td></tr>
+        <tr><td><code>thal</code></td><td>code 3</td><td class="num">&minus;0.4795</td><td class="num">0.619</td></tr>
+        <tr><td><code>sex</code></td><td>male</td><td class="num">0.3860</td><td class="num">1.471</td></tr>
+        <tr><td><code>thalach</code></td><td>standardised maximum heart rate</td><td class="num">&minus;0.3207</td><td class="num">0.726</td></tr>
+        <tr><td><code>slope</code></td><td>slope code 2</td><td class="num">0.3012</td><td class="num">1.351</td></tr>
+        <tr><td><code>cp</code></td><td>chest-pain code 3</td><td class="num">&minus;0.2813</td><td class="num">0.755</td></tr>
+        <tr><td><code>exang</code></td><td>exercise angina present</td><td class="num">0.2658</td><td class="num">1.305</td></tr>
+        <tr><td><code>oldpeak</code></td><td>standardised ST depression</td><td class="num">0.2298</td><td class="num">1.258</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>6.6 Application behaviour</h3>
+  <p>Figures 9&ndash;11 show the deployed interface. The assessment form supports complete-record presets and explicit missing optional values. The result page shows a live probability and four local contributions. The insights page reads the same evaluation artifacts used in this report. The sidebar health indicator confirms that the model route is online.</p>
+
+  <div class="screenshot">
+    <img src="../docs/screenshots/predict.png" alt="Assessment page">
+    <figcaption><strong>Figure 9.</strong> The assessment page with a complete UCI record loaded. The form exposes 11 required fields and two optional fields.</figcaption>
+  </div>
+  <p class="figure-note">The preset selector carries all 13 values from a real UCI record, but the live form still validates every field and allows <code>ca</code> and <code>thal</code> to be cleared. No request is made until the user chooses <em>Run assessment</em>.</p>
+
+  <div class="screenshot">
+    <img src="../docs/screenshots/results.png" alt="Results page">
+    <figcaption><strong>Figure 10.</strong> Live result page for a disease-indicated profile. The four local contributions are additive log-odds terms, not causal effects.</figcaption>
+  </div>
+  <p class="figure-note">The result page separates the thresholded class from the estimated probability and displays the model version and threshold next to the estimate. The four contribution bars come from the same log-odds dot product used for the prediction, not from a post-hoc surrogate model.</p>
+
+  <div class="screenshot">
+    <img src="../docs/screenshots/insights.png" alt="Model insights page">
+    <figcaption><strong>Figure 11.</strong> Model-insights overview driven by the committed evaluation artifacts.</figcaption>
+  </div>
+  <p class="figure-note">The insights page loads <code>/api/model-info</code> and derives its charts and tables from the committed evaluation artifacts. Its tabs expose cross-validation, holdout, ROC, calibration, permutation importance, coefficient analysis, and dataset summaries, so the page is a rendered view of the evidence rather than a second source of numbers.</p>
+
+  <h3>6.7 Interface checks</h3>
+  <p>The deployed interface was exercised through the production build and the route-handler test suite. Table 6 summarises the checks that matter for the claims in this report. The checks are deliberately functional rather than aesthetic: they verify that the displayed result is produced by the model, that invalid input is rejected at the boundary, and that the result does not persist beyond the browser session.</p>
+
+  <div class="table-wrap">
+    <table>
+      <caption class="caption"><strong>Table 6.</strong> Functional interface checks and the evidence used to support them.</caption>
+      <thead><tr><th style="width:27%">Check</th><th>Observed behaviour</th></tr></thead>
+      <tbody>
+        <tr><td>Preset completeness</td><td>Three presets each fill all 13 fields and satisfy the documented form contract.</td></tr>
+        <tr><td>Required / optional split</td><td>11 fields are required; <code>ca</code> and <code>thal</code> may be omitted or set to <code>null</code>.</td></tr>
+        <tr><td>Boundary validation</td><td>Range and unknown-field errors return HTTP 422; malformed JSON returns HTTP 400.</td></tr>
+        <tr><td>Result lifetime</td><td>The assessment is held in React memory only; reloading the results route clears it.</td></tr>
+        <tr><td>API observability</td><td><code>/api/health</code> reports bundle availability and the sidebar displays the live status.</td></tr>
+        <tr><td>Inference parity</td><td>All 303 cohort probabilities match scikit-learn to the tested precision of nine decimal places.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The interface is desktop-first. That choice kept the 13-field clinical form, the contribution panel, and the evaluation dashboard legible during the project, but it is not a claim of mobile accessibility. A production clinical interface would need a separate usability study, responsive layout work, and an accessibility audit.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 7. DISCUSSION -->
+<!-- ===================================================================== -->
+<section class="body" id="discussion">
+  <h2><span class="secnum">7</span>Discussion</h2>
+
+  <h3>7.1 What the results support</h3>
+  <p>The results support a modest but coherent conclusion: on this single Cleveland split, a regularised linear model separates disease-indicated from no-disease records well enough to be a useful teaching example. The holdout ROC-AUC of 0.961 and disease-class recall of 0.929 are strong for a 13-feature model. The cross-validated F1 of 0.830 with a fold standard deviation of 0.026 is consistent with the holdout F1 of 0.881, although the holdout estimate is necessarily more uncertain.</p>
+
+  <p>The comparison also illustrates why model capacity is not automatically beneficial. Both tree-based candidates can represent non-linearities, but they did not outperform the linear model under the shared preprocessing and tuning protocol. The random forest's cross-validated recall was lower and its fold variance was larger. The decision tree was the weakest and least stable. This does not prove that tree models are inappropriate for the problem; it shows that, at this sample size and with this protocol, the regularised linear model generalised best.</p>
+
+  <h3>7.2 What the results do not support</h3>
+  <p>The results do not support clinical deployment. The cohort is small, single-centre, and historical. The holdout has 61 patients, so a single split can move the metrics substantially. No confidence intervals, external validation, temporal validation, or prospective evaluation are reported. The probability outputs are model scores, not clinically calibrated risks. The target is angiographic disease presence at examination, not future heart-disease risk. The interface repeats these points because a polished chart can otherwise create false confidence.</p>
+
+  <p>The coefficients and permutation importances are also descriptive. A positive coefficient for <code>ca</code> does not mean that changing the number of coloured vessels would change a patient's outcome. It means that the fitted model uses the recorded value in the direction shown. Correlated features, measurement error, and selection effects all complicate causal readings.</p>
+
+  <h3>7.3 Why logistic regression was a defensible choice</h3>
+  <p>Logistic regression offers three practical advantages in this setting. It is well regularised for a small sample, its decision function is exactly decomposable into local contributions, and its inference path can be reproduced in a few dozen lines of TypeScript. The last point matters for the deployment objective: a tree ensemble would require exporting every tree and implementing traversal, or retaining a Python service. The linear model keeps the production runtime small and auditable.</p>
+
+  <p>The choice was not made solely for convenience. The model had the best cross-validated F1 and ROC-AUC among the candidates. The 0.1 regularisation strength is relatively strong, which is plausible for a 242-record training set. The model's coefficients remain interpretable in direction, even though their magnitudes are on a transformed scale.</p>
+
+  <h3>7.4 Engineering observations</h3>
+  <p>The migration from a split frontend/backend to a single Next.js application removed an entire runtime from the deployment path. The most important correctness risk was not the UI port; it was reproducing preprocessing exactly. The export therefore includes the fitted imputer statistics, scaler parameters, one-hot categories, coefficients, and intercept, and the parity test compares full-precision probabilities and log-odds on every cohort row. The test suite also exercises the real route handlers rather than mocking the model.</p>
+
+  <p>The result is a deployment that is easy to reproduce: clone, install Node dependencies, build. Python is required only to retrain or re-export. The committed JSON bundle is versioned with the model and contains the metadata needed for the dashboard. This separation is a useful pattern for small academic projects that want a simple production story without pretending that the training stack should also be the serving stack.</p>
+
+  <h3>7.5 Threats to validity</h3>
+  <p><strong>Internal validity.</strong> The fixed split and seed make the evaluation reproducible, but a single split is still a single sample. The holdout metrics could change under a different stratified split. The model selection protocol protects against holdout leakage, but it does not eliminate selection uncertainty across folds.</p>
+
+  <p><strong>External validity.</strong> The Cleveland cohort is not representative of contemporary or global populations. The features reflect 1980s clinical practice. The dataset is mostly male. The model should not be expected to transfer to another hospital, another era, or another case mix without revalidation.</p>
+
+  <p><strong>Construct validity.</strong> The binary target collapses a four-level angiographic variable. This is a common simplification, but it discards severity information and treats all values above zero as one class. The model therefore estimates a coarse disease-indicated category, not a continuous severity score.</p>
+
+  <p><strong>Calibration.</strong> The Brier score is a useful summary, but the reliability diagram is based on 61 patients. The probability outputs should not be read as clinically calibrated event rates.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 8. LIMITATIONS -->
+<!-- ===================================================================== -->
+<section class="body" id="limitations">
+  <h2><span class="secnum">8</span>Limitations and future work</h2>
+
+  <h3>8.1 Limitations</h3>
+  <ul>
+    <li><strong>Sample size.</strong> The cohort contains 303 records and the holdout contains 61. The resulting metric uncertainty is substantial.</li>
+    <li><strong>Single-centre, historical data.</strong> The data were collected in Cleveland in 1988. Practice patterns, population characteristics, and measurement technology have changed.</li>
+    <li><strong>Target semantics.</strong> The target is angiographic disease presence at examination, not incident disease, prognosis, or future risk.</li>
+    <li><strong>Default threshold.</strong> The 0.5 threshold was not selected for a clinical utility function. Different screening or referral contexts would require explicit cost analysis.</li>
+    <li><strong>No clinical calibration.</strong> The model's probabilities are ranking scores. No external calibration or decision-curve analysis was performed.</li>
+    <li><strong>Narrow missing-data path.</strong> Only <code>ca</code> and <code>thal</code> have missing values in training. The interface does not claim general robustness to missing inputs.</li>
+    <li><strong>Descriptive explanations.</strong> Local contributions and permutation importance describe the fitted model, not causal effects.</li>
+    <li><strong>Not a medical device.</strong> The application is not validated, regulated, or intended for patient care.</li>
+  </ul>
+
+  <h3>8.2 Future work</h3>
+  <p>A rigorous extension would evaluate repeated stratified splits or nested cross-validation to quantify selection and split uncertainty. External validation on another Cleveland-format cohort, or on a contemporary dataset with compatible predictors, would be more informative than further tuning on the same 303 records. Calibration could be studied with isotonic or Platt scaling inside the training folds, but the small holdout would still limit confidence. Decision-curve analysis would connect the model to a specified clinical decision. A prospective study would be required before any clinical claim.</p>
+
+  <p>On the engineering side, the export bundle and parity test provide a template for additional models. A future version could support versioned model bundles and a model card endpoint. The UI could expose calibration uncertainty more explicitly, and the API could add authentication if it were ever used outside a public demonstration. None of these extensions would turn the current model into a medical device.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- 9. CONCLUSION -->
+<!-- ===================================================================== -->
+<section class="body" id="conclusion">
+  <h2><span class="secnum">9</span>Conclusion</h2>
+
+  <p>This project implemented an end-to-end heart-disease classification workflow with a reproducible Python training pipeline and a single Next.js deployment. It retained the original UCI Cleveland predictors, handled the six missing cells inside leakage-safe pipelines, tuned three candidate families with five-fold cross-validation, selected logistic regression on training-fold F1, and evaluated the selected model once on an untouched 61-patient holdout. The holdout ROC-AUC was 0.961 and disease-class recall was 0.929, with five false positives and two false negatives.</p>
+
+  <p>The deployed system demonstrates that a fitted scikit-learn pipeline can be exported into a transparent JSON representation and reproduced exactly in TypeScript. The 303-row parity test is the central correctness evidence for the serving path. The application keeps assessment data in memory, documents its API, exposes the evaluation evidence, and labels its contributions and limitations rather than presenting the output as a diagnosis.</p>
+
+  <p>The most important conclusion is therefore not the headline accuracy. It is the combination of a defensible validation protocol, an auditable training-to-serving boundary, and an explicit statement of what the numbers do not mean. Those properties make the project a useful academic demonstration and a sound starting point for more rigorous clinical research.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- REFERENCES -->
+<!-- ===================================================================== -->
+<section class="body refs" id="references" style="page-break-before: always;">
+  <h2><span class="secnum">&mdash;</span>References</h2>
+
+  <p><span class="n">[1]</span> A. Janosi, W. Steinbrunn, M. Pfisterer, and R. Detrano. <em>Heart Disease</em> [Dataset]. UCI Machine Learning Repository, 1988. <a href="https://doi.org/10.24432/C52P4X">https://doi.org/10.24432/C52P4X</a>.</p>
+
+  <p><span class="n">[2]</span> R. Detrano, A. Janosi, W. Steinbrunn, M. Pfisterer, J.-P. Schmid, S. Sandhu, K. H. Guppy, S. Lee, and V. Froelicher. International application of a new probability algorithm for the diagnosis of coronary artery disease. <em>American Journal of Cardiology</em>, 64(5):304&ndash;310, 1989. <a href="https://doi.org/10.1016/0002-9149(89)90524-9">https://doi.org/10.1016/0002-9149(89)90524-9</a>.</p>
+
+  <p><span class="n">[3]</span> F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. VanderPlas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay. Scikit-learn: Machine learning in Python. <em>Journal of Machine Learning Research</em>, 12:2825&ndash;2830, 2011.</p>
+
+  <p><span class="n">[4]</span> T. Fawcett. An introduction to ROC analysis. <em>Pattern Recognition Letters</em>, 27(8):861&ndash;874, 2006. <a href="https://doi.org/10.1016/j.patrec.2005.10.010">https://doi.org/10.1016/j.patrec.2005.10.010</a>.</p>
+
+  <p><span class="n">[5]</span> G. W. Brier. Verification of forecasts expressed in terms of probability. <em>Monthly Weather Review</em>, 78(1):1&ndash;3, 1950.</p>
+
+  <p><span class="n">[6]</span> T. Hastie, R. Tibshirani, and J. Friedman. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. 2nd edition, Springer, 2009.</p>
+
+  <p><span class="n">[7]</span> Vercel. <em>Next.js Documentation: App Router, Route Handlers, and Deployment</em>. <a href="https://nextjs.org/docs">https://nextjs.org/docs</a>, accessed October 2026.</p>
+
+  <p><span class="n">[8]</span> Vercel. <em>Vercel Documentation: Deploying Next.js Projects</em>. <a href="https://vercel.com/docs">https://vercel.com/docs</a>, accessed October 2026.</p>
+</section>
+
+<!-- ===================================================================== -->
+<!-- APPENDICES -->
+<!-- ===================================================================== -->
+<section class="body appendix" id="appendix-a">
+  <h2><span class="secnum">A</span>Reproducibility commands</h2>
+
+  <p>The training path uses Python 3.12 and the versions pinned in <code>ml/requirements.txt</code>. From the repository root:</p>
+  <pre>python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -r ml/requirements.txt
+pip install -r tests/requirements.txt
+python -m ml.train
+python -m ml.evaluate</pre>
+
+  <p>The training entry point writes the fitted pipeline, metrics, schema, metadata, model bundle, parity fixture, and plots. The export can be regenerated from an existing pipeline with:</p>
+  <pre>python -m ml.export_model</pre>
+
+  <p>The application can be run locally with:</p>
+  <pre>npm ci
+npm run dev</pre>
+
+  <p>The production build and test commands are:</p>
+  <pre>npm test
+npm run typecheck
+npm run lint
+npm run build
+npm start</pre>
+
+  <p>The committed parity fixture allows the TypeScript inference path to be checked without Python:</p>
+  <pre>npm test -- src/lib/model/inference.test.ts</pre>
+</section>
+
+<section class="body appendix" id="appendix-b">
+  <h2><span class="secnum">B</span>API example</h2>
+
+  <pre>curl -s http://localhost:3000/api/predict \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "age": 63, "sex": 1, "cp": 4, "trestbps": 145,
+    "chol": 233, "fbs": 1, "restecg": 2, "thalach": 150,
+    "exang": 0, "oldpeak": 2.3, "slope": 3, "ca": 0, "thal": 6
+  }'</pre>
+
+  <p>The response is a JSON object containing the predicted class, probability, threshold, model metadata, up to four local contributions, target definition, and disclaimer. The fields <code>ca</code> and <code>thal</code> may be omitted or set to <code>null</code>; all other fields are required. Unknown fields and out-of-range values produce a structured HTTP 422 response.</p>
+</section>
+
+<section class="body appendix" id="appendix-c">
+  <h2><span class="secnum">C</span>Test inventory</h2>
+
+  <p>The Python suite contains 17 tests covering dataset shape and missingness, target construction, the stratified split, preprocessing isolation, artifact consistency, recomputation of holdout metrics, exported imputer/scaler/encoder parameters, coefficient parity, and the complete 303-row probability fixture.</p>
+
+  <p>The TypeScript/Vitest suite contains 48 tests covering form validation, payload conversion, formatting, preset integrity, result rendering, reload semantics, preset loading, reset behaviour, server-side field errors, real route-handler inference, health and model-info responses, optional and null optional fields, unknown fields, range errors, malformed JSON, deterministic responses, no-store headers, CORS preflight, and the 303-row scikit-learn parity check. The production build is a separate required check.</p>
+
+  <p class="small">Report generated from the repository artifacts and the deployed application on 26 October 2026. The live deployment is <a href="https://cardia-heart-disease-alpha.vercel.app">cardia-heart-disease-alpha.vercel.app</a>; the source is <a href="https://github.com/arjun-713/ai-ml-assignment">github.com/arjun-713/ai-ml-assignment</a>.</p>
+</section>
+
+</body>
+</html>

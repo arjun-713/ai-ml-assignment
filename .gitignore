@@ -29,3 +29,8 @@ npm-debug.log*
 
 # Training artifacts are intentionally committed so the Next.js app can run
 # from a fresh clone and deploy to Vercel without a Python runtime.
+.vercel
+
+# Report build intermediates
+report/.build-report.pdf
+report/.finished-report.pdf
